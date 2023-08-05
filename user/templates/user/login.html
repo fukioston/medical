@@ -1,0 +1,145 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.4.1/css/bootstrap.min.css' %}">
+    <style>
+        .account h2 {
+            margin-top: 10px;
+            text-align: center;
+        }
+        .error-msg{
+            color:red;
+            height:9px;
+            font-size: 13px;
+        }
+        .glass-container{
+            width: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            border-radius: 0;
+            backdrop-filter: blur(0px);
+            background-color: rgba(0,191,255, 0);
+            box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 8px;
+            border: 0 rgba(255,255,255,0.4) solid;
+            border-bottom: 0 rgba(40,40,40,0.35) solid;
+            border-right: 0 rgba(40,40,40,0.35) solid;
+
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 100px;
+            padding: 20px 40px;
+            color: black;
+            font-size: 1.5em;
+        }
+        body{
+            background-image: url("{% static "images/bg_login1.jpg" %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            color: white;
+            font-size: 0.9em;
+        }
+        h2{
+            text-align: center;
+        }
+        .btn {
+	        background: white;
+            color: black;
+            width: 8em;
+        }
+
+        .btn:hover{
+            background: black;
+            color: white;
+        }
+        a:hover{
+            color: #afd9ee;
+        }
+    </style>
+</head>
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"> 二手交易平台 </a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="/item/">返回</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<body>
+<div class="glass-container" id="glass">
+    <form  method="post" novalidate>
+    <h2>用户登录</h2>
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+            {% if field.name == 'code' %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+
+                        <div class="clearfix">
+                            <div class="col-md-6" style="padding-left: 0;">{{ field }}<div class="error-msg">{{ field.errors.0 }}</div></div>
+                            <div class="col-md-6">
+                                 <img id="imageCode" src="{% url 'image_code' %}" alt="图片验证码">
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    <div class="error-msg" style="color: red">{{ field.errors.0 }}</div>
+            </div>
+            {% endif %}
+        {% endfor %}
+        <div>
+            <div style="float:right">
+                <a href="{% url 'register' %}">注册</a>
+                <a href="{% url 'login_sms' %}">短信验证码登陆</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
+                <input id="btnSubmit" type="submit" class="btn btn-primary" value="登录"/>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+{% block js %}
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script>
+{#    打开页面即执行#}
+$(function () {
+ {#实现点击更换验证码图⽚#}
+ $('#imageCode').click(function () {
+ var oldSrc = $(this).attr('src');
+ $(this).attr('src', oldSrc + "?");
+ })
+ })
+    </script>
+{% endblock %}
+
+</html>

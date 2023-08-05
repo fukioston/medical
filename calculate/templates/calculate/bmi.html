@@ -1,0 +1,90 @@
+{% extends 'layout/basic.html' %}
+{% load static %}
+
+{% block css %}
+    <style>
+.bmi_input{
+    width:400px;
+}
+.card{
+    width:500px;
+}
+#answer{
+    height:400px;
+    width:400px;
+    resize: none;
+}
+
+    </style>
+    <title>个人信息</title>
+{% endblock %}
+
+{% block content %}
+<div class="col-md-6 bmi_calculate">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="mb-0">BMI计算器</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" novalidate>
+
+                            <div class="form-group">
+                                <label for="ss">身高(单位：cm）</label>
+<input id="height" type="text" class="form-control input-lg bmi_input" id="bmi_input" placeholder="请输入你的身高"
+                           name="newprice">
+                                <span class="error-msg" style="color: red"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="ss">体重(单位：kg）</label>
+    <input id="weight" type="text" class="form-control input-lg bmi_input" id="bmi_input" placeholder="请输入你的体重"
+                           name="newprice">
+                                <span class="error-msg" style="color: red"></span>
+                            </div>
+
+                            <input id="btnBMI" type="button" value="计算" class="btn btn-primary">
+                        </form>
+                    </div>
+                </div>
+            </div>
+    <div>
+<textarea id="answer"></textarea>
+    </div>
+
+{% endblock %}
+{% block js %}
+    <script>
+    btnBMI_click()
+function btnBMI_click() {
+            $('#btnBMI').click(
+                function () {
+                var height = $('#height').val();
+                var weight = $('#weight').val();
+            $.ajax({
+    url:'/calculate/bmi_cal',
+    type:'get',
+    data:{
+        height,
+        weight
+
+    },
+    success(msg){
+       document.getElementById("answer").value = msg.message;
+
+
+    },
+    error(err){
+      alert(err)
+    }
+})
+
+
+
+
+
+            })}
+</script>
+
+
+
+
+{% endblock %}

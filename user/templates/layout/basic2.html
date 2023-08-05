@@ -1,0 +1,333 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.4.1/css/bootstrap.min.css' %}">
+    <style>
+        *{
+            font-family: 宋体;
+        }
+        body {
+
+  height: 100%;
+  position: relative;
+  background-color:#eee;
+}
+
+.bg-black{
+background: #ffffff;
+}
+
+.default {
+  border-color: #e7e7e7;
+}
+
+.default:hover {
+  background: #e7e7e7;
+}
+
+.btn {
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+
+}
+.default {
+  border: 2px solid black;
+  border-color: #e7e7e7;
+
+}
+
+.default:hover {
+  background: #e7e7e7;
+  color: black;
+}
+
+.my-btn{
+  margin:23%
+}
+
+
+
+.example-block {
+  transition: background 0.4s ease-out;
+  position: relative;
+  display: inline-block;
+  height: auto;
+}
+.example-block:hover {
+
+  cursor: pointer;
+  animation: levitate 1s ease-in-out infinite;
+}
+
+@keyframes levitate {
+  0% {
+    transform: translate(0, 0px);
+    box-shadow: 0 27px 30px -15px rgba(21, 173, 250, 0.6);
+  }
+  50% {
+    transform: translate(0, -9px);
+    box-shadow: 0 36px 30px -15px rgba(21, 173, 250, 0.3);
+  }
+  100% {
+    transform: translate(0, 0px);
+    box-shadow: 0 27px 30px -15px rgba(21, 173, 250, 0.6);
+  }
+}
+
+.example-block .image {
+  transition:  ease-in-out, transform 0.4s ease-in-out;
+}
+.example-block:hover .image {
+  transform: scale(1.8);
+}
+body {
+
+  height: 100%;
+  position: relative;
+  background-color:#eee;
+}
+
+.bg-black{
+background: #ffffff;
+}
+
+.default {
+  border-color: #e7e7e7;
+}
+
+.default:hover {
+  background: #e7e7e7;
+}
+
+.btn {
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+
+}
+.default {
+  border: 2px solid black;
+  border-color: #e7e7e7;
+
+}
+
+.default:hover {
+  background: #e7e7e7;
+  color: black;
+}
+
+.my-btn{
+  margin:23%
+}
+
+
+
+.example-block {
+  transition: background 0.4s ease-out;
+  position: relative;
+  display: inline-block;
+  height: auto;
+}
+.example-block:hover {
+
+  cursor: pointer;
+  animation: levitate 1s ease-in-out infinite;
+}
+
+@keyframes levitate {
+  0% {
+    transform: translate(0, 0px);
+    box-shadow: 0 27px 30px -15px rgba(21, 173, 250, 0.6);
+  }
+  50% {
+    transform: translate(0, -9px);
+    box-shadow: 0 36px 30px -15px rgba(21, 173, 250, 0.3);
+  }
+  100% {
+    transform: translate(0, 0px);
+    box-shadow: 0 27px 30px -15px rgba(21, 173, 250, 0.6);
+  }
+}
+
+.example-block .image {
+  transition:  ease-in-out, transform 0.4s ease-in-out;
+}
+.example-block:hover .image {
+  transform: scale(1.8);
+}
+
+
+        body {
+            background: url("../../../static/images/background_user.png") repeat;
+        }
+
+
+
+body{
+	background: #E2E5EE;
+}
+.close:focus{
+	outline: none;
+}
+.container.justify-content-center{
+	margin-top: 200px;
+}
+.modal-header{
+	border: none;
+}
+.modal-footer{
+	border: none;
+}
+.btn-danger{
+	background: #DD2750;
+	border: 1px solid #C43352;
+}
+.btn-light{
+	border: 1px solid #E7E7E9;
+}
+.btn:focus{
+	box-shadow: none;
+}
+        {#zaizheli#}
+        .navbar {
+            border-radius: 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+a:hover{
+    cursor:pointer;
+}
+a {
+  text-decoration: none;
+}
+.alerttext{
+    text-align: center;
+}
+    </style>
+
+    {% block css %}
+
+    {% endblock %}
+
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/item/">
+            <img src="{% static 'icon/二手网站.png' %}" style="width: 200px"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                {% if not current_url == '/item/' %}
+                    <li><a href="/item/">商城</a></li>
+                {% endif %}
+
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if not user_info %}
+                    <li><a href="{% url 'register'%} ">注册</a></li>
+                    <li><a href="{% url 'login'%} ">登录</a></li>
+
+                {% else %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">{{ user_info.username }}<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/user/home">个人资料</a></li>
+                            <li><a href="/user/edit_info">更改信息</a></li>
+                            <li><a href="/user/edit_pwd/">更改密码</a></li>
+                            <li><a href="/user/on_sales/">我的商品</a></li>
+                            <li><a href="/item/submit/">上传商品</a></li>
+                            <li><a href="/item/favorite/">我的收藏</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li id="poplayer">
+{#                                <a href="javascript:void(0)" onclick="popDiv();">退出登录</a>#}
+                                <a  data-toggle="modal" data-target="#modelId"> 退出登录</a>
+                            </li>
+                            <li>
+
+{#                        <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#modelId"> 退出登录</button>#}
+
+               </li>
+
+                        </ul>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+
+             <!-- Button trigger modal -->
+
+                <!-- Modal -->
+                <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header hoverImages">
+                                <h5 class="modal-title"><strong> We remind you </strong></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body pl-5 mt-3">
+                                <div class="row">
+
+                                </div>
+                            <div class="row">
+                                <div class="col alerttext">
+                                    <h2  class="font-weight-bold mt-3">您确定要退出吗？</h2>
+                                        <h3 class="text-muted fs-14">退出后需要重新登录 </h3>
+{#                                        <h6><span><i class="fa fa-info-circle text-muted" aria-hidden="true"></i>#}
+{#                                        </span> <small class="text-muted">请三思而后行</small></h6>#}
+
+                                </div>
+                            </div>
+                        </div>
+                      <div class="modal-footer">
+                          <a href="{% url 'logout' %}"><button type="button" class="btn btn-lg bg-danger"><small>确认退出</small></button> </a>
+                               <button type="button" class=" btn btn-lg bg-red  default text-info " aria-label="Close" data-dismiss="modal" data-wow-delay="0.7s"><small>取消</small></button>
+{#                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+
+{#                        <button type="button" class="btn btn-lg bg-danger text-white " data-dismiss="modal" data-wow-delay="0.7s"><a href="{% url 'logout' %}">确认退出</a></button>#}
+{#                        <button type="button" class="btn btn-lg bg-red  default text-info " data-wow-delay="0.7s"><small>取消</small></button>#}
+                      </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+<div style="height: 50px"></div>
+{#"""#}
+{#-----------------这里是content的block喲---------------------------------------#}
+{#"""#}
+<div>
+
+    {% block content %}
+
+    {% endblock %}
+</div>
+
+
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-3.4.1/js/bootstrap.min.js' %}"></script>
+{% block js %}
+
+{% endblock %}
+</body>
+</html>

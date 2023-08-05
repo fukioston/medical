@@ -1,0 +1,17 @@
+# pycharm 环境默认⽣成的⽂件 
+.idea/ 
+.DS_Store
+# python默认⽣成的缓存⽂件
+__pycache__/
+*.py[cod]
+*$py.class
+# Django:
+# 本地配置
+local_settings.py
+# 默认数据库信息
+*.sqlite3
+# database migrations
+*/migrations/*.py
+# 除了init⽂件
+!*/migrations/__init__.py
+*.pyc

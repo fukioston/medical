@@ -1,0 +1,244 @@
+{% extends 'layout/basic.html' %}
+{% load static %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% block css %}
+<style>
+    body{
+	background-color: #fff;
+}
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #eee;
+}
+
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+
+
+.main {
+    background-color: #eee;
+    width: 320px;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 6px 0px 0px 0px;
+}
+
+.scroll {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    height: 325px;
+}
+
+.img1 {
+    border-radius: 50%;
+    background-color: #66BB6A;
+}
+.name {
+    font-size: 8px;
+}
+
+
+.msg {
+    background-color: #fff;
+    font-size: 11px;
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: 500;
+    color: #3e3c3c;
+    min-height: 40px;
+}
+
+.between {
+    font-size: 8px;
+    font-weight: 500;
+    color: #a09e9e;
+}
+
+.navbar {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.form-control {
+    font-size: 18px;
+    font-weight: 400;
+    width: 230px;
+    height: 30px;
+    border: none;
+}
+
+
+form-control:focus {
+    box-shadow: none;
+    overflow: hidden;
+    border: none;
+}
+
+.form-control:focus{
+	box-shadow: none !important;
+}
+
+
+
+.icondiv {
+
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    padding: 2px;
+    position: relative;
+    bottom: 1px;
+}
+.main{
+width: 1000px;
+height: 650px;
+
+}
+#talk_div{
+height: 650px;
+
+}
+#send_txt{
+    width: 600px;
+    height: 60px;
+        background-color: #eee;
+    resize: none;
+
+
+}
+.navbar{
+    display: flex;
+    justify-content: center !important;
+
+}
+.msg{
+    font-size: 18px;
+    max-width: 400px; /* 设置对话框的最大宽度为200px（你可以根据需要调整这个值） */
+    word-wrap: break-word; /* 自动换行，以防止单词溢出 */
+    text-align: left;
+}
+.name{
+    font-size: 16px;
+}
+#btnSend{
+    margin-left: 18px;
+
+}
+
+
+
+
+
+
+
+
+</style>
+{% endblock %}
+<body>
+{% block content %}
+
+	<div class="main">
+		<div id='talk_div' class="px-2 scroll">
+
+		<div class="d-flex align-items-center">
+			<div class="text-left pr-1">
+                <img src="https://img.icons8.com/color/40/000000/guest-female.png" width="30" class="img1" /></div>
+			<div class="pr-2 pl-1 ">
+				<span class="name">智能医生</span>
+				<p class="msg">你好，我是莫名其妙的医生。请问有什么能帮助你的呢？</p>
+			</div>
+		</div>
+{#		<div class="text-center"><span class="between">Call started at 10:47am</span></div>#}
+{#		<div class="text-center"><span class="between">Call ended at 11:03am</span></div>#}
+
+		</div>
+		<nav class="navbar bg-white navbar-expand-sm d-flex justify-content-between">
+			<textarea id="send_txt"  name="text" class="form-control" placeholder="请输入你的问题或你想查询的关键词"></textarea>
+                <input type="button" id="btnSend" value="send" class="btn btn-primary">
+
+		</nav>
+	</div>
+
+
+{% endblock %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+{% block js %}
+<script>
+    btnSend_click()
+function btnSend_click() {
+            $('#btnSend').click(
+                function () {
+                {#    先处理前端的发送端显示#}
+                var send_txt = $('#send_txt').val();
+                console.log(send_txt)
+                    $('#talk_div').append(`
+                    <div class="d-flex align-items-center text-right justify-content-end ">
+				<div class="pr-2">
+					<span class="name">{{user_info.username}}</span>
+					<p class="msg">${send_txt}</p>
+				</div>
+				<div><img src="/static/profile_img/{{ user_info.profile_img }}" width="30" height="30" class="img1" /></div>
+		</div>
+                 `)
+                    $('#send_txt').val('');
+                    {#自动滚动#}
+                    var talkDiv = document.getElementById('talk_div');
+        talkDiv.scrollTop = talkDiv.scrollHeight;
+            {#        然后再将数据传到后端进行处理#}
+            $.ajax({
+    url:'/robot/answer',
+    type:'get',
+    data:{
+        send_txt
+
+    },
+    success(msg){
+            var answer=msg.message
+        $('#talk_div').append(`
+        <div class="d-flex align-items-center">
+			<div class="text-left pr-1"><img src="https://img.icons8.com/color/40/000000/guest-female.png" width="30" class="img1" /></div>
+			<div class="pr-2 pl-1">
+				<span class="name">智能医生</span>
+				<p class="msg">${answer}</p>
+			</div>
+		</div>`)
+        var talkDiv = document.getElementById('talk_div');
+        talkDiv.scrollTop = talkDiv.scrollHeight;
+
+
+    },
+    error(err){
+      alert(err)
+    }
+})
+
+
+
+
+
+            })}
+</script>
+{% endblock %}
+</body>
+</html>

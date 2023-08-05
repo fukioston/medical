@@ -1,0 +1,57 @@
+{% extends 'layout/basic.html' %}
+{% load static %}
+
+{% block css %}
+    <style>
+.img-circle{
+    width: 300px;
+    height: 300px;
+}
+    </style>
+    <title>个人信息</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="text-center mb-3">
+                    <img src="/static/profile_img/{{ user_info.profile_img }}" alt="/static/profile_img/doge.jpg" class="img-circle"
+                         style="width: 340px; margin-top: 50px; margin-right: 60px; ">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="mb-0">个人信息</h4>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="username">用户名</label>
+                                <input type="text" class="form-control" id="username" value="{{ user_info.username }}"
+                                       disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">密码</label>
+                                <input type="password" class="form-control" id="password" value="********" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">手机号</label>
+                                <input type="text" class="form-control" id="phone" value="{{ user_info.mobile_phone }}"
+                                       disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="itemCount">邮箱</label>
+                                <input type="text" class="form-control" id="email" value="{{ user_info.email }}"
+                                       disabled>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

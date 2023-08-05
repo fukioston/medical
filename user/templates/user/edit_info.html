@@ -1,0 +1,106 @@
+{% extends 'layout/basic.html' %}
+{% load static %}
+
+{% block css %}
+    <style>
+
+        .p-3{
+            margin-top: 50px;
+            font-size: 30px;
+
+        }
+        .form-control {
+            width: 500px; /* Adjust the width as needed */
+            height: 45px;
+            font-size: 20px;
+        }
+.main-content {
+            display: flex;
+            justify-content: center;
+        }
+.form_label{
+    font-family: "微軟正黑體 Light", serif;
+}
+.profile{
+    margin-top: 50px;
+    margin-right: 50px;
+}
+.form1{
+    display: flex;
+}
+.upload-profile{
+    width:80px;
+    height: 30px;
+    font-size: 15px;
+
+}
+.form-left{
+    display: flex;
+    flex-direction:column;
+}
+.form-left-1{
+    display: flex;
+
+}
+
+
+/* 自定义文件上传按钮样式 */
+
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container rounded bg-white mt-5 mb-5 main-content">
+    <div class="row">
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <form class="form1" name="form1" method="post" novalidate enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-left">
+                    <div class="form-left-1">
+                        <img id="profile_img" class="img-circle profile" width="150px" height="150px" src="/static/profile_img/{{ user_info.profile_img }}" >
+                    </div>
+
+                    <div class="form-left-2">
+                    <input  id="fileInput" type="file" name="file"  style="display:none;" accept=".jpg,.png,.jpeg">
+　                       <input class="upload-profile" type="button" value="更换头像" onclick="document.form1.fileInput.click()">
+                        </div>
+                </div>
+                       <div class="form-right">
+                            {% for field in form %}
+                            <div class="form-group" class="col-md-12">
+                                <label class="form_label"  for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                <span class="error-msg" style="color: red">{{ field.errors.0 }}</span>
+                            </div>
+                            {% endfor %}
+                       <input type="submit" value="保存" class="btn btn-primary">
+                       </div>
+　
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% block js %}
+        <script>
+    const fileInput = document.getElementById('fileInput');
+    const itemPicture = document.getElementById('profile_img');
+
+    fileInput.addEventListener('change', function () {
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+
+        reader.onloadend = function () {
+            itemPicture.src = reader.result;
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+        {% endblock %}
+{% endblock %}
