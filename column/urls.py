@@ -1,7 +1,7 @@
-"""medical URL Configuration
+"""second_hand_websites URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.2/topics/http/urls/
+    https://docs.djangoproject.com/en/4.1/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -13,14 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path,include
+
+from django.urls import path
+from column.views import catalog
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path("user/", include('user.urls')),
-    path("graph/", include('graph.urls')),
-    path("robot/", include('robot.urls')),
-    path("calculate/", include('calculate.urls')),
-    path("column/", include('column.urls'))
+    path('catalog', catalog.home),
+    path('article_list', catalog.article_list)
 ]
+
