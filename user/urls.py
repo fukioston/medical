@@ -28,5 +28,6 @@ urlpatterns = [
     path('image/code/',login.image_code,name='image_code'),
     path('logout/',home.logout,name="logout"),
     path('edit_pwd/',home.edit_pwd,name='edit_pwd')
+
 ]
 
