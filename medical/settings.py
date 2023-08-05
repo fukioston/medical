@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'graph.apps.GraphConfig',
     'robot.apps.RobotConfig',
-    'calculate.apps.CalculateConfig'
+    'calculate.apps.CalculateConfig',
+    'column.apps.ColumnConfig'
 ]
 
 MIDDLEWARE = [
