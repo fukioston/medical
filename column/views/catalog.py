@@ -7,5 +7,7 @@ def home(request):
 
 
 def article_list(request):
+    catalog = request.GET.get('catalog')  # 获取参数值
+    print(catalog)
 
     return render(request, 'column/article_list.html')
