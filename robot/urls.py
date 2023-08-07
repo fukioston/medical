@@ -19,7 +19,7 @@ from django.urls import path
 from robot.views import talk
 
 urlpatterns = [
-path('talk/', talk.talk),
+    path('talk/', talk.talk),
     path('answer/',talk.answer)
 ]
 

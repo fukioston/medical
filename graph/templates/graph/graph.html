@@ -1,0 +1,358 @@
+{% extends 'layout/basic.html' %}
+{% load static %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% block css %}
+    <style>
+
+        /* 调整下拉选择框的样式 */
+        .dropdown-toggle {
+            padding-right: 30px; /* 增加padding-right值以留出空间给下三角图标 */
+        }
+
+        /* 调整下拉选择框的下三角图标的位置 */
+        .dropdown-toggle::after {
+            position: absolute;
+            right: 10px; /* 调整图标距离右侧的位置 */
+            top: 50%; /* 垂直居中 */
+            transform: translateY(-50%); /* 使图标垂直居中 */
+            font-family: "Font Awesome 5 Free"; /* 设置使用Font Awesome图标字体 */
+            font-weight: 900; /* 设置图标字体的粗细 */
+            font-size: 14px; /* 设置图标的大小 */
+        }
+
+        .mt-3 {
+            display: flex;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdown {
+            margin-top: 1rem;
+        }
+
+        #btnSearch {
+            white-space: nowrap; /* 防止文字换行，保持在一行内 */
+        }
+
+
+    </style>
+{% endblock %}
+
+{% block content %}
+    <head>
+        <meta charset="UTF-8">
+        <title>知识图谱</title>
+    </head>
+    <body>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <header class="panel-heading">
+                        请输入查询条件：
+                    </header>
+                    <div class="panel-body">
+                        <form id="searchRelationForm" class="form-inline"
+                              style="padding-left: 10% ; padding-right: 10%;"
+                              method="get">
+                            <div class="form-group">
+                                <!-- 在HTML中创建一个下拉选择框 -->
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                            style="background-color: #318FB5">
+                                        选择关系类型
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#" data-relation="ALL">所有关系（随机显示25个）</a>
+                                        <a class="dropdown-item" href="#" data-relation="ACOMMANY">并发症</a>
+                                        <a class="dropdown-item" href="#" data-relation="GOOD_EAT">宜吃食物</a>
+                                        <a class="dropdown-item" href="#" data-relation="AVOID_EAT">忌吃食物</a>
+                                        <a class="dropdown-item" href="#" data-relation="BELONGS_TO">所属科室</a>
+                                        <a class="dropdown-item" href="#" data-relation="MAYBE">可能疾病</a>
+                                        <a class="dropdown-item" href="#"
+                                           data-relation="RECOMMAND_DRUG">推荐药物</a>
+                                    </div>
+                                </div>
+                                <div id="input-container" class="mt-3">
+                                    <!-- 这里可以根据选项显示不同的输入框 -->
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+            <div class="col-md-12">
+                <div class="panel panel-default ">
+                    <header class="panel-heading">
+                        关系图 :
+                    </header>
+                    <div class="panel-body ">
+                        <div id="graph" style="width: 1000px;height:600px;"></div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    </body>
+{% endblock %}
+
+{% block js %}
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
+    <script>
+        var entity1Value = '';
+        var relationNameValue = '';
+        var entity2Value = '';
+
+
+        $(document).ready(function () {
+            // 监听下拉选择框的选项点击事件
+            $('.dropdown-item').click(function (event) {
+                event.preventDefault();
+
+                // 获取选项的关系类型
+                var relation = $(this).data('relation');
+
+                var text = $(this).text();
+                $('#dropdownMenuButton').text(text);
+                // 根据关系类型显示不同的输入框
+
+                showInputFields(relation);
+            });
+        });
+
+        // 显示不同的输入框
+        function showInputFields(relation) {
+            var inputContainer = $('#input-container');
+            inputContainer.empty();
+
+            // 根据关系类型创建不同的输入框
+            if (relation === 'ACOMMANY') {
+                relationNameValue = relation;
+                inputContainer.append('<div id="entity1" class="form-group" style="padding: 2%"> <input type="text" id="entity1_text" name="entity1_text" class="form-control"placeholder="输入想查询的疾病" aria-describedby="basic-addon1"> </div>');
+                inputContainer.append('<div class="btn-group" style="padding: 2%"> <button type="button" id="btnSearch" class="btn btn-primary"onclick="handleSearchClick()">获取这个疾病的并发症 </button> </div>');
+            } else if (relation === 'AVOID_EAT') {
+                relationNameValue = relation;
+                inputContainer.append('<div id="entity1" class="form-group" style="padding: 2%"> <input type="text" id="entity1_text" name="entity1_text" class="form-control"placeholder="输入想查询的疾病" aria-describedby="basic-addon1"> </div>');
+                inputContainer.append('<div class="btn-group" style="padding: 2%"> <button type="button" id="btnSearch" class="btn btn-primary"onclick="handleSearchClick()">获取这个疾病的忌吃食物</button> </div>');
+            } else if (relation === 'BELONGS_TO') {
+                relationNameValue = relation;
+                inputContainer.append('<div id="entity1" class="form-group" style="padding: 2%"> <input type="text" id="entity1_text" name="entity1_text" class="form-control"placeholder="输入想查询的疾病" aria-describedby="basic-addon1"> </div>');
+                inputContainer.append('<div class="btn-group" style="padding: 2%"> <button type="button" id="btnSearch" class="btn btn-primary"onclick="handleSearchClick()">获取这个疾病的所属科室</button> </div>');
+            } else if (relation === 'GOOD_EAT') {
+                relationNameValue = relation;
+                inputContainer.append('<div id="entity1" class="form-group" style="padding: 2%"> <input type="text" id="entity1_text" name="entity1_text" class="form-control"placeholder="输入想查询的疾病" aria-describedby="basic-addon1"> </div>');
+                inputContainer.append('<div class="btn-group" style="padding: 2%"> <button type="button" id="btnSearch" class="btn btn-primary"onclick="handleSearchClick()">获取这个疾病的宜吃食物 </button> </div>');
+            } else if (relation === 'MAYBE') {
+                relationNameValue = relation;
+                inputContainer.append('<div id="entity1" class="form-group" style="padding: 2%"> <input type="text" id="entity1_text" name="entity1_text" class="form-control"placeholder="输入想查询的症状" aria-describedby="basic-addon1"> </div>');
+                inputContainer.append('<div class="btn-group" style="padding: 2%"> <button type="button" id="btnSearch" class="btn btn-primary"onclick="handleSearchClick()">获取这个症状对应的可能疾病</button> </div>');
+            } else if (relation === 'RECOMMAND_DRUG') {
+                relationNameValue = relation;
+                inputContainer.append('<div id="entity1" class="form-group" style="padding: 2%"> <input type="text" id="entity1_text" name="entity1_text" class="form-control"placeholder="输入想查询的疾病" aria-describedby="basic-addon1"> </div>');
+                inputContainer.append('<div class="btn-group" style="padding: 2%"> <button type="button" id="btnSearch" class="btn btn-primary"onclick="handleSearchClick()">获取这个疾病的推荐治疗药物</button> </div>');
+            } else if (relation === 'ALL') {
+                inputContainer.append('<div class="btn-group" style="padding: 2%"> <button type="button" id="btnSearch" class="btn btn-primary"onclick="handleSearchClick()">获取所有关系</button> </div>');
+            }
+
+        }
+
+
+        function handleSearchClick() {
+
+
+            // 获取实体1输入框的内容
+            if (document.getElementById('entity1_text') !== null) {
+                entity1Value = document.getElementById('entity1_text').value;
+            }
+
+            // 获取关系名称输入框的内容
+
+            // 获取实体2输入框的内容
+            {#entity2Value = document.getElementById('entity2_text').value;#}
+
+            var searchResult;
+            // 使用Ajax发送数据给后端
+            $.ajax({
+                type: "GET", // 可根据你的需求选择GET或POST方法
+                url: "/graph/handle", // 替换成后端处理请求的URL
+                data: {
+                    entity1: entity1Value,
+                    relation: relationNameValue,
+                    entity2: entity2Value
+                },
+                success: function (response) {
+                    // 这里是请求成功后的回调函数
+                    // response是后端返回的数据，你可以在这里处理返回的结果
+                    searchResult = JSON.parse(response);
+                    console.log("后端返回的数据：", searchResult);
+                    handleSearchResult(searchResult)
+                },
+                error: function (xhr, status, error) {
+                    // 这里是请求失败后的回调函数
+                    // 可以在这里处理请求失败的情况
+                    console.error("请求失败：", error);
+                }
+
+            });
+        }
+
+        function handleSearchResult(searchResult) {
+            // 创建关系图实例
+            var myChart = echarts.init(document.getElementById('graph'));
+            // 创建空数组存放节点和边数据
+            var nodes = [];
+            var links = [];
+
+            // 遍历searchResult数组，将节点和边数据提取出来
+            searchResult.forEach(function (item) {
+                // 处理节点1的数据
+                var node1 = item.n1;
+                if (!nodes.find(function (node) {
+                    return node.name === node1.name;
+                })) {
+                    nodes.push({
+                        des: node1.name, // 使用name作为节点id
+                        name: node1.name, // 使用name作为节点名称
+                        value: node1.name,
+                        symbolize: 70,
+                        category: 0 // 设置节点1的类别，用于后续样式区分
+                    });
+                }
+
+                // 处理节点2的数据
+                var node2 = item.n2;
+                if (!nodes.find(function (node) {
+                    return node.name === node2.name;
+                })) {
+                    nodes.push({
+                        des: node2.name, // 使用name作为节点id
+                        name: node2.name, // 使用name作为节点名称
+                        value: node2.name,
+                        symbolize: 70,
+                        category: 1 // 设置节点2的类别，用于后续样式区分
+                    });
+                }
+
+                // 处理边的数据
+                {#var relation = item.rel;#}
+                relation = item.relationshipName;
+                links.push({
+                    source: node1.name, // 边的起始节点id
+                    target: node2.name, // 边的目标节点id
+                    value: relation,
+                    name: relation, // 边的关系名称
+                    des: relation,
+                });
+            });
+            console.log("nodes:", nodes);
+            console.log("links:", links);
+            // 设置关系图配置项和数据
+            var categories = [];
+            for (var i = 0; i < 2; i++) {
+                categories[i] = {
+                    name: '类目' + i
+                };
+            }
+            option = {
+                // 图的标题
+                title: {
+                    text: 'ECharts 关系图'
+                },
+                // 提示框的配置
+                tooltip: {
+                    formatter: function (x) {
+                        return x.data.des;
+                    }
+                },
+                // 工具箱
+                toolbox: {
+                    // 显示工具箱
+                    show: true,
+                    feature: {
+                        mark: {
+                            show: true
+                        },
+                        // 还原
+                        restore: {
+                            show: true
+                        },
+                        // 保存为图片
+                        saveAsImage: {
+                            show: true
+                        }
+                    }
+                },
+                legend: [{
+                    // selectedMode: 'single',
+                    data: categories.map(function (a) {
+                        return a.name;
+                    })
+                }],
+                series: [{
+                    type: 'graph', // 类型:关系图
+                    layout: 'force', //图的布局，类型为力导图
+                    symbolSize: 40, // 调整节点的大小
+                    roam: true, // 是否开启鼠标缩放和平移漫游。默认不开启。
+                    edgeSymbol: ['circle', 'arrow'],
+                    edgeSymbolSize: [2, 10],
+                    edgeLabel: {
+                        normal: {
+                            textStyle: {
+                                fontSize: 20
+                            }
+                        }
+                    },
+                    force: {
+                        repulsion: 500,
+                        edgeLength: [10, 50],
+                        gravity: 0.1,
+                        layoutAnimation: true, // 禁用拖动时的布局更新
+                    },
+                    draggable: true,
+                    lineStyle: {
+                        normal: {
+                            width: 2,
+                            color: '#4b565b',
+                        }
+                    },
+                    edgeLabel: {
+                        normal: {
+                            show: true,
+                            formatter: function (x) {
+                                return x.data.name;
+                            }
+                        }
+                    },
+                    label: {
+                        normal: {
+                            show: true,
+                            textStyle: {}
+                        }
+                    },
+
+                    // 数据
+                    data: nodes,
+                    links: links,
+
+                    categories: categories,
+                }],
+
+            };
+            myChart.setOption(option);
+        }
+
+
+    </script>
+{% endblock %}
