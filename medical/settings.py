@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'graph.apps.GraphConfig',
     'robot.apps.RobotConfig',
     'calculate.apps.CalculateConfig',
-    'column.apps.ColumnConfig'
+    'column.apps.ColumnConfig',
+    'map.apps.MapConfig',
+    'statistic.apps.StatisticConfig',
 ]
 
 MIDDLEWARE = [

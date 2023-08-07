@@ -1,0 +1,48 @@
+{% extends 'layout/basic.html' %}
+{% load static %}
+<link rel="stylesheet" href="../../../static/plugins/bootstrap-4.4.1-dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+{% block base %}
+    <meta charset="UTF-8">
+    <title>Map</title>
+    <script src="https://webapi.amap.com/loader.js"></script>
+    <script type="text/javascript">window._AMapSecurityConfig = {securityJsCode: 'a558629aab71e61d62fed5b058638dc2',}</script>
+    <script type="text/javascript"
+            src="https://webapi.amap.com/maps?v=2.0&key=7ac9930fd2843c9a3eee0576f7a58246&
+            plugin=AMap.PlaceSearch,AMap.AdvancedInfoWindow"></script>
+    <script src="//webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
+{% endblock %}
+
+<body>
+{% block content %}
+    <div id="container" style="width: 1000px; height: 600px;"></div>
+    <div style="margin : 0px 0px 0px 10px;">
+        <input id="tipinput" style="width: 200px;" class="form-control input-style" placeholder="请输入关键字" value=""/>
+    </div>
+{% endblock %}
+<script src="../../../static/js/jquery-3.2.1.min.js"></script>
+<script src="../../../static/plugins/bootstrap-4.4.1-dist/js/bootstrap.bundle.js"></script>
+{% block js %}
+    <script>
+        var map = new AMap.Map('container', {
+            zoom: 16, center: [117.715004, 39.026344],//中心点坐标viewMode:'3D'//使用3D视图
+        });
+        var autoOptions = {
+            input: "tipinput"//使用联想输入的input的id（也就是上边那个唯一的id）
+        };
+        AMap.plugin(['AMap.PlaceSearch', 'AMap.AutoComplete'], function () {
+            var auto = new AMap.AutoComplete(autoOptions);
+            var placeSearch = new AMap.PlaceSearch({
+                map: map
+            });  //构造地点查询类
+            auto.on("select", select);//注册监听，当选中某条记录时会触发
+            function select(e) {
+                placeSearch.setCity(e.poi.adcode);
+                placeSearch.search(e.poi.name);  //关键字查询查询
+            }
+        });
+    </script>
+{% endblock %}
+</body>
+</html>
