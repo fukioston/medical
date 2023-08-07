@@ -127,6 +127,14 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+disease_path = os.path.join(BASE_DIR, 'utils\\robot\data\disease.txt')
+deny_path = os.path.join(BASE_DIR, 'utils\\robot\data\deny.txt')
+drug_path = os.path.join(BASE_DIR, 'utils\\robot\data\drug.txt')
+food_path = os.path.join(BASE_DIR, 'utils\\robot\data\\food.txt')
+symptom_path = os.path.join(BASE_DIR, 'utils\\robot\data\symptom.txt')
+department_path = os.path.join(BASE_DIR, 'utils\\robot\data\department.txt')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 
 from user.models import UserInfo
+from utils.robot.get_answer import *
 
 
 def talk(request):
@@ -13,5 +14,10 @@ def talk(request):
 
 def answer(request):
     message = '抱歉，您的问题我可能无法给出答复。请您把问题提的尽量准确一些。'
+    question=request.GET.get('send_txt')
     # 如果表中有了数据就报错
+    if classify(question,region_tree,wdtype_dict):
+        message2 = search_main(parser_main(classify(question, region_tree, wdtype_dict)))
+        print(classify(question,region_tree,wdtype_dict))
+        message=message2
     return JsonResponse({'status': True, 'err': "已经收藏", 'message': message})
