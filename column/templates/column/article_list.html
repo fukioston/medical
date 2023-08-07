@@ -52,44 +52,47 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container mt-4">
-    <button class="card p-3" style="width: 100%; border: None" onclick="window.location.href='article'">
-        <div class="row" style="width: 100%;">
-            <div class="col-md-4">
-                <div class="position-relative snipimage">
-                    <img src="{% static 'images/column/article/otQTFTp.jpg'%}" class="rounded img-fluid w-100 img-responsive">
-                    <span class="position-absolute user-timing">1 min</span>
+  <div class="container mt-4">
+      {% for info in info_list %}
+            <button class="card p-3" style="width: 100%; border: None; margin-top: 10px;" onclick="window.location.href='article?article_name={{ info.0 }}'">
+
+                <div class="row" style="width: 100%;">
+                    <div class="col-md-4">
+                        <div class="position-relative snipimage">
+                            <img src="{{ info.1 }}" class="rounded img-fluid w-100 img-responsive">
+                            <span class="position-absolute user-timing"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="mt-2">
+                          <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-1">{{info.0}}</h5>
+                            <span><i class="fa fa-heart text-danger"></i> </span>
+                          </div>
+                          <div class="d-flex justify-content-md-start justify-content-between views-content mt-2">
+                              <div class="d-flex flex-row align-items-center">
+                                  <i class="fa fa-eye"></i>
+                                  <span class="ms-1 views">453674</span>
+                              </div>
+                              <div class="d-flex flex-row align-items-center ms-2">
+                                  <i class="fa fa-heart"></i>
+                                  <span class="ms-1 views">4565</span>
+                              </div>
+                          </div>
+                          <div class="d-flex flex-row mt-3">
+                              <img src="https://i.imgur.com/rvQ3LAt.jpg" width="50" class="rounded-circle" alt="头像">
+                              <div class="ms-2 d-flex flex-column">
+                                 <div class="d-flex flex-row align-items-center">
+                                      <h6>Thomas Hope</h6>
+                                  <span class="dots"></span>
+                                 </div>
+                                 <span class="days-ago">2 days ago</span>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-8">
-                <div class="mt-2">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="mb-1">How to do basic jumping </h5>
-                    <span><i class="fa fa-heart text-danger"></i> </span>
-                  </div>
-                  <div class="d-flex justify-content-md-start justify-content-between views-content mt-2">
-                      <div class="d-flex flex-row align-items-center">
-                          <i class="fa fa-eye"></i>
-                          <span class="ms-1 views">453674</span>
-                      </div>
-                      <div class="d-flex flex-row align-items-center ms-2">
-                          <i class="fa fa-heart"></i>
-                          <span class="ms-1 views">4565</span>
-                      </div>
-                  </div>
-                  <div class="d-flex flex-row mt-3">
-                      <img src="https://i.imgur.com/rvQ3LAt.jpg" width="50" class="rounded-circle" alt="头像">
-                      <div class="ms-2 d-flex flex-column">
-                         <div class="d-flex flex-row align-items-center">
-                              <h6>Thomas Hope</h6>
-                          <span class="dots"></span>
-                         </div>
-                         <span class="days-ago">2 days ago</span>
-                      </div>
-                  </div>
-                </div>
-            </div>
-        </div>
-    </button>
-</div>
+            </button>
+      {% endfor %}
+  </div>
 {% endblock %}
