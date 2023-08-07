@@ -3,6 +3,7 @@ from django.shortcuts import render, HttpResponse, redirect
 
 from column.models import articles
 
+
 def home(request):
     counts = []
     catalog_list = articles.objects.values_list('catalog', flat=True).distinct()
@@ -22,5 +23,10 @@ def article_list(request):
 
     article_name_list = [article_obj.article_name for article_obj in articles_obj]
     article_img_list = [article_obj.img_url for article_obj in articles_obj]
-    info = list(zip(article_name_list, article_img_list))
+    article_uploader = [article_obj.uploader for article_obj in articles_obj]
+    article_upload_time = [article_obj.upload_time for article_obj in articles_obj]
+    article_likes = [article_obj.likes for article_obj in articles_obj]
+    article_click = [article_obj.click for article_obj in articles_obj]
+    info = list(zip(article_name_list, article_img_list, article_uploader, article_upload_time, article_likes, article_click))
+
     return render(request, 'column/article_list.html', {'info_list': info})
