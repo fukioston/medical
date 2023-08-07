@@ -67,7 +67,6 @@
                         <div class="mt-2">
                           <div class="d-flex justify-content-between align-items-center">
                             <h5 class="mb-1">{{ info.0 }}</h5>
-                            <span><i class="fa fa-heart text-danger"></i> </span>
                           </div>
                           <div class="d-flex justify-content-md-start justify-content-between views-content mt-2">
                               <div class="d-flex flex-row align-items-center">
@@ -95,4 +94,12 @@
             </button>
       {% endfor %}
   </div>
+{% endblock %}
+{% block js %}
+    <script>
+$("#like").click(function() {
+     print($(this).data('id'))
+})
+
+            </script>
 {% endblock %}

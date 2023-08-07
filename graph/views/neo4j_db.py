@@ -1,9 +1,11 @@
 from py2neo import Graph, Node, Relationship
 
+from medical.local_settings import g
+
 
 class neo4jconn:
     def __init__(self):
-        self.graph = Graph("http://localhost:7474", auth=("neo4j", "36491491Aa!"), name="mytry")
+        self.graph = g
 
     # 已知实体1，找他的所有关系
     def findRelationByEntity1(self, entity1):

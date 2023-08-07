@@ -5,7 +5,7 @@ from datetime import datetime
 # Create your models here.
 
 class articles(models.Model):
-    catalog = models.TextField(verbose_name='分裂')
+    catalog = models.TextField(verbose_name='分类')
     article_name = models.TextField(verbose_name='文章标题')
     article_url = models.TextField(verbose_name='文章url')
     img_url = models.TextField(verbose_name='文章封面')
@@ -16,3 +16,6 @@ class articles(models.Model):
     click = models.IntegerField(verbose_name='点击量', default=0)
 
 
+class like(models.Model):
+    article_id=models.IntegerField(verbose_name='article_id')
+    user_id=models.IntegerField(verbose_name='user_id')
