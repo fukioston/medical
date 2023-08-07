@@ -3,7 +3,7 @@ from py2neo import Graph, Node, Relationship
 
 class neo4jconn:
     def __init__(self):
-        self.graph = Graph("http://localhost:7474", auth=("neo4j", "12345678"), name="last")
+        self.graph = Graph("http://localhost:7474", auth=("neo4j", "a6782533"), name="neo4j2")
 
     # 已知实体1，找他的所有关系
     def findRelationByEntity1(self, entity1):
