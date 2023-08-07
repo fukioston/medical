@@ -8,6 +8,10 @@ def article(request):
     article_name = request.GET.get('article_name')
     if article_name:
         articles_obj = articles.objects.filter(article_name=article_name).first()
+        if articles_obj:
+            articles_obj.click += 1
+            articles_obj.save()
+            print(articles_obj.click)
     else:
         articles_obj = None
 

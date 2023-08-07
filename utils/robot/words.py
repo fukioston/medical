@@ -4,7 +4,7 @@ from py2neo import Graph
 
 from medical.settings import disease_path, department_path, drug_path, food_path, symptom_path, deny_path
 
-g = Graph("http://localhost:7474", auth=("neo4j", "12345678"), name="last")
+g = Graph("http://localhost:7474", auth=("neo4j", "36491491Aa!"), name="mytry")
 # 读取5个实体的txt
 disease_wds = [i.strip() for i in open(disease_path, encoding='utf-8') if i.strip()]
 department_wds = [i.strip() for i in open(department_path, encoding='utf-8') if i.strip()]
