@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse, redirect
 
 
-def home(request):
+def article(request):
 
-    return render(request, 'column/catalog.html')
+    return render(request, 'column/article.html')
+

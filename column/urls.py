@@ -16,9 +16,11 @@ Including another URLconf
 
 from django.urls import path
 from column.views import catalog
+from column.views import article_list
 
 urlpatterns = [
     path('catalog', catalog.home),
-    path('article_list', catalog.article_list)
+    path('article_list', catalog.article_list),
+    path('article', article_list.article)
 ]
 

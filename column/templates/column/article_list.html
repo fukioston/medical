@@ -53,11 +53,11 @@
 
 {% block content %}
     <div class="container mt-4">
-    <div class="card p-3">
-        <div class="row">
+    <button class="card p-3" style="width: 100%; border: None" onclick="window.location.href='article'">
+        <div class="row" style="width: 100%;">
             <div class="col-md-4">
                 <div class="position-relative snipimage">
-                    <img src="https://i.imgur.com/otQTFTp.jpg" class="rounded img-fluid w-100 img-responsive">
+                    <img src="{% static 'images/column/article/otQTFTp.jpg'%}" class="rounded img-fluid w-100 img-responsive">
                     <span class="position-absolute user-timing">1 min</span>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                       </div>
                   </div>
                   <div class="d-flex flex-row mt-3">
-                      <img src="https://i.imgur.com/rvQ3LAt.jpg" width="50" class="rounded-circle">
+                      <img src="https://i.imgur.com/rvQ3LAt.jpg" width="50" class="rounded-circle" alt="头像">
                       <div class="ms-2 d-flex flex-column">
                          <div class="d-flex flex-row align-items-center">
                               <h6>Thomas Hope</h6>
@@ -90,82 +90,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="card p-3 mt-2">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="position-relative snipimage">
-                    <img src="https://i.imgur.com/dThLXci.jpg" class="rounded img-fluid w-100 img-responsive">
-                    <span class="position-absolute user-timing">15 min</span>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="mt-2">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="mb-1">How to do you make the basics of main stream </h5>
-                    <span><i class="fa fa-heart text-danger"></i> </span>
-                  </div>
-                  <div class="d-flex justify-content-md-start justify-content-between views-content mt-2">
-                      <div class="d-flex flex-row align-items-center">
-                          <i class="fa fa-eye"></i>
-                          <span class="ms-1 views">45564</span>
-                      </div>
-                      <div class="d-flex flex-row align-items-center ms-2">
-                          <i class="fa fa-heart"></i>
-                          <span class="ms-1 views">455</span>
-                      </div>
-                  </div>
-                  <div class="d-flex flex-row mt-3">
-                      <img src="https://i.imgur.com/rvQ3LAt.jpg" width="50" class="rounded-circle">
-                      <div class="ms-2 d-flex flex-column">
-                         <div class="d-flex flex-row align-items-center">
-                              <h6>Thomas Hope</h6>
-                          <span class="dots"></span>
-                         </div>
-                         <span class="days-ago">2 days ago</span>
-                      </div>
-                  </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="card p-3 mt-2 mb-3">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="position-relative snipimage">
-                    <img src="https://i.imgur.com/d1C6Nk4.jpg" class="rounded img-fluid w-100 img-responsive">
-                    <span class="position-absolute user-timing">25 min</span>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="mt-2">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="mb-1">Do you know we loves jungle having green shades </h5>
-                    <span><i class="fa fa-heart text-danger"></i> </span>
-                  </div>
-                  <div class="d-flex justify-content-md-start justify-content-between views-content mt-2">
-                      <div class="d-flex flex-row align-items-center">
-                          <i class="fa fa-eye"></i>
-                          <span class="ms-1 views">4545564</span>
-                      </div>
-                      <div class="d-flex flex-row align-items-center ms-2">
-                          <i class="fa fa-heart"></i>
-                          <span class="ms-1 views">4545</span>
-                      </div>
-                  </div>
-                  <div class="d-flex flex-row mt-3">
-                      <img src="https://i.imgur.com/rvQ3LAt.jpg" width="50" class="rounded-circle">
-                      <div class="ms-2 d-flex flex-column">
-                         <div class="d-flex flex-row align-items-center">
-                              <h6>Thomas Hope</h6>
-                          <span class="dots"></span>
-                         </div>
-                         <span class="days-ago">2 days ago</span>
-                      </div>
-                  </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    </button>
 </div>
 {% endblock %}
