@@ -15,21 +15,19 @@ Including another URLconf
 """
 
 from django.urls import path
-from user.views import login, home, register, apply_admin
+from user.views import login, home, register
 
 urlpatterns = [
     path('login/', login.login, name="login"),
-    path('image/code/', login.image_code,name='image_code'),
-    path('edit_info/', home.edit_info,name="edit_info"),
-    path('sms/code/', login.send_sms,name="send_sms"),
-    path('login/sms/', login.login_sms,name="login_sms"),
-    path('home/', home.home,name="home"),
-    path('register/',register.register,name="register"),
-    path('image/code/',login.image_code,name='image_code'),
-    path('logout/',home.logout,name="logout"),
-    path('edit_pwd/',home.edit_pwd,name='edit_pwd'),
-    path('apply_admin',apply_admin.apply_admin),
-    path('satisfy',apply_admin.satisfy)
+    path('image/code/', login.image_code, name='image_code'),
+    path('edit_info/', home.edit_info, name="edit_info"),
+    path('sms/code/', login.send_sms, name="send_sms"),
+    path('login/sms/', login.login_sms, name="login_sms"),
+    path('home/', home.home, name="home"),
+    path('register/', register.register, name="register"),
+    path('image/code/', login.image_code, name='image_code'),
+    path('logout/', home.logout, name="logout"),
+    path('edit_pwd/', home.edit_pwd, name='edit_pwd'),
+
 
 ]
-

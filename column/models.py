@@ -14,6 +14,7 @@ class articles(models.Model):
     upload_time = models.TextField(verbose_name='上传日期', default='2023/08/07')
     likes = models.IntegerField(verbose_name='点赞数', default=0)
     click = models.IntegerField(verbose_name='点击量', default=0)
+    status=models.CharField(verbose_name='状态', default=0,max_length=32)
 
 
 class like(models.Model):

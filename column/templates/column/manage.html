@@ -1,0 +1,121 @@
+{% extends 'layout/basic.html' %}
+{% load static %}
+<title>管理页面</title>
+{% block css %}
+    <style>
+@import url('https://fonts.googleapis.com/css?family=Assistant');
+
+body {
+  background: #eee;
+  font-family: Assistant, sans-serif;
+}
+
+.cell-1 {
+  border-collapse: separate;
+  border-spacing: 0 4em;
+  background: #fff;
+  border-bottom: 5px solid transparent;
+  /*background-color: gold;*/
+  background-clip: padding-box;
+}
+
+thead {
+  background: #dddcdc;
+}
+.rounded{
+    width:940px;
+}
+    </style>
+
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+        <div class="d-flex justify-content-center row">
+            <div class="col-md-10">
+                <div class="rounded">
+                    <div class="table-responsive table-borderless">
+                        <table  class="table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">id</th>
+                                    <th>文章名称</th>
+                                    <th>文章类型</th>
+                                    <th>文章状态</th>
+                                    <th>上传时间</th>
+                                    <th>作者</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="article" class="table-body">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{%block js %}
+    <script>
+    get_all()
+
+    function get_all(){
+        $.ajax({
+    url:'/column/get_all',
+    type:'get',
+    data:{
+
+    },
+     success(msg) {
+        console.log(msg.info)
+         var info=msg.info
+         console.log(info)
+         for (var i = 0; i < info.length; i++)
+
+         {if(info[i][3]==='pass')
+             $('#article').append(
+                `<tr class="cell-1">
+                                    <td class="text-center">${info[i][0]}</td>
+                                    <td>${info[i][1]}</td>
+                                    <td>${info[i][2]}</td>
+                                    <td><span class="badge badge-success">审核通过</span></td>
+                                    <td>${info[i][4]}</td>
+                                    <td>${info[i][5]}</td>
+                                    <td><button>查看原文</td>
+                                </tr>`)
+                else if(info[i][3]==='not_pass')
+                    $('#article').append(
+                `<tr class="cell-1">
+                                    <td class="text-center">${info[i][0]}</td>
+                                    <td>${info[i][1]}</td>
+                                    <td>${info[i][2]}</td>
+                                    <td><span class="badge badge-danger">审核不通过</span></td>
+                                    <td>${info[i][4]}</td>
+                                    <td>${info[i][5]}</td>
+                                    <td><button>查看原文</td>
+                                </tr>`)
+                else
+                 $('#article').append(
+                `<tr class="cell-1">
+                                    <td class="text-center">${info[i][0]}</td>
+                                    <td>${info[i][1]}</td>
+                                    <td>${info[i][2]}</td>
+                                    <td><span class="badge badge-info">审核中</span></td>
+                                    <td>${info[i][4]}</td>
+                                    <td>${info[i][5]}</td>
+                                    <td><button>查看原文</td>
+                                </tr>`)
+         }
+
+     }
+     })
+
+
+        }
+
+
+    </script>
+
+{% endblock %}

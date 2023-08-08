@@ -1,0 +1,227 @@
+{% extends 'layout/basic.html' %}
+{% load static %}
+{% block css %}
+    <style>
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+
+
+}
+
+{#body{#}
+{#	background-color: #eee;#}
+
+.modal-title{
+	font-weight: bold;
+}
+h6{
+	font-size: 	16px;
+	font-weight: bold;
+}
+
+
+.mt-150{
+
+     margin-top:150px;
+}
+.my{
+    display: flex;
+
+    flex-direction: column;
+    text-align: center;
+    background: green;
+    width: 600px;
+    height: 600px;
+    border: 1px;
+
+
+}
+.mymain{
+    flex-direction: column;
+    align-items: center;
+
+}
+.container{
+    margin-top: 20px;
+}
+#c1,#c2,#c3{
+    pointer-events: none;
+    opacity: 0.5;
+}
+#condition1,#condition2,#condition3 {
+    color: red; /* 设置文字颜色为红色 */
+    font-weight: bold; /* 设置文字加粗 */
+  }
+
+
+    </style>
+{% endblock %}
+{% block content %}
+
+    <div class="my">
+    <h1>管理员招募</h1>
+    <p>你想成为管理员吗？</p>
+
+
+
+
+
+
+    </div>
+    <div><input class="form-check-input" type="checkbox"   id="yesornot"  onclick="a()">我已阅读并同意以上规定</div>
+
+<div class="container d-flex justify-content-center mt-150">
+	<div class="row">
+		<div class="col-xs-12">
+				<!-- Button trigger modal -->
+<button id="btnApply" type="button" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal">
+  申请
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content p-4">
+      <div class="modal-header pt-1 pl-2">
+        <h5 class="modal-title" id="exampleModalLabel">Notification settings</h5>
+        <button id='close' type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span  aria-hidden="true">&times;</span>
+        </button>
+      </div>
+<div class="modal-body">
+    <div class="form-check pt-4">
+  		<input class="form-check-input" type="checkbox" name="condition1"  id="c1" value="option2"  >
+  		<label class="form-check-label" for="exampleRadios2"><h6>没有申请过管理员</h6></label>
+  		<p id="condition1" class="justify">你已经是管理员了！</p>
+	</div>
+
+
+	<div class="form-check pt-4">
+ 		 <input class="form-check-input" type="checkbox" name="condition2" id="c2" value="option2">
+  		<label class="form-check-label" for="exampleRadios2"><h6>发表文章数超过10篇</h6></label>
+  		<p id="condition2" class="justify">很遗憾你没有达到这个要求</p>
+	</div>
+    <div class="form-check pt-4">
+        <input class="form-check-input" type="checkbox" name="condition3"  id="c3" value="option2" >
+  		<label class="form-check-label" for="exampleRadios2"><h6>发表文章浏览量超过100次</h6></label>
+		<p id="condition3" class="justify">很遗憾你没有达到这个要求</p>
+
+	</div>
+
+
+</div>
+
+      <div class="modal-footer pt-4">
+
+        <button type="button" class="btn btn-light mx-auto" style="width:45%" data-dismiss="modal">Cancel</button>
+        <button id="btnConfirm" type="button" class="btn btn-dark mx-auto" style="width:45%">确认申请</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block js %}
+    <script>
+
+     a()
+     btnConfirm_click()
+    btnApply_click()
+function btnApply_click() {
+            $('#btnApply').click(
+
+                function () {
+
+    $.ajax({
+    url:'/manager/satisfy',
+    type:'get',
+    data:{
+    },
+    success(msg){
+            console.log(msg.condition)
+        var condition1 = msg.condition[0]
+        var condition2 = msg.condition[1]
+        var condition3 = msg.condition[2]
+        if(condition1!==true||condition2!==true||condition3!==true)
+            $('#confirm').prop('disabled', true)
+        if(condition1) {
+            var element = document.getElementById("condition1");
+            element.textContent = "符合该要求"; // 修改文字内容
+            element.style.color = "green"; // 修改文字颜色
+            document.getElementById("c1").checked = true
+        };
+        if(condition2) {
+            var element2 = document.getElementById("condition2");
+            element2.textContent = "符合该要求"; // 修改文字内容
+            element2.style.color = "green"; // 修改文字颜色
+            document.getElementById("c2").checked = true
+        };
+        if(condition3) {
+            var element3 = document.getElementById("condition3");
+            element3.textContent = "符合该要求"; // 修改文字内容
+            element3.style.color = "green"; // 修改文字颜色
+            document.getElementById("c3").checked = true
+        };
+        
+
+    }
+    })})}
+function btnConfirm_click(){
+    $('#btnConfirm').click(
+
+        function () {
+
+            $.ajax({
+    url:'/manager/apply',
+    type:'post',
+    data:{
+            csrfmiddlewaretoken:'{{ csrf_token }}'
+    },
+     success(msg) {
+       alert('申请成功')
+     }
+     })
+        var button =document.getElementById("close")
+            button.click()
+
+        }
+
+
+
+
+
+
+    )}
+
+
+
+
+
+
+
+
+
+
+            function a(){
+
+    if (document.getElementById("yesornot").checked)
+    $('#btnApply').prop('disabled', false)
+    else $('#btnApply').prop('disabled', true)
+
+}
+
+
+
+
+
+    </script>
+{% endblock %}
