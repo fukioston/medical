@@ -6,94 +6,213 @@
 <head>
     <meta charset="UTF-8">
     {% block base %}
-    <title>Title</title>
+        <title>Title</title>
     {% endblock %}
 </head>
 
 <style>
     @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
-    body{font-family: 'Poppins', sans-serif;background: #fafafa}
-    p{font-size: 1.1em;font-weight: 300;line-height: 1.7em;color:#999}
-    a, a:hover, a:focus{color:inherit;text-decoration: none;transition: all 0.3s}
-    .navbar{padding:15px 10px;background: #fff;border:none;border-radius: 0;margin-bottom: 40px;box-shadow: 1px 1px 3px rgba(0,0,0,0.1)}
-    .navbar-btn{box-shadow: none;outline:none !important;border:none}.line{width:100%;height:1px;border-bottom: 1px dashed #ddd}
-    .wrapper{display: flex;width:100%;align-items:stretch}
-    #sidebar{min-width:250px;max-width: 250px;background: #005086;color:#fff;transition: all 0.3s}
-    #sidebar.active{margin-left:-250px}
-    #sidebar .sidebar-header{padding:20px;background: #005086}
-    #sidebar ul.components{padding:20px 0px;border-bottom:1px solid #47748b}
-    #sidebar ul p{padding:10px;font-size:15px;display: block;color:#fff}
-    #sidebar ul li a{padding:10px;font-size: 1.1em;display: block}
-    #sidebar ul li a:hover{color:#fff;background: #318fb5}
-    #sidebar ul li.active>a, a[aria-expanded="true"]{color:#fff;background: #318fb5}
-    a[data-toggle="collapse"]{position: relative}
-    .dropdown-toggle::after{display: block;position: absolute;
-        top:50%;right:20px;
-        transform: translateY(-50%)}
-    ul ul a{font-size:0.9em !important;
-        padding-left: 30px !important;background: #318fb5}
-    ul.CTAs{padding:20px}
-    ul.CTAs a{
-        text-align: center;font-size:0.9em !important;
-        display: block;border-radius: 5px;
-        margin-bottom:5px}
-    a.download, a.download:hover{background:#318fb5;color:#fff}
-    #content{width:100%;padding:20px;min-height: 100vh;transition: all 0.3s}
-    .content-wrapper{padding:15px}
-   #sidebar{
-       height: 100% !important;
-   }
 
-   .content{
-       width: 100% !important;
-       height: 100% !important;
-   }
-   .wrapper{
+    .selected{
+        background-color: #318fb5;
+    }
 
-       height:910px !important;
-   }
-   .mymain{
-       display: flex;
-       justify-content: center;
-   }
-   .now_page{
-       background: #318fb5;
-   }
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: #fafafa
+    }
+
+    p {
+        font-size: 1.1em;
+        font-weight: 300;
+        line-height: 1.7em;
+        color: #999
+    }
+
+    a, a:hover, a:focus {
+        color: inherit;
+        text-decoration: none;
+        transition: all 0.3s
+    }
+
+    .navbar {
+        padding: 15px 10px;
+        background: #fff;
+        border: none;
+        border-radius: 0;
+        margin-bottom: 40px;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1)
+    }
+
+    .navbar-btn {
+        box-shadow: none;
+        outline: none !important;
+        border: none
+    }
+
+    .line {
+        width: 100%;
+        height: 1px;
+        border-bottom: 1px dashed #ddd
+    }
+
+    .wrapper {
+        display: flex;
+        width: 100%;
+        align-items: stretch
+    }
+
+    #sidebar {
+        min-width: 250px;
+        max-width: 250px;
+        background: #005086;
+        color: #fff;
+        transition: all 0.3s
+    }
+
+    #sidebar.active {
+        margin-left: -250px
+    }
+
+    #sidebar .sidebar-header {
+        padding: 20px;
+        background: #005086
+    }
+
+    #sidebar ul.components {
+        padding: 20px 0px;
+        border-bottom: 1px solid #47748b
+    }
+
+    #sidebar ul p {
+        padding: 10px;
+        font-size: 15px;
+        display: block;
+        color: #fff
+    }
+
+    #sidebar ul li a {
+        padding: 10px;
+        font-size: 1.1em;
+        display: block
+    }
+
+    #sidebar ul li a:hover {
+        color: #fff;
+        background: #318fb5
+    }
+
+    #sidebar ul li.active > a, a[aria-expanded="true"] {
+        color: #fff;
+        background: #318fb5
+    }
+
+    a[data-toggle="collapse"] {
+        position: relative
+    }
+
+    .dropdown-toggle::after {
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%)
+    }
+
+    ul ul a {
+        font-size: 0.9em !important;
+        padding-left: 30px !important;
+        background: #318fb5
+    }
+
+    ul.CTAs {
+        padding: 20px
+    }
+
+    ul.CTAs a {
+        text-align: center;
+        font-size: 0.9em !important;
+        display: block;
+        border-radius: 5px;
+        margin-bottom: 5px
+    }
+
+    a.download, a.download:hover {
+        background: #318fb5;
+        color: #fff
+    }
+
+    #content {
+        width: 100%;
+        padding: 20px;
+        min-height: 100vh;
+        transition: all 0.3s
+    }
+
+    .content-wrapper {
+        padding: 15px
+    }
+
+    #sidebar {
+        height: 100% !important;
+    }
+
+    .content {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    .wrapper {
+
+        height: 910px !important;
+    }
+
+    .mymain {
+        display: flex;
+        justify-content: center;
+    }
+
+    .now_page {
+        background: #318fb5;
+    }
+
 
 </style>
 {% block css %}
 
-    {% endblock %}
+{% endblock %}
 <body>
 <div class="wrapper">
     <nav id="sidebar">
         <div class="sidebar-header">
-            <h3>医疗网站</h3>	<hr>
+            <h3>医疗网站</h3>
+            <hr>
         </div>
         <ul class="list-unstyled components">
             <p>菜单</p>
-                 <li>
+            <li>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">用户</a>
                 <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li>	<a href="/user/home">用户中心</a>	</li>
-                    <li>	<a href="/user/edit_pwd">修改密码</a>	</li>
-                    <li>	<a href="/user/edit_info">修改个人信息</a></li>
-                    <li>	<a href="#">我的文章</a></li>
-                     <li>	<a class="hahaha" href="#" >文章审核</a></li>
+                    <li><a href="/user/home">用户中心</a></li>
+                    <li><a href="/user/edit_pwd">修改密码</a></li>
+                    <li><a href="/user/edit_info">修改个人信息</a></li>
+                    <li><a href="#">我的文章</a></li>
+                    <li><a class="hahaha" href="#">文章审核</a></li>
                 </ul>
             </li>
-            <li>	<a href="/column/catalog">医学科普栏目</a>	</li>
-            <li>	<a href="/robot/talk">智能问答机器人</a>	</li>
-            <li>	<a href="/graph/">医学知识图谱</a>	</li>
-            <li>	<a href="/map/">医院地图支持</a>	</li>
-            <li>	<a href="/statistic">统计</a>	</li>
+            <li><a href="/column/catalog" class="link">医学科普栏目</a></li>
+            <li><a href="/robot/talk/" class="link">智能问答机器人</a></li>
+            <li><a href="/graph/" class="link">医学知识图谱</a></li>
+            <li><a href="/map/" class="link">医院地图支持</a></li>
+            <li><a href="/statistic" class="link">统计</a></li>
 
             <li>
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">计算小工具</a>
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
+                   class="dropdown-toggle">计算小工具</a>
                 <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li>	<a href="/calculate/bmi">BMI计算</a>	</li>
-                    <li>	<a href="#">大学生体测计算器</a>	</li>
-                    <li>	<a href="#">血压建议</a>	</li>
+                    <li><a href="/calculate/bmi">BMI计算</a></li>
+                    <li><a href="#">大学生体测计算器</a></li>
+                    <li><a href="#">血压建议</a></li>
                 </ul>
             </li>
         </ul>
@@ -109,48 +228,65 @@
             <button type="button" id="sidebarCollapse" class="btn btn-info">
                 <i class="fa fa-align-justify"></i>
             </button>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     {% if not user_info %}
-                    <li class="nav-item active"><a href="{% url 'register'%} ">注册</a></li>
-                    <li class="nav-item active"><a href="{% url 'login'%} ">登录</a></li>
+                        <li class="nav-item active"><a href="{% url 'register' %} ">注册</a></li>
+                        <li class="nav-item active"><a href="{% url 'login' %} ">登录</a></li>
 
                     {% else %}
-                        <li class="nav-item"> <a class="nav-link" href="#">{{ user_info.username }}</a> </li>
+                        <li class="nav-item"><a class="nav-link" href="#">{{ user_info.username }}</a></li>
 
 
-{#                    <li class="nav-item"> <a class="nav-link" href="#">Features</a> </li>#}
-{#                    <li class="nav-item"> <a class="nav-link" href="#">Pricing</a> </li>#}
-{#                    <li class="nav-item"> <a class="nav-link" href="#">Contact</a> </li>#}
-                     {% endif %}
+                        {#                    <li class="nav-item"> <a class="nav-link" href="#">Features</a> </li>#}
+                        {#                    <li class="nav-item"> <a class="nav-link" href="#">Pricing</a> </li>#}
+                        {#                    <li class="nav-item"> <a class="nav-link" href="#">Contact</a> </li>#}
+                    {% endif %}
                 </ul>
             </div>
         </nav>
-<div class="mymain">
- {% block content %}
+        <div class="mymain">
+            {% block content %}
 
- {% endblock %}
-</div>
-
-
-
-
-
+            {% endblock %}
         </div>
+
+
+    </div>
 </div>
 
 </body>
 <script src="../../../static/js/jquery-3.2.1.min.js"></script>
 <script src="../../../static/plugins/bootstrap-4.4.1-dist/js/bootstrap.bundle.js"></script>
 <script>
-    $(document).ready(function(){
-			$("#sidebarCollapse").on('click', function(){
-				$("#sidebar").toggleClass('active');
-			});
-		});
+    $(document).ready(function () {
+        $("#sidebarCollapse").on('click', function () {
+            $("#sidebar").toggleClass('active');
+        });
+
+
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // 获取当前页面的 URL
+        var currentUrl = window.location.pathname;
+
+        // 获取所有链接元素
+        var navLinks = Array.from(document.getElementsByClassName("link"));
+
+        // 为每个链接检查是否与当前页面的 URL 匹配，如果匹配则添加 .selected 类
+        navLinks.forEach(function (link) {
+            var linkUrl = link.getAttribute('href');
+            if (linkUrl === currentUrl) {
+                link.classList.add('selected');
+            }
+        });
+    });
+
 </script>
 {% block js %}
 

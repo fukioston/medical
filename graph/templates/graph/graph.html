@@ -54,7 +54,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <header class="panel-heading">
-                        请输入查询条件：
+                        请输入查询条件：（若结点过小，可以用鼠标滚轮进行放大）
                     </header>
                     <div class="panel-body">
                         <form id="searchRelationForm" class="form-inline"
@@ -318,7 +318,6 @@
                         repulsion: 500,
                         edgeLength: [10, 50],
                         gravity: 0.1,
-                        layoutAnimation: true, // 禁用拖动时的布局更新
                     },
                     draggable: true,
                     lineStyle: {
@@ -348,7 +347,6 @@
 
                     categories: categories,
                 }],
-
             };
             myChart.setOption(option);
         }
