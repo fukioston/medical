@@ -27,7 +27,9 @@ def get_all(request):
     return JsonResponse({'status': True, 'err': "无法回复", 'info':info})
 
 def get_reviewing(request):
-    articles_obj = articles.objects.filter(status="reviewing").order_by('upload_time')
+    page = request.GET.get('page')
+    page = int(page)
+    articles_obj = articles.objects.filter(status="0").order_by('upload_time')[(page-1)*10:page*10]
     articles_id = [article_obj.id for article_obj in articles_obj]
     article_name_list = [article_obj.article_name for article_obj in articles_obj]
     article_uploader = [UserInfo.objects.filter(id=article_obj.uploader_id).first().username
@@ -38,3 +40,10 @@ def get_reviewing(request):
     info = list(
         zip(articles_id, article_name_list, article_catalog, article_status, article_upload_time, article_uploader, ))
     return JsonResponse({'status': True, 'err': "无法回复", 'info': info})
+
+
+def review(request):
+    info = request.session.get('info')
+    user_id = info['id']
+    query_set = UserInfo.objects.filter(id=user_id).first()
+    return render(request, 'manager/review.html', {'user_info': query_set, })
