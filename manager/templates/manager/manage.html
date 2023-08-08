@@ -120,6 +120,7 @@ thead {
         var element = document.getElementById("article");
                     element.innerHTML = "";
          var info=msg.info
+         console.log('??????????'+msg.status)
          for (var i = 0; i<info.length; i++)
 
          {if(info[i][3]==='1')
@@ -172,6 +173,7 @@ function btnFind_click() {
                 success(msg) {
                     var element = document.getElementById("article");
                     element.innerHTML = "";
+
                     var info = msg.info
                     console.log('??')
                     console.log(info)

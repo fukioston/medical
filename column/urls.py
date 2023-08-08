@@ -24,6 +24,6 @@ urlpatterns = [
     path('article_list', catalog.article_list),
     path('article', article_list.article),
     path('upload', upload.upload),
-    path('search',search.search)
+    path('search', search.search),
+    path('search_tip/', search.search_tip)
 ]
-

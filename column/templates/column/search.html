@@ -3,71 +3,40 @@
 
 {% block css %}
     <style>
-        body{
-
-            background-color: #f8f8f8;
-        }
-        {#搜索框#}
-        .height{
-            height: 70px;
-        }
-        .form{
-
-            position: relative;
-        }
-        .form .fa-search{
-            position: absolute;
-            top:15px;
-            left: 20px;
-            color: #9ca3af;
-        }
-        .form span{
-            position: absolute;
-            right: 17px;
-            top: 13px;
-            padding: 2px;
-            border-left: 1px solid #d1d5db;
-
-        }
-
-        .left-pan{
-            padding-left: 7px;
-        }
-
-        .left-pan i{
-
-           padding-left: 10px;
-        }
-
-        .form-input{
-
-            height: 45px;
-            width: 400px;
-            text-indent: 33px;
-            border-radius: 100px;
-        }
-
-        .form-input:focus{
-
-            box-shadow: none;
-            border:none;
-        }
     </style>
 {% endblock %}
 
 {% block content %}
-    <div class="container bg-light rounded">
-        <div class="row height d-flex justify-content-center align-items-center">
-            <div class="col-lg-4 col-md-6 my-lg-0 my-3">
-                <div class="form">
-                    <i class="fa fa-search"></i>
-                    <input type="text" class="form-control form-input" placeholder="请输入文章名">
-                </div>
-            </div>
-        </div>
+    <div class="form">
+        <form action="" method="get">
+            <i class="fa fa-search"></i>
+            <input id="content" type="text" class="form-control form-input" placeholder="请输入文章名">
+            <input type="submit" value="搜索">
+        </form>
+        <div id="tips" style="display: none; width: 200px; height: 200px; border: gray solid 1px;"></div>
     </div>
+{% endblock %}
 
-
-
-
+{% block js %}
+    <script type="text/javascript">
+        $(function(){
+            $("#content").keyup(function (){
+                {#console.log('gghg')#}
+                $.ajax({
+                    url: '/column/search_tip/',
+                    type: 'post',
+                    dataType: 'text',
+                    data: {'kw':this.value,
+                        csrfmiddlewaretoken:'{{ csrf_token }}'
+                    },
+                    success(msg){
+                        console.log(msg)
+                    },
+                    error: function (){
+                        alert('failed!')
+                    }
+                })
+            })
+        });
+    </script>
 {% endblock %}
