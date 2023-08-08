@@ -10,12 +10,36 @@
 {% block content %}
     <div class="col-md-1"></div>
     <div class="col-md-10">
-    <form method="POST" class="form-horizontal" role="form" action="" >
-        {% csrf_token %}
-        {{ form.media }}
-        {{ form }}
-        <button type="submit" style="background-color: #318FB5; border: None;">提交</button>
-    </form>
+        <form method="POST" class="form-horizontal" role="form" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.media }}
+    <div class="form-group">
+        <label for="{{ form.catalog.id_for_label }}" class="col-md-2 control-label">分类</label>
+        <div class="col-md-10">
+            {{ form.catalog }}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="{{ form.article_name.id_for_label }}" class="col-md-2 control-label">文章名称</label>
+        <div class="col-md-10">
+            {{ form.article_name }}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="{{ form.img_url.id_for_label }}" class="col-md-2 control-label">图片</label>
+        <div class="col-md-10">
+            {{ form.img_url }}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="{{ form.content.id_for_label }}" class="col-md-2 control-label">内容</label>
+        <div class="col-md-10">
+            {{ form.content }}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">提交</button>
+</form>
+
     </div>
     <div class="col-md-1"></div>
 

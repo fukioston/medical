@@ -1,6 +1,5 @@
 from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse, redirect
-from column.models import Upload
 from user.models import UserInfo
 from column.forms.article_form import UploadForm
 
@@ -15,8 +14,10 @@ def upload(request):
     else:
         form = UploadForm(request.POST, request.FILES)
         if form.is_valid():
+            form.instance.uploader_id = user_id
+            form.instance.status = 1
             form.save()
-            return HttpResponse('成功!')
+            return redirect('catalog.home')
         else:
             print(form.errors)  # 打印验证错误信息
 

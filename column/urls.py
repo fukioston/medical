@@ -20,7 +20,7 @@ from column.views import article_list
 from column.views import upload
 
 urlpatterns = [
-    path('catalog', catalog.home),
+    path('catalog', catalog.home, name='catalog.home'),
     path('article_list', catalog.article_list),
     path('article', article_list.article),
     path('upload', upload.upload)

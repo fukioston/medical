@@ -3,18 +3,17 @@ from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from django import forms
 from django.forms import ClearableFileInput
 
-from column.models import Upload
+from column.models import articles
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
 class UploadForm(forms.ModelForm):
     class Meta:
-        model = Upload
-        exclude = ['author', 'views', 'slug', 'pub_date']
+        model = articles
+        exclude = ['uploader_id', 'click', 'likes', 'upload_time', 'status']
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'body': CKEditorUploadingWidget(attrs={'class': 'form-control'}),
-            'status': forms.Select(attrs={'class': 'form-control'}),
-            'category': forms.Select(attrs={'class': 'form-control'}),
-            'tags': forms.CheckboxSelectMultiple(attrs={'class': 'multi-checkbox'}),
+            'catalog': forms.Select(attrs={'class': 'form-control'}),
+            'article_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'img_url': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
+            'content': CKEditorUploadingWidget(attrs={'class': 'form-control'}),
         }
