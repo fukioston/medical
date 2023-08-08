@@ -214,7 +214,7 @@ function btnSend_click() {
         talkDiv.scrollTop = talkDiv.scrollHeight;
             {#        然后再将数据传到后端进行处理#}
             $.ajax({
-    url:'/robot/answer',
+    url:'/robot/answer/',
     type:'get',
     data:{
         send_txt

@@ -23,7 +23,21 @@ thead {
   background: #dddcdc;
 }
 .rounded{
-    width:940px;
+    width:980px;
+}
+.truncate {
+  white-space: nowrap; /* 不换行 */
+  overflow: hidden; /* 隐藏溢出内容 */
+  text-overflow: ellipsis; /* 使用省略号表示溢出内容 */
+    min-width: 50px;
+  max-width: 50px; /* 设置最大宽度 */
+}
+.truncate1 {
+  white-space: nowrap; /* 不换行 */
+  overflow: hidden; /* 隐藏溢出内容 */
+  text-overflow: ellipsis; /* 使用省略号表示溢出内容 */
+    min-width: 150px;
+  max-width: 150px; /* 设置最大宽度 */
 }
     </style>
 
@@ -111,14 +125,14 @@ thead {
          {
                  $('#article').append(
                 `<tr class="cell-1">
-                                    <td class="text-center">${info[i][0]}</td>
-                                    <td>${info[i][1]}</td>
-                                    <td>${info[i][2]}</td>
-                                    <td><span class="badge badge-info">待审核</span></td>
-                                    <td>${info[i][4]}</td>
-                                    <td>${info[i][5]}</td>
-                                    <td><button onclick="window.location.href='/column/article?article_name=${info[i][1]}'">查看原文</td>
-                                </tr>`)
+                                    <td class="text-center truncate">${info[i][0]}</td>
+                                    <td class="truncate1">${info[i][1]}</td>
+                                    <td class="truncate">${info[i][2]}</td>
+                                    <td class="truncate"><span class="badge badge-info">待审核</span></td>
+                                    <td class="truncate">${info[i][4]}</td>
+                                    <td class="truncate">${info[i][5]}</td>
+                                    <td class="truncate"><input   type="button"  onclick="window.location.href='/column/article?article_name=${info[i][1]}'"  value="查看原文"></td>
+                </tr>`)
          }
 
      }
