@@ -15,7 +15,7 @@ from utils.image_code import check_code
 def login(request):
     if request.method == 'GET':
         form = LoginForm(request)
-        return render(request, 'user/login.html', {'form': form})
+        return render(request, '../../user/templates/user/login.html', {'form': form})
     form = LoginForm(request, data=request.POST)
     try:
         if form.is_valid():
@@ -31,7 +31,7 @@ def login(request):
                 form.add_error('password', '密码错误!')
     except ValidationError as e:
         form.add_error('code', e)
-    return render(request, 'user/login.html', {'form': form})
+    return render(request, '../../user/templates/user/login.html', {'form': form})
 
 
 def send_sms(request):
@@ -45,7 +45,7 @@ def login_sms(request):
     if request.method == 'GET':
         form = LoginSmsForm(request)
 
-        return render(request, 'user/login_sms.html',{'form':form})
+        return render(request, '../../user/templates/user/login_sms.html',{'form':form})
 
     form = LoginSmsForm(request, data=request.POST)
     try:
@@ -60,7 +60,7 @@ def login_sms(request):
             form.add_error('mobile_phone', '手机号或验证码错误')
     except ValidationError as e:
         form.add_error('code', e)
-    return render(request, 'user/login_sms.html', {'form': form})
+    return render(request, '../../user/templates/user/login_sms.html', {'form': form})
 def image_code(request):
     # 生成图片验证码
     image_object, code = check_code()
