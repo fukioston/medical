@@ -19,4 +19,4 @@ def article(request):
     info = request.session.get('info')
     user_id = info['id']
     query_set = UserInfo.objects.filter(id=user_id).first()
-    return render(request, 'column/article.html', {'title': article_name, 'content': article_content, 'user_info': query_set})
+    return render(request, 'manager/article.html', {'title': article_name, 'content': article_content, 'user_info': query_set})
