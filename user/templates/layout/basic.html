@@ -1,7 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="../../../static/plugins/bootstrap-4.4.1-dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="{% static 'plugins/bootstrap-4.4.1-dist/css/bootstrap.min.css' %}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <head>
     <meta charset="UTF-8">
@@ -104,7 +104,7 @@
 
     #sidebar ul li.active > a, a[aria-expanded="true"] {
         color: #fff;
-        background: #005086
+        background: #318fb5
     }
 
     a[data-toggle="collapse"] {
@@ -122,7 +122,7 @@
     ul ul a {
         font-size: 0.9em !important;
         padding-left: 30px !important;
-        background: #005086
+        background: #318fb5
     }
 
     ul.CTAs {
@@ -215,6 +215,15 @@
             <li><a href="/statistic/" class="link">统计</a></li>
             <li><a href="/calculate/bmi/" class="link">BMI计算器</a></li>
 
+            <li>
+                <a href="#calculate_Submenu" data-toggle="collapse" aria-expanded="false"
+                   class="dropdown-toggle">计算小工具</a>
+                <ul class="collapse list-unstyled" id="calculate_Submenu">
+                    <li><a href="/calculate/bmi">BMI计算</a></li>
+                    <li><a href="#">大学生体测计算器</a></li>
+                    <li><a href="#">血压建议</a></li>
+                </ul>
+            </li>
         </ul>
 
         <ul class="list-unstyled CTAs">
@@ -260,8 +269,8 @@
 </div>
 
 </body>
-<script src="../../../static/js/jquery-3.2.1.min.js"></script>
-<script src="../../../static/plugins/bootstrap-4.4.1-dist/js/bootstrap.bundle.js"></script>
+<script src={% static 'js/jquery-3.2.1.min.js' %}></script>
+<script src={% static 'plugins/bootstrap-4.4.1-dist/js/bootstrap.bundle.js' %}></script>
 <script>
 
     $(document).ready(function () {
