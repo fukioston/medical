@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'layout/basic.html' %}
+{% load static %}
+<link rel="stylesheet" href="../../../static/plugins/bootstrap-4.4.1-dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-</body>
-</html>
+{% block base %}
+    <title>Statistic</title>
+{% endblock %}
+
+<body>
+{% block content %}
+
+{% endblock %}
+
+<script src="../../../static/js/jquery-3.2.1.min.js"></script>
+<script src="../../../static/plugins/bootstrap-4.4.1-dist/js/bootstrap.bundle.js"></script>
+{% block js %}
+    <script>
+
+    </script>
+{% endblock %}
