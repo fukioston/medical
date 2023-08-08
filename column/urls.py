@@ -15,7 +15,7 @@ Including another URLconf
 """
 
 from django.urls import path
-from column.views import catalog, manage
+from column.views import catalog
 from column.views import article_list
 from column.views import upload
 

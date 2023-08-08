@@ -83,7 +83,7 @@ thead {
                                     <td><span class="badge badge-success">审核通过</span></td>
                                     <td>${info[i][4]}</td>
                                     <td>${info[i][5]}</td>
-                                    <td><button>查看原文</td>
+                                    <td><button onclick="window.location.href='/column/article?article_name=${info[i][1]}'">查看原文</td>
                                 </tr>`)
                 else if(info[i][3]==='not_pass')
                     $('#article').append(
@@ -94,7 +94,7 @@ thead {
                                     <td><span class="badge badge-danger">审核不通过</span></td>
                                     <td>${info[i][4]}</td>
                                     <td>${info[i][5]}</td>
-                                    <td><button>查看原文</td>
+                                    <td><button onclick="window.location.href='/column/article?article_name=${info[i][1]}'">查看原文</td>
                                 </tr>`)
                 else
                  $('#article').append(
@@ -105,7 +105,7 @@ thead {
                                     <td><span class="badge badge-info">审核中</span></td>
                                     <td>${info[i][4]}</td>
                                     <td>${info[i][5]}</td>
-                                    <td><button>查看原文</td>
+                                    <td><button onclick="window.location.href='/column/article?article_name=${info[i][1]}'">查看原文</td>
                                 </tr>`)
          }
 
