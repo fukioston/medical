@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'column.apps.ColumnConfig',
     'map.apps.MapConfig',
     'statistic.apps.StatisticConfig',
-
+'manager.apps.ManagerConfig',
     # 富文本编辑器
     'ckeditor',
     'ckeditor_uploader'
