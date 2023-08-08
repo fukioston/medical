@@ -1,0 +1,106 @@
+{% extends 'layout/basic.html' %}
+{% load static %}
+
+{% block css %}
+    <style>
+        body{
+            background-color: #f8f8f8;
+        }
+
+        .card{
+            border:none;
+            background-color:#252836;
+            color:#fff;
+            border-radius:12px;
+
+        }
+
+        .user-timing{
+
+            right:9px;
+            bottom:9px;
+            color:#fff;
+        }
+
+        .views-content{
+            color:#606271;
+        }
+
+        .views{
+            font-size:12px;
+
+        }
+
+        .dots{
+            display:flex;
+            height:10px;
+            width:10px;
+            background-color:green;
+            border-radius:50%;
+            margin-left:5px;
+            margin-bottom:6px;
+        }
+        .days-ago{
+                margin-top: -10px;
+            color: #606271;
+        }
+
+        .snipimage img{
+            height: 200px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+  <div class="container mt-4">
+      {% for info in info_list %}
+            <button class="card p-3" style="width: 100%; border: None; margin-top: 10px;" onclick="window.location.href='article?article_name={{ info.0 }}'">
+
+                <div class="row" style="width: 100%;">
+                    <div class="col-md-4">
+                        <div class="position-relative snipimage">
+                            <img src="{{ info.1 }}" class="rounded img-fluid w-100 img-responsive">
+                            <span class="position-absolute user-timing"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="mt-2">
+                          <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-1">{{ info.0 }}</h5>
+                          </div>
+                          <div class="d-flex justify-content-md-start justify-content-between views-content mt-2">
+                              <div class="d-flex flex-row align-items-center">
+                                  <i class="fa fa-eye"></i>
+                                  <span class="ms-1 views">{{ info.5 }}</span>
+                              </div>
+                              <div class="d-flex flex-row align-items-center ms-2">
+                                  <i class="fa fa-heart"></i>
+                                  <span class="ms-1 views">{{ info.4 }}</span>
+                              </div>
+                          </div>
+                          <div class="d-flex flex-row mt-3">
+
+                              <img src="/static/profile_img/{{ info.7 }}" width="40" height="40" class="rounded-circle" alt="头像">
+                              <div class="ms-2 d-flex flex-column">
+                                 <div class="d-flex flex-row align-items-center">
+                                      <h6>{{ info.2 }}</h6>
+                                  <span class="dots"></span>
+                                 </div>
+                                 <span class="days-ago">{{ info.3 }}</span>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </button>
+      {% endfor %}
+  </div>
+{% endblock %}
+{% block js %}
+    <script>
+$("#like").click(function() {
+     print($(this).data('id'))
+})
+
+            </script>
+{% endblock %}
