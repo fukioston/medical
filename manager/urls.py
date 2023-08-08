@@ -23,5 +23,6 @@ urlpatterns = [
     path('satisfy', apply_admin.satisfy),
     path('apply', apply_admin.apply),
     path('manage', manage.mymanage),
-    path('get_all', manage.get_all)
+    path('get_all', manage.get_all),
+    path('get_reviewing',manage.get_reviewing)
 ]

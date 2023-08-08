@@ -30,11 +30,14 @@ thead {
 {% endblock %}
 
 {% block content %}
+
 <div class="container mt-5">
         <div class="d-flex justify-content-center row">
             <div class="col-md-10">
                 <div class="rounded">
                     <div class="table-responsive table-borderless">
+                        <input  id="btnFind" type="button" value="查看未审核文章">
+                        <input  id="btnFindALL" type="button"  onclick="get_all()"  value="查看全部">
                         <table  class="table">
                             <thead>
                                 <tr>
@@ -53,28 +56,58 @@ thead {
                     </div>
                 </div>
             </div>
+            <nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a id="previous_page" class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="">1</a></li>
+    <li class="page-item"><a class="page-link" href="">2</a></li>
+    <li class="page-item"><a class="page-link" href="">3</a></li>
+      <li class="page-item"><a class="page-link" href="">4</a></li>
+      <li class="page-item"><a class="page-link" href="">5</a></li>
+    <li class="page-item"><a id="next_page" class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
         </div>
+
+
     </div>
+
 
 {% endblock %}
 {%block js %}
     <script>
+    var page=2
     get_all()
+    btnFind_click()
+    $('#next_page').click(function(){
+            page+=1;
+            console.log(page)
+            get_all();
+})
+    $('#previous_page').click(function(){
+            page-=1;
+            console.log(page)
+            if(page<1)
+        {page=1; alert('已经是第一页') }
+        else get_all();
+
+})
+
 
     function get_all(){
         $.ajax({
     url:'/manager/get_all',
     type:'get',
     data:{
-
+       page
     },
      success(msg) {
-        console.log(msg.info)
+        var element = document.getElementById("article");
+                    element.innerHTML = "";
          var info=msg.info
-         console.log(info)
-         for (var i = 0; i < info.length; i++)
+         for (var i = 0; i<info.length; i++)
 
-         {if(info[i][3]==='pass')
+         {if(info[i][3]==='1')
              $('#article').append(
                 `<tr class="cell-1">
                                     <td class="text-center">${info[i][0]}</td>
@@ -85,7 +118,7 @@ thead {
                                     <td>${info[i][5]}</td>
                                     <td><button onclick="window.location.href='/column/article?article_name=${info[i][1]}'">查看原文</td>
                                 </tr>`)
-                else if(info[i][3]==='not_pass')
+                else if(info[i][3]==='2')
                     $('#article').append(
                 `<tr class="cell-1">
                                     <td class="text-center">${info[i][0]}</td>
@@ -102,7 +135,7 @@ thead {
                                     <td class="text-center">${info[i][0]}</td>
                                     <td>${info[i][1]}</td>
                                     <td>${info[i][2]}</td>
-                                    <td><span class="badge badge-info">审核中</span></td>
+                                    <td><span class="badge badge-info">待审核</span></td>
                                     <td>${info[i][4]}</td>
                                     <td>${info[i][5]}</td>
                                     <td><button onclick="window.location.href='/column/article?article_name=${info[i][1]}'">查看原文</td>
@@ -114,7 +147,34 @@ thead {
 
 
         }
+function btnFind_click() {
+    $('#btnFind').click(
+        function () {
+            $.ajax({
+                url: '/manager/get_reviewing',
+                type: 'get',
+                data: {},
+                success(msg) {
+                    var element = document.getElementById("article");
+                    element.innerHTML = "";
+                    var info = msg.info
+                    for (var i = 0; i < info.length; i++)
+                        $('#article').append(
+                            `<tr class="cell-1">
+                                    <td class="text-center">${info[i][0]}</td>
+                                    <td>${info[i][1]}</td>
+                                    <td>${info[i][2]}</td>
+                                    <td><span class="badge badge-info">待审核</span></td>
+                                    <td>${info[i][4]}</td>
+                                    <td>${info[i][5]}</td>
+                                    <td><button onclick="window.location.href='/column/article?article_name=${info[i][1]}'">查看原文</td>
+                                </tr>`)
 
+
+                }
+
+            })
+})}
 
     </script>
 
