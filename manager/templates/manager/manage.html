@@ -131,7 +131,7 @@ thead {
                                     <td class="truncate"><span class="badge badge-success">审核通过</span></td>
                                     <td class="truncate">${info[i][4]}</td>
                                     <td class="truncate">${info[i][5]}</td>
-                                    <td class="truncate"><input   type="button"  onclick="window.location.href='/column/article?article_name=${info[i][1]}'"  value="查看原文"></td>
+                                    <td class="truncate"><input   type="button"  onclick="window.location.href='/manager/article?article_name=${info[i][1]}'"  value="查看原文"></td>
                                 </tr>`)
                 else if(info[i][3]==='2')
                     $('#article').append(
@@ -142,7 +142,7 @@ thead {
                                     <td class="truncate"><span class="badge badge-danger">审核不通过</span></td>
                                     <td class="truncate">${info[i][4]}</td>
                                     <td class="truncate">${info[i][5]}</td>
-                      <td class="truncate"><input   type="button"  onclick="window.location.href='/column/article?article_name=${info[i][1]}'"  value="查看原文"></td>
+                      <td class="truncate"><input   type="button"  onclick="window.location.href='/manager/article?article_name=${info[i][1]}'"  value="查看原文"></td>
                                 </tr>`)
                 else
                  $('#article').append(
@@ -153,7 +153,7 @@ thead {
                                     <td class="truncate"><span class="badge badge-info">待审核</span></td>
                                     <td class="truncate">${info[i][4]}</td>
                                     <td class="truncate">${info[i][5]}</td>
-                                   <td class="truncate"><input   type="button"  onclick="window.location.href='/column/article?article_name=${info[i][1]}'"  value="查看原文"></td>
+                                   <td class="truncate"><input   type="button"  onclick="window.location.href='/manager/article?article_name=${info[i][1]}'"  value="查看原文"></td>
                              </tr>`)
          }
 

@@ -1,0 +1,145 @@
+{% extends 'layout/basic.html' %}
+{% load static %}
+
+{% block css %}
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body{
+
+            background-color: #f8f8f8;
+        }
+        .container{
+            margin-top: 20px;
+            padding: 40px 20px;
+        }
+        .box{
+            padding: 40px 30px;
+            transition: all .4s ease-in-out;
+            cursor: pointer;
+        }
+        .box:hover{
+            box-shadow: 2px 2px 10px #a5a5a5;
+            transform: scale(1.03);
+        }
+        a:hover{
+            text-decoration: none;
+        }
+        img{
+            object-fit: contain;
+            width: 35px;
+            height: 35px;
+            /* padding: 20px; */
+        }
+        p.text-muted{
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        b{
+            font-size: 1.12rem;
+        }
+        .rounded-circle{
+            width: 60px;
+            height: 60px;
+            background-color: red;
+        }
+        .blue{
+            background-color: #bedcfa;
+            transform: rotateZ(90deg);
+        }
+        .pale-blue{
+            background-color: #eff8ff;
+        }
+        .pale-orange{
+            background-color: #ffe5b9;
+        }
+        .pale-purple{
+            background-color: #e8e8e8;
+        }
+        .pale-cyan{
+            background-color: #cffffe;
+        }
+        .pale-pink{
+            background-color: #ffe4e4;
+        }
+        .pale-pale{
+            background-color: #f4eeff;
+        }
+        .pale-green{
+            background-color: #a0ffe6;
+        }
+        .pale-pista{
+            background-color: #dbf6e9;
+        }
+
+
+
+        {#搜索框#}
+        .height{
+            height: 70px;
+        }
+        .form{
+
+            position: relative;
+        }
+        .form .fa-search{
+            position: absolute;
+            top:15px;
+            left: 20px;
+            color: #9ca3af;
+        }
+        .form span{
+            position: absolute;
+            right: 17px;
+            top: 13px;
+            padding: 2px;
+            border-left: 1px solid #d1d5db;
+
+        }
+
+        .left-pan{
+            padding-left: 7px;
+        }
+
+        .left-pan i{
+
+           padding-left: 10px;
+        }
+
+        .form-input{
+
+            height: 45px;
+            width: 400px;
+            text-indent: 33px;
+            border-radius: 100px;
+        }
+
+        .form-input:focus{
+
+            box-shadow: none;
+            border:none;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container bg-light rounded">
+        <div class="row height d-flex justify-content-center align-items-center">
+            <div class="col-lg-4 col-md-6 my-lg-0 my-3">
+                <div class="form">
+                    <i class="fa fa-search"></i>
+                    <input type="text" class="form-control form-input" placeholder="请输入文章名">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

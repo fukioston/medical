@@ -15,7 +15,7 @@ Including another URLconf
 """
 
 from django.urls import path
-from column.views import catalog
+from column.views import catalog, search
 from column.views import article_list
 from column.views import upload
 
@@ -23,6 +23,7 @@ urlpatterns = [
     path('catalog', catalog.home, name='catalog.home'),
     path('article_list', catalog.article_list),
     path('article', article_list.article),
-    path('upload', upload.upload)
+    path('upload', upload.upload),
+    path('search',search.search)
 ]
 
