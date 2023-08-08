@@ -19,5 +19,5 @@ from graph.views import show_graph
 
 urlpatterns = [
     path('', show_graph.show),
-    path('handle/', show_graph.handle),
+    path('handle', show_graph.handle),
 ]

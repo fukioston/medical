@@ -77,11 +77,66 @@
             background-color: #dbf6e9;
         }
 
+
+
+        {#搜索框#}
+        .height{
+            height: 70px;
+        }
+        .form{
+
+            position: relative;
+        }
+        .form .fa-search{
+            position: absolute;
+            top:15px;
+            left: 20px;
+            color: #9ca3af;
+        }
+        .form span{
+            position: absolute;
+            right: 17px;
+            top: 13px;
+            padding: 2px;
+            border-left: 1px solid #d1d5db;
+
+        }
+
+        .left-pan{
+            padding-left: 7px;
+        }
+
+        .left-pan i{
+
+           padding-left: 10px;
+        }
+
+        .form-input{
+
+            height: 45px;
+            width: 400px;
+            text-indent: 33px;
+            border-radius: 100px;
+        }
+
+        .form-input:focus{
+
+            box-shadow: none;
+            border:none;
+        }
     </style>
 {% endblock %}
 
 {% block content %}
     <div class="container bg-light rounded">
+        <div class="row height d-flex justify-content-center align-items-center">
+            <div class="col-lg-4 col-md-6 my-lg-0 my-3">
+                <div class="form">
+                    <i class="fa fa-search"></i>
+                    <input type="text" class="form-control form-input" placeholder="请输入文章名">
+                </div>
+            </div>
+        </div>
         <div class="h4 font-weight-bold text-center py-3">专题</div>
         <div class="row">
             <div class="col-lg-4 col-md-6 my-lg-0 my-3">
