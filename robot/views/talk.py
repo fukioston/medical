@@ -20,4 +20,4 @@ def answer(request):
         message2 = search_main(parser_main(classify(question, region_tree, wdtype_dict)))
         print(classify(question,region_tree,wdtype_dict))
         message=message2
-    return JsonResponse({'status': True, 'err': "已经收藏", 'message': message})
+    return JsonResponse({'status': True, 'err': "无法回复", 'message': message})

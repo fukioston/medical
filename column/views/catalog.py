@@ -27,11 +27,14 @@ def article_list(request):
     articles_id=[article_obj.id for article_obj in articles_obj]
     article_name_list = [article_obj.article_name for article_obj in articles_obj]
     article_img_list = [article_obj.img_url for article_obj in articles_obj]
-    article_uploader = [article_obj.uploader for article_obj in articles_obj]
+    article_uploader_img = [UserInfo.objects.filter(id=article_obj.uploader_id).first().profile_img
+                        for article_obj in articles_obj]
+    article_uploader = [UserInfo.objects.filter(id=article_obj.uploader_id ).first().username
+                        for article_obj in articles_obj]
     article_upload_time = [article_obj.upload_time for article_obj in articles_obj]
     article_likes = [article_obj.likes for article_obj in articles_obj]
     article_click = [article_obj.click for article_obj in articles_obj]
-    info = list(zip(article_name_list, article_img_list, article_uploader, article_upload_time, article_likes, article_click,articles_id))
+    info = list(zip(article_name_list, article_img_list, article_uploader, article_upload_time, article_likes, article_click,articles_id,article_uploader_img))
     uinfo = request.session.get('info')
     user_id = uinfo['id']
     query_set = UserInfo.objects.filter(id=user_id).first()

@@ -10,7 +10,7 @@ class articles(models.Model):
     article_url = models.TextField(verbose_name='文章url')
     img_url = models.TextField(verbose_name='文章封面')
     content = models.TextField(verbose_name='文章内容')
-    uploader = models.TextField(verbose_name='用户名', max_length=32, default='admin')
+    uploader_id = models.IntegerField(verbose_name='用户id')
     upload_time = models.TextField(verbose_name='上传日期', default='2023/08/07')
     likes = models.IntegerField(verbose_name='点赞数', default=0)
     click = models.IntegerField(verbose_name='点击量', default=0)
