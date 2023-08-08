@@ -15,14 +15,14 @@ Including another URLconf
 """
 
 from django.urls import path
-from column.views import catalog, manage
+from column.views import catalog
+from manager.views import manage
 from column.views import article_list
 
 urlpatterns = [
     path('catalog', catalog.home),
     path('article_list', catalog.article_list),
     path('article', article_list.article),
-    path('manage',manage.mymanage),
-    path('get_all',manage.get_all)
+
 ]
 
