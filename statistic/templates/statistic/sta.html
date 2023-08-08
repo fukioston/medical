@@ -5,17 +5,43 @@
 
 {% block base %}
     <title>Statistic</title>
+    <script src={% static 'js/echarts.min.js' %}></script>
 {% endblock %}
 
 <body>
 {% block content %}
-
+    <div id="main" style="width: 500px;height:500px;"></div>
+    <div id="sta1" style="width: 500px;height:500px;"></div>
 {% endblock %}
 
 <script src="../../../static/js/jquery-3.2.1.min.js"></script>
 <script src="../../../static/plugins/bootstrap-4.4.1-dist/js/bootstrap.bundle.js"></script>
 {% block js %}
-    <script>
-
+    <script type="text/javascript">
+        myChart = echarts.init(document.getElementById('main'));
+        option = {
+            title: {
+                text: '节点统计',
+                left: 'center'
+            },
+            xAxis: {
+                type: 'category',
+                data: ['Disease', 'Department', 'Drug', 'Food', 'Symptom']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    label: {
+                        show: true,
+                        position: 'top'
+                    },
+                    data: {{ list }},
+                    type: 'bar'
+                }
+            ]
+        };
+        myChart.setOption(option);
     </script>
 {% endblock %}
