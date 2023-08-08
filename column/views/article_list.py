@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse, redirect
 
 from column.models import articles
+from user.models import UserInfo
 
 
 def article(request):
@@ -16,6 +17,7 @@ def article(request):
         articles_obj = None
 
     article_content = articles_obj.content
-    print(article_name)
-    print(article_content)
-    return render(request, 'column/article.html', {'title': article_name, 'content': article_content})
+    info = request.session.get('info')
+    user_id = info['id']
+    query_set = UserInfo.objects.filter(id=user_id).first()
+    return render(request, 'column/article.html', {'title': article_name, 'content': article_content,'user_info': query_set,})
