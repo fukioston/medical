@@ -3,87 +3,120 @@
 
 {% block css %}
     <style>
-.bmi_input{
-    width:400px;
-}
-.card{
-    width:500px;
-}
-#answer{
-    height:400px;
-    width:400px;
-    resize: none;
-     pointer-events: none;
-}
+        .bmi_input {
+            width: 500px;
+        }
+
+        .card {
+            height: 100%;
+            width: 100%;
+            font-size: 1.4em;
+        }
+
+        #answer {
+            height: 400px;
+            width: 500px;
+            resize: none;
+            pointer-events: none;
+            border: 1px solid #dee2e6;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            font-size: 1.5em;
+        }
+
+
+        .bmi_calculate {
+            max-width: 600px;
+            position: relative;
+            top: 60px;
+            overflow-y: auto;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 0;
+            width: 400px;
+            margin-left: 300px;
+        }
+
+        .bmi_result {
+            position: relative;
+            top: 60px;
+            overflow-y: auto;
+            margin-right: 200px;
+        }
+
 
     </style>
     <title>个人信息</title>
 {% endblock %}
 
 {% block content %}
-<div class="col-md-6 bmi_calculate">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="mb-0">BMI计算器</h4>
-                    </div>
-                    <div class="card-body">
-                        <form method="post" novalidate>
-
-                            <div class="form-group">
-                                <label for="ss">身高(单位：cm）</label>
-<input id="height" type="text" class="form-control input-lg bmi_input" id="bmi_input" placeholder="请输入你的身高"
-                           name="newprice">
-                                <span class="error-msg" style="color: red"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="ss">体重(单位：kg）</label>
-    <input id="weight" type="text" class="form-control input-lg bmi_input" id="bmi_input" placeholder="请输入你的体重"
-                           name="newprice">
-                                <span class="error-msg" style="color: red"></span>
-                            </div>
-
-                            <input id="btnBMI" type="button" value="计算" class="btn btn-primary">
-                        </form>
-                    </div>
-                </div>
+    <div class="col-md-6 bmi_calculate">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">BMI计算器
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-calculator" viewBox="0 0 16 16">
+                        <path d="M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/>
+                        <path d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-2zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-4z"/>
+                    </svg>
+                </h4>
             </div>
-    <div>
-<textarea id="answer"></textarea>
+            <div class="card-body">
+                <form method="post" novalidate>
+
+                    <div class="form-group">
+                        <label for="ss">身高(单位：cm）</label>
+                        <input id="height" type="text" class="form-control input-lg bmi_input" id="bmi_input"
+                               placeholder="请输入你的身高"
+                               name="newprice">
+                        <span class="error-msg" style="color: red"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="ss">体重(单位：kg）</label>
+                        <input id="weight" type="text" class="form-control input-lg bmi_input" id="bmi_input"
+                               placeholder="请输入你的体重"
+                               name="newprice">
+                        <span class="error-msg" style="color: red"></span>
+                    </div>
+
+                    <input id="btnBMI" type="button" value="计算" class="btn btn-primary">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 bmi_result">
+        <textarea id="answer">
+        </textarea>
     </div>
 
 {% endblock %}
 {% block js %}
     <script>
-    btnBMI_click()
-function btnBMI_click() {
-            $('#btnBMI').click(
-                function () {
-                var height = $('#height').val();
-                var weight = $('#weight').val();
+        var btnBMI = document.getElementById("btnBMI");
+        btnBMI.addEventListener("click", function () {
+            var height = $('#height').val();
+            var weight = $('#weight').val();
+            //向后端发送体重与身高信息，后端返回计算的bmi值
             $.ajax({
-    url:'/calculate/bmi_cal',
-    type:'get',
-    data:{
-        height,
-        weight
+                url: '/calculate/bmi_cal',
+                type: 'get',
+                data: {
+                    height,
+                    weight
 
-    },
-    success(msg){
-       document.getElementById("answer").value = msg.message;
+                },
+                success(msg) {
+                    document.getElementById("answer").value = msg.message;
+                    document.getElementById("answer").value += "\n\n想要获取更准确的建议，请咨询医生";
 
-
-    },
-    error(err){
-      alert(err)
-    }
-})
-
-
-
-
-
-            })}
-</script>
+                },
+                error(err) {
+                    alert("请输入正确的身高与体重！")
+                }
+            })
+        })
+    </script>
 
 
 

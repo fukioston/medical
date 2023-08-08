@@ -19,7 +19,6 @@ def handle(request):
         entity1 = request.GET['entity1']
         relation = request.GET['relation']
         entity2 = request.GET['entity2']
-        print(entity1, relation, entity2)
         searchResult = {}
 
         # 若只输入entity1,则输出与entity1有直接关系的实体和关系
@@ -46,5 +45,4 @@ def handle(request):
         if len(entity1) != 0 and len(relation) != 0 and len(entity2) != 0:
             searchResult = db.findEntities1AndEntities2(entity1, entity2, relation)
 
-        print(json.dumps(searchResult))
         return JsonResponse(json.dumps(searchResult), json_dumps_params={'ensure_ascii': False},safe=False)
