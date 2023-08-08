@@ -39,6 +39,13 @@ thead {
     min-width: 150px;
   max-width: 150px; /* 设置最大宽度 */
 }
+.truncate2{
+    white-space: nowrap; /* 不换行 */
+  overflow: hidden; /* 隐藏溢出内容 */
+  text-overflow: ellipsis; /* 使用省略号表示溢出内容 */
+    min-width: 80px;
+  max-width: 80px; /* 设置最大宽度 */
+}
     </style>
 
 {% endblock %}
@@ -131,7 +138,7 @@ thead {
                                     <td class="truncate"><span class="badge badge-info">待审核</span></td>
                                     <td class="truncate">${info[i][4]}</td>
                                     <td class="truncate">${info[i][5]}</td>
-                                    <td class="truncate"><input   type="button"  onclick="window.location.href='/manager/article?article_name=${info[i][1]}'"  value="查看原文"></td>
+                                    <td class="truncate2"><input   type="button" class="btn btn-primary"  onclick="window.location.href='/manager/article?article_name=${info[i][1]}'"  value="查看原文"></td>
                 </tr>`)
          }
 
