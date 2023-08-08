@@ -22,6 +22,7 @@ urlpatterns = [
     path('catalog', catalog.home),
     path('article_list', catalog.article_list),
     path('article', article_list.article),
-    path('manage',manage.mymanage)
+    path('manage',manage.mymanage),
+    path('get_all',manage.get_all)
 ]
 
