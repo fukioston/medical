@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,HttpResponse
 from user.models import UserInfo
 
 
@@ -39,5 +39,4 @@ def bmi(request):
     user_id = info['id']
     query_set = UserInfo.objects.filter(id=user_id).first()
     # on_sales_num = Items.objects.filter(userid=user_id).count()
-
     return render(request, 'calculate/bmi.html', {'user_info': query_set, })

@@ -175,22 +175,8 @@
     .now_page {
         background: #318fb5;
     }
-#sidebar{
-    position: fixed;
-    margin-top: 70px;
 
-}
-.navbar{
-    position: fixed;
-    width: 100%;
-    z-index: 100;
-}
-.mymain{
-    margin-top: 150px;
-    margin-left: 125px;
 
-    transition: margin-right 0.3s ease-in-out; /* 添加过渡效果 */
-}
 
 
 
@@ -305,17 +291,7 @@
         });
     });
 
-    var mymain = document.getElementById("mymain");
-    var sidebarCollapse = document.getElementById("sidebarCollapse");
 
-sidebarCollapse.addEventListener("click", function() {
-    console.log('sss')
-  if (mymain.style.marginRight === "125px") {
-    mymain.style.marginRight = "0";
-  } else {
-    mymain.style.marginRight = "125px";
-  }
-});
 
 </script>
 {% block js %}
