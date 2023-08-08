@@ -1,5 +1,6 @@
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
-from datetime import datetime
+from ckeditor.fields import RichTextField
 
 
 # Create your models here.
@@ -18,5 +19,16 @@ class articles(models.Model):
 
 
 class like(models.Model):
-    article_id=models.IntegerField(verbose_name='article_id')
-    user_id=models.IntegerField(verbose_name='user_id')
+    article_id = models.IntegerField(verbose_name='article_id')
+    user_id = models.IntegerField(verbose_name='user_id')
+
+
+class Upload(models.Model):
+    """文章模型"""
+    STATUS_CHOICES = (
+        ('d', '草稿'),
+        ('p', '发表'),
+    )
+
+    title = models.CharField('标题', max_length=200, unique=True)
+    body = RichTextUploadingField('正文')

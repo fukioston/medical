@@ -14,7 +14,7 @@ def home(request):
     info = request.session.get('info')
     user_id = info['id']
     query_set = UserInfo.objects.filter(id=user_id).first()
-    return render(request, 'column/catalog.html', {'class': counts,'user_info':query_set,})
+    return render(request, 'column/catalog.html', {'class': counts, 'user_info': query_set, })
 
 
 def article_list(request):
