@@ -18,6 +18,6 @@ from django.urls import path
 from calculate.views import bmi
 
 urlpatterns = [
-    path('bmi', bmi.bmi),
+    path('bmi/', bmi.bmi),
     path('bmi_cal', bmi.bmi_calculate),
 ]
