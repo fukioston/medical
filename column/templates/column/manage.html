@@ -1,0 +1,94 @@
+{% extends 'layout/basic.html' %}
+{% load static %}
+<title>管理页面</title>
+{% block css %}
+    <style>
+@import url('https://fonts.googleapis.com/css?family=Assistant');
+
+body {
+  background: #eee;
+  font-family: Assistant, sans-serif;
+}
+
+.cell-1 {
+  border-collapse: separate;
+  border-spacing: 0 4em;
+  background: #fff;
+  border-bottom: 5px solid transparent;
+  /*background-color: gold;*/
+  background-clip: padding-box;
+}
+
+thead {
+  background: #dddcdc;
+}
+.rounded{
+    width:500px;
+}
+    </style>
+
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+        <div class="d-flex justify-content-center row">
+            <div class="col-md-10">
+                <div class="rounded">
+                    <div class="table-responsive table-borderless">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">id</th>
+                                    <th>文章名称</th>
+                                    <th>文章状态</th>
+                                    <th>上传时间</th>
+                                    <th>作者</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-body">
+                                <tr class="cell-1">
+                                    <td class="text-center">1</td>
+                                    <td>#SO-13487</td>
+                                    <td><span class="badge badge-success">审核通过</span></td>
+                                    <td>Gasper Antunes</td>
+                                    <td>Today</td>
+                                    <td><i class="fa fa-ellipsis-h text-black-50"></i></td>
+                                </tr>
+                                <tr class="cell-1">
+                                    <td class="text-center">2</td>
+                                    <td>#SO-13453</td>
+                                    <td><span class="badge badge-info">审核中</span></td>
+                                    <td>Aartsen van</td>
+                                    <td>Yesterday</td>
+                                    <td><i class="fa fa-ellipsis-h text-black-50"></i></td>
+                                </tr>
+                                <tr class="cell-1">
+                                    <td class="text-center">3</td>
+                                    <td>#SO-13498</td>
+                                    <td><span class="badge badge-danger">审核不通过</span></td>
+                                    <td>Trashes Habard</td>
+                                    <td>May 12,2020</td>
+                                    <td><i class="fa fa-ellipsis-h text-black-50"></i></td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{%block js %}
+    <script>
+
+
+    function get_all(){
+
+    }
+    </script>
+
+{% endblock %}
