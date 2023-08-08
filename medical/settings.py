@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'column.apps.ColumnConfig',
     'map.apps.MapConfig',
     'statistic.apps.StatisticConfig',
+    'manager.apps.ManagerConfig'
 ]
 
 MIDDLEWARE = [

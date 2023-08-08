@@ -11,7 +11,7 @@ def apply_admin(request):
     info = request.session.get('info')
     user_id = info['id']
     query_set = UserInfo.objects.filter(id=user_id).first()
-    return render(request, 'user/apply_admin.html',{'user_info':query_set,})
+    return render(request, 'manager/apply_admin.html', {'user_info':query_set, })
 
 
 def satisfy(request):

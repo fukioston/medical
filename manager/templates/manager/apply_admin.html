@@ -142,7 +142,7 @@ function btnApply_click() {
                 function () {
 
     $.ajax({
-    url:'/user/satisfy',
+    url:'/manager/satisfy',
     type:'get',
     data:{
     },
@@ -181,7 +181,7 @@ function btnConfirm_click(){
         function () {
 
             $.ajax({
-    url:'/user/apply',
+    url:'/manager/apply',
     type:'post',
     data:{
             csrfmiddlewaretoken:'{{ csrf_token }}'
