@@ -27,4 +27,6 @@ urlpatterns = [
     path('get_all', manage.get_all),
     path('get_reviewing', manage.get_reviewing),
     path('article', article.article),
+    path('agreed', article.agreed),
+path('notagreed', article.notagreed),
 ]

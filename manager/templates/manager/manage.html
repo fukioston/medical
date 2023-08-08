@@ -53,6 +53,7 @@ thead {
 {% block content %}
 
 <div class="container mt-5">
+
         <div class="d-flex justify-content-center row">
             <div class="col-md-10">
                 <div class="rounded">
@@ -80,11 +81,11 @@ thead {
             <nav aria-label="Page navigation example">
   <ul class="pagination">
     <li class="page-item"><a id="previous_page" class="page-link" href="#">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="">1</a></li>
-    <li class="page-item"><a class="page-link" href="">2</a></li>
-    <li class="page-item"><a class="page-link" href="">3</a></li>
-      <li class="page-item"><a class="page-link" href="">4</a></li>
-      <li class="page-item"><a class="page-link" href="">5</a></li>
+    <li class="page-item"><a id="page1" class="page-link" href="#">1</a></li>
+    <li class="page-item"><a id="page2" class="page-link" href="#">2</a></li>
+    <li class="page-item"><a id="page3" class="page-link" href="#">3</a></li>
+      <li class="page-item"><a id="page4" class="page-link" href="#">4</a></li>
+      <li class="page-item"><a id="page5" class="page-link" href="#">5</a></li>
     <li class="page-item"><a id="next_page" class="page-link" href="#">Next</a></li>
   </ul>
 </nav>
@@ -94,17 +95,20 @@ thead {
     </div>
 
 
+
 {% endblock %}
 {%block js %}
     <script>
-    var page=2
-
+    var page=1
+var last=0
     get_all()
     btnFind_click()
     $('#next_page').click(function(){
             page+=1;
-            console.log(page)
-            get_all();
+            if(last===1)
+        {page-=1; alert('已经是最后一页') }
+        else get_all();
+
 })
     $('#previous_page').click(function(){
             page-=1;
@@ -114,6 +118,27 @@ thead {
         else get_all();
 
 })
+$('#page1').click(function(){
+            page=1;
+            get_all();
+})
+    $('#page2').click(function(){
+            page=2;
+            get_all();
+})
+    $('#page3').click(function(){
+            page=3;
+            get_all();
+})
+    $('#page4').click(function(){
+            page=4;
+            get_all();
+})
+    $('#page5').click(function(){
+            page=5;
+            get_all();
+})
+
 
 
     function get_all(){
@@ -127,7 +152,6 @@ thead {
         var element = document.getElementById("article");
                     element.innerHTML = "";
          var info=msg.info
-         console.log('??????????'+msg.status)
          for (var i = 0; i<info.length; i++)
 
          {if(info[i][3]==='1')
@@ -164,6 +188,10 @@ thead {
                                    <td class="truncate2"><input  class="btn btn-primary" type="button"  onclick="window.location.href='/manager/article?article_name=${info[i][1]}'"  value="查看原文"></td>
                              </tr>`)
          }
+         if(info.length<10)
+             last=1
+         else last=0
+
 
      }
      })

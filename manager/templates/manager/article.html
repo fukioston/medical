@@ -56,6 +56,24 @@
           font-size: 2em;
             font-family: sans-serif;
         }
+        .mycomment{
+            display: flex;
+
+            justify-content: center;
+        }
+        .lmybtn,.rmybtn{
+            width: 130px;
+            height: 70px;
+
+        }
+.lmybtn{
+    margin-right: 40px;
+}
+.rmybtn{
+    margin-left: 40px;
+}
+
+
     </style>
 {% endblock %}
 
@@ -80,10 +98,15 @@
         <div class="col-md-10" style="text-align: center">
             {{ content | safe}}
         </div>
-        <div class="col-md-1"></div>
+
 
     </div>
+    <div class="mycomment">
+        <input  data-id="{{article_id}}" id="btnPass" type="button" class="lmybtn btn btn-primary " onclick="showSwal('success-message')" value="通过审核">
+{#        id="btnPass"#}
+        <input  data-id="{{article_id}}" id="btnUnpass" type="button" class="rmybtn btn btn-primary"  onclick="showSwal2('fail-message')" value="不通过审核">
 
+        </div>
 
   </div>
 {% endblock %}
@@ -91,6 +114,54 @@
 {% block js %}
     <script>
 
+    judge()
+    btnPass_click()
+    btnUnpass_click()
+    function judge(){
+        var a={{article_status}}
+
+        if(a===1||a===2)
+        {
+            $('#btnPass').prop('disabled', true)
+        $('#btnUnpass').prop('disabled', true)
+        }
+    }
+    function btnUnpass_click() {
+            $('#btnUnpass').click(
+                function () {
+                    const id=$(this).data('id')
+    $.ajax({
+    url:'/manager/notagreed',
+    type:'post',
+    data:{
+        id:id,
+        csrfmiddlewaretoken:'{{ csrf_token }}'
+    },
+        success(msg){
+       $('#btnPass').prop('disabled', true)
+        $('#btnUnpass').prop('disabled', true)
+
+    }
+    })})}
+
+    function btnPass_click() {
+            $('#btnPass').click(
+                function () {
+
+                    const id=$(this).data('id')
+    $.ajax({
+    url:'/manager/agreed',
+    type:'post',
+    data:{
+        id: id,
+        csrfmiddlewaretoken:'{{ csrf_token }}'
+    },
+        success(msg){
+
+       $('#btnPass').prop('disabled', true)
+        $('#btnUnpass').prop('disabled', true)
+    }
+    })})}
 $('document').ready(function(){
 
 
@@ -141,5 +212,56 @@ $('document').ready(function(){
 
 
     });
+    (function($) {
+  showSwal = function(type) {
+    'use strict';
+     if (type === 'success-message') {
+      swal({
+        title: '审核通过!',
+        type: 'success',
+        button: {
+          text: "Continue",
+          value: true,
+          visible: true,
+          className: "btn btn-primary ",
+
+        }
+      })
+
+    }else{
+        swal("Error occured !");
+    }
+  }
+
+})(jQuery);
+    (function($) {
+  showSwal2 = function(type) {
+     if (type === 'fail-message') {
+      swal({
+        title: '审核不通过!',
+        type: 'error',
+        button: {
+          text: "Continue",
+          value: true,
+          visible: true,
+          className: "btn btn-primary ",
+
+        },
+      }).then(function(result){
+
+
+          // 用户点击了 "Continue" 按钮，执行您的关闭后操作
+          console.log("弹出框已关闭");
+          // 在这里可以执行您的逻辑
+      });
+
+    }
+     else{
+        swal("Error occured !");
+    }
+  }
+
+})(jQuery);
+
     </script>
 {% endblock %}
