@@ -5,16 +5,21 @@ from medical.settings import g
 def symptom_info(request):
     return render(request, 'medical_info/symptom_info.html')
 def get_symptom_info(request):
+    page = request.GET.get('page')
+    page = int(page)
     answer = g.run(
         "MATCH (n:Symptom) RETURN n").data()
     json_data = []
     for record in answer:
         json_data.append(record['n'])
     # 返回JSON响应
+    json_data = json_data[(page - 1) * 10:page * 10]
     return JsonResponse(json_data, safe=False)
 
 
 def get_select(request):
+    page = request.GET.get('page')
+    page = int(page)
     department=request.GET.get('department')
     print(department)
     answer = g.run(
@@ -22,5 +27,6 @@ def get_select(request):
     json_data = []
     for record in answer:
         json_data.append(record['n'])
+    json_data = json_data[(page-1)*10:page*10]
     # 返回JSON响应
     return JsonResponse(json_data, safe=False)

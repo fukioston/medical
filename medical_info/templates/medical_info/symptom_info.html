@@ -98,13 +98,13 @@ thead {
 
 <div class="dropdown">
 <button class="btn btn-outline-danger dropdown-toggle_inner" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-<span>Countries</span>
+<span>全部</span>
 <i class="fa fa-caret-down"></i>
 </button>
 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-<li><a class="dropdown-item" href=" ">Australia</a ></li>
-<li><a class="dropdown-item" href="#">India</a ></li>
-<li><a class="dropdown-item" href="#">United States</a ></li>
+<li><a class="dropdown-item" href=" ">妇产科</a ></li>
+<li><a class="dropdown-item" href="#">儿科</a ></li>
+<li><a class="dropdown-item" href="#">内科</a ></li>
 </ul>
 </div>
 </div>
@@ -124,6 +124,7 @@ thead {
                                     <th class="text-center">id</th>
                                     <th>症状名</th>
                                     <th>所属科室</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody id="symptom" class="table-body">
@@ -154,21 +155,68 @@ thead {
 {% block js %}
 
     <script>
+     var page=1
+    var last=0
+{##有点bug需要修复#}
+    $('#next_page').click(function(){
+            page+=1;
+            if(last===1)
+        {page-=1; alert('已经是最后一页') }
+        else get_all();
+
+})
+    $('#previous_page').click(function(){
+            page-=1;
+            console.log(page)
+            if(page<1)
+        {page=1; alert('已经是第一页') }
+        else get_all();
+
+})
+$('#page1').click(function(){
+            page=1;
+            get_all();
+})
+    $('#page2').click(function(){
+            page=2;
+            get_all();
+})
+    $('#page3').click(function(){
+            page=3;
+            get_all();
+})
+    $('#page4').click(function(){
+            page=4;
+            get_all();
+})
+    $('#page5').click(function(){
+            page=5;
+            get_all();
+})
+
     get_select_all()
     function get_all(){
          $.ajax({
     url:'/medical_info/get_symptom_info',
     type:'get',
+             data:{
+        'page':page
+             },
         success(data){
-
+var element = document.getElementById("symptom");
+                    element.innerHTML = "";
  for (var i = 0; i < data.length; i++) {
 $('#symptom').append(`
 <tr class="cell-1">
-      <td class="text-center">${data[i].id}</td>
-        <td class="truncate1">${data[i].name}</td>
-      <td class="truncate1">${data[i].name}</td>
+      <td class="truncate" class="text-center">${data[i].id}</td>
+        <td class="truncate">${data[i].name}</td>
+      <td class="truncate">${data[i].name}</td>
+<td class="truncate2"><input  class="btn btn-primary" type="button"  onclick="window.location.href='/manager/article?article_name=1'"  value="查看详细信息"></td>
  </tr>
 `)
+     if(data.length<10)
+             last=1
+         else last=0
             }
     }
     })}
@@ -177,18 +225,20 @@ $('#symptom').append(`
         $.ajax({
     url:'/medical_info/get_select',
     type:'get',
-            data: {
-
+            data:{
+        'page':page,
         'department':'妇科',
             },
         success(data){
-
+        var element = document.getElementById("symptom");
+                    element.innerHTML = "";
  for (var i = 0; i < data.length; i++) {
 $('#symptom').append(`
                    <tr class="cell-1">
       <td class="text-center truncate">${data[i].id}</td>
-        <td class="truncate1">${data[i].name}</td>
-      <td class="truncate1">${data[i].name}</td>
+        <td class="truncate">${data[i].name}</td>
+      <td class="truncate">${data[i].name}</td>
+<td class="truncate2"><input  class="btn btn-primary" type="button"  onclick="window.location.href='/manager/article?article_name=1'"  value="查看详细信息"></td>
  </tr>
 `)
             }

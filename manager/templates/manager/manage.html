@@ -198,37 +198,6 @@ $('#page1').click(function(){
 
 
         }
-function btnFind_click() {
-    $('#btnFind').click(
-        function () {
-            $.ajax({
-                url: '/manager/get_reviewing',
-                type: 'get',
-                data: {},
-                success(msg) {
-                    var element = document.getElementById("article");
-                    element.innerHTML = "";
-
-                    var info = msg.info
-                    console.log('??')
-                    console.log(info)
-                    for (var i = 0; i < info.length; i++)
-                        $('#article').append(
-                            `<tr class="cell-1">
-                                    <td class="text-center">${info[i][0]}</td>
-                                    <td>${info[i][1]}</td>
-                                    <td>${info[i][2]}</td>
-                                    <td><span class="badge badge-info">待审核</span></td>
-                                    <td>${info[i][4]}</td>
-                                    <td>${info[i][5]}</td>
-                                    <td><button onclick="window.location.href='/column/article?article_name=${info[i][1]}'">查看原文</td>
-                                </tr>`)
-
-
-                }
-
-            })
-})}
 
     </script>
 
