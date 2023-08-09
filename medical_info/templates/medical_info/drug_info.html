@@ -105,9 +105,10 @@ thead {
                                     <th class="text-center">id</th>
                                     <th>疾病</th>
                                     <th>对应药物</th>
+                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody id="symptom" class="table-body">
+                            <tbody id="drug" class="table-body">
                             </tbody>
                         </table>
                     </div>
@@ -138,56 +139,58 @@ thead {
             page+=1;
             if(last===1)
         {page-=1; alert('已经是最后一页') }
-        else get_all();
+        get_all(page);
 
 })
     $('#previous_page').click(function(){
-            page-=1;
-            console.log(page)
+
             if(page<1)
         {page=1; alert('已经是第一页') }
-        else get_all();
+        else get_all(page);
+
 
 })
 $('#page1').click(function(){
-            page=1;
-            get_all();
+            page=1
+    get_all(page)
 })
     $('#page2').click(function(){
             page=2;
-            get_all();
+        get_all(page);
+
 })
     $('#page3').click(function(){
             page=3;
-            get_all();
+ get_all(page)
+
 })
     $('#page4').click(function(){
             page=4;
-            get_all();
+        get_all(page)
+
 })
     $('#page5').click(function(){
             page=5;
-            get_all();
+        get_all(page)
 })
-
-    get_select_all()
-    function get_all(){
+    get_all(1)
+   function get_all(page){
          $.ajax({
     url:'/medical_info/get_drug_info',
     type:'get',
              data:{
-        'page':page
+        'page':page,
              },
         success(data){
-var element = document.getElementById("symptom");
+var element = document.getElementById("drug");
                     element.innerHTML = "";
  for (var i = 0; i < data.length; i++) {
-$('#symptom').append(`
+$('#drug').append(`
 <tr class="cell-1">
-      <td class="truncate" class="text-center">${data[i].id}</td>
-        <td class="truncate">${data[i].name}</td>
-      <td class="truncate">${data[i].name}</td>
-<td class="truncate2"><input  class="btn btn-primary" type="button"  onclick="window.location.href='/manager/article?article_name=1'"  value="查看详细信息"></td>
+      <td class="truncate text-center">${data[i].id}</td>
+        <td class="truncate">${data[i].disease_name}</td>
+<td class="truncate">${data[i].d.name}</td>
+<td class="truncate2"><input   class="btn btn-primary" type="button"  value="查看详细信息"></td>
  </tr>
 `)
      if(data.length<10)
@@ -197,25 +200,6 @@ $('#symptom').append(`
     }
     })}
 
-   {#function get_select_all(){#}
-   {#     $.ajax({#}
-   {# url:'/medical_info/get_select',#}
-   {# type:'get',#}
-   {#         data:{#}
-   {#     'page':page,#}
-   {#     'department':'妇科',#}
-   {#         },#}
-   {#     success(data){#}
-   {#     var element = document.getElementById("symptom");#}
-   {#                 element.innerHTML = "";#}
-   {#     for (var i = 0; i < data.length; i++) {#}
-   {#         $('#symptom').append(`#}
-   {#                            <tr class="cell-1">#}
-   {#               <td class="text-center truncate">${data[i].id}</td>#}
-   {#                 <td class="truncate">${data[i].name}</td>#}
-   {#               <td class="truncate">${data[i].name}</td>#}
-   {#         <td class="truncate2"><input  class="btn btn-primary" type="button"  onclick="window.location.href='/manager/article?article_name=1'"  value="查看详细信息"></td>#}
-   {#          </tr>#}
-   {#     `)}}})}#}
+
     </script>
 {% endblock %}

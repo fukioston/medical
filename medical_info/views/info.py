@@ -150,11 +150,22 @@ def drug_info(request):
 def get_drug_info(request):
     page = request.GET.get('page')
     page = int(page)
+    print(page)
+    query = (
+        "MATCH (n:Disease)-[r:RECOMMAND_DRUG]->(d:Drug) "  # 假设 n 和 p 之间有某种关系，修改为实际关系
+        "RETURN ID(d) AS id, d,  n.name AS disease_name "  # 选择需要的属性
+    )
     answer = g.run(
-        "MATCH (n:Drug) RETURN n LIMIT 50").data()
+        query).data()
     json_data = []
     for record in answer:
-        json_data.append(record['n'])
+        data = {
+            'd': record['d'],
+            'id': record['id'],
+            'disease_name': record['disease_name']
+        }
+        json_data.append(data)
     # 返回JSON响应
     json_data = json_data[(page - 1) * 10:page * 10]
     return JsonResponse(json_data, safe=False)
+
