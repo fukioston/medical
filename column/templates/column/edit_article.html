@@ -37,16 +37,38 @@
             {{ form.content }}
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">提交</button>
+    <button type="submit" class="btn btn-primary" onclick="showSwal('success-message')">提交</button>
 </form>
 
     </div>
     <div class="col-md-1"></div>
+    <div id="successAlert" class="alert alert-success" style="display: none;">
+        修改成功！
+    </div>
 
 {% endblock %}
 
 {% block js %}
     <script>
 
+   (function($) {
+  showSwal = function(type) {
+
+     if (type === 'success-message') {
+         Swal.fire({
+  title: '提交成功!',
+  text: '',
+  icon: 'success',
+  confirmButtonText: 'ok'
+        }).then(function(isConfirm) {
+            window.location.href='/column/catalog';
+         })
+         }
+    else{
+        swal("Error occured !");
+    }
+  }
+
+})(jQuery);
     </script>
 {% endblock %}

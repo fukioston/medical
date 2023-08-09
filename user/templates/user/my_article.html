@@ -163,7 +163,7 @@ $('#page1').click(function(){
                                     <td class="truncate"><span class="badge badge-success">审核通过</span></td>
                                     <td class="truncate">${info[i][4]}</td>
                                     <td class="truncate">${info[i][5]}</td>
-                                    <td class="truncate2"><input   type="button" class="btn btn-primary" onclick="window.location.href='/manager/article?article_name=${info[i][1]}'"  value="修改文章"></td>
+                                    <td class="truncate2"><input   type="button" class="btn btn-primary" onclick="window.location.href='/column/edit_article?article_name=${info[i][1]}'"  value="修改文章"></td>
                                 </tr>`)
                 else if(info[i][3]==='2')
                     $('#article').append(
@@ -174,7 +174,7 @@ $('#page1').click(function(){
                                     <td class="truncate"><span class="badge badge-danger">审核不通过</span></td>
                                     <td class="truncate">${info[i][4]}</td>
                                     <td class="truncate">${info[i][5]}</td>
-                      <td class="truncate2"><input   type="button"  class="btn btn-primary" onclick="window.location.href='/manager/article?article_name=${info[i][1]}'"  value="修改文章"></td>
+                      <td class="truncate2"><input   type="button"  class="btn btn-primary" onclick="window.location.href='/column/edit_article?article_name=${info[i][1]}'"  value="修改文章"></td>
                                 </tr>`)
                 else
                  $('#article').append(
@@ -185,7 +185,7 @@ $('#page1').click(function(){
                                     <td class="truncate"><span class="badge badge-info">待审核</span></td>
                                     <td class="truncate">${info[i][4]}</td>
                                     <td class="truncate">${info[i][5]}</td>
-                                   <td class="truncate2"><input  class="btn btn-primary" type="button"  onclick="window.location.href='/manager/article?article_name=${info[i][1]}'"  value="修改文章"></td>
+                                   <td class="truncate2"><input  class="btn btn-primary" type="button"  onclick="window.location.href='/column/edit_article?article_name=${info[i][1]}'"  value="修改文章"></td>
                              </tr>`)
          }
          if(info.length<10)

@@ -4,6 +4,8 @@ from user.models import UserInfo
 from column.forms.article_form import UploadForm
 from column.models import articles
 
+import time
+
 
 def upload(request):
     info = request.session.get('info')
@@ -38,7 +40,8 @@ def edit_article(request):
             # 修改后要重新审核
             form.instance.status = 0
             form.save()
-            return HttpResponse('修改成功!')
+            time.sleep(10)
+            return redirect('/column/catalog', {'user_info': query_set})
     else:
         form = UploadForm(instance=article)
 
