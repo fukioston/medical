@@ -1,0 +1,228 @@
+{% extends 'layout/basic.html' %}
+{% load static %}
+
+{% block css %}
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body{
+
+            background-color: #f8f8f8;
+        }
+        .container{
+            margin-top: 20px;
+            padding: 40px 20px;
+        }
+        .box{
+            padding: 40px 30px;
+            transition: all .4s ease-in-out;
+            cursor: pointer;
+        }
+        .box:hover{
+            box-shadow: 2px 2px 10px #a5a5a5;
+            transform: scale(1.03);
+        }
+        a:hover{
+            text-decoration: none;
+        }
+        img{
+            object-fit: contain;
+            width: 35px;
+            height: 35px;
+            /* padding: 20px; */
+        }
+        p.text-muted{
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        b{
+            font-size: 1.12rem;
+        }
+        .rounded-circle{
+            width: 60px;
+            height: 60px;
+            background-color: red;
+        }
+        .blue{
+            background-color: #bedcfa;
+            transform: rotateZ(90deg);
+        }
+        .pale-blue{
+            background-color: #eff8ff;
+        }
+        .pale-orange{
+            background-color: #ffe5b9;
+        }
+        .pale-purple{
+            background-color: #e8e8e8;
+        }
+        .pale-cyan{
+            background-color: #cffffe;
+        }
+        .pale-pink{
+            background-color: #ffe4e4;
+        }
+        .pale-pale{
+            background-color: #f4eeff;
+        }
+        .pale-green{
+            background-color: #a0ffe6;
+        }
+        .pale-pista{
+            background-color: #dbf6e9;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container bg-light rounded">
+        <div class="h4 font-weight-bold text-center py-3">专题</div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 my-lg-0 my-3">
+                <button class="box bg-white" style="width: 100%; border: None" onclick="window.location.href='article_list?catalog=' + encodeURIComponent('居家妙招')">
+                    <div class="d-flex align-items-center">
+                        <div
+                            class="rounded-circle mx-3 text-center d-flex align-items-center justify-content-center blue">
+                            <img src="{% static 'images/column/catalog_icon/catalog_icon_1.png'%}" alt="">
+                        </div>
+                        <div class="d-flex flex-column">
+                            <b>居家妙招</b>
+                            <a href="">
+                                <p class="text-muted" style="text-align: left">{{ class.0.1 }} 篇</p>
+                            </a>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div class="col-lg-4 col-md-6 my-lg-0 my-3">
+                <button class="box bg-white" style="width: 100%; border: None" onclick="window.location.href='article_list?catalog=' + encodeURIComponent('饮食妙招')">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle mx-3  d-flex align-items-center justify-content-center pale-orange">
+                            <img src="{% static 'images/column/catalog_icon/catalog_icon_2.png' %}" alt="">
+                        </div>
+                        <div class="d-flex flex-column">
+                            <b>饮食妙招</b>
+                            <a href="#">
+                                <p class="text-muted" style="text-align: left">{{class.8.1 }} 篇</p>
+                            </a>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div class="col-lg-4 col-md-6 my-lg-0 my-3">
+                <button class="box bg-white" style="width: 100%; border: None" onclick="window.location.href='article_list?catalog=' + encodeURIComponent('日常妙招')">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle mx-3  d-flex align-items-center justify-content-center pale-purple">
+                            <img src="{% static 'images/column/catalog_icon/catalog_icon_3.png' %}" alt="">
+                        </div>
+                        <div class="d-flex flex-column">
+                            <b>日常妙招</b>
+                            <a href="#">
+                                <p class="text-muted" style="text-align: left">{{class.7.1 }} 篇</p>
+                            </a>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div class="col-lg-4 col-md-6 my-lg-3 my-3">
+                <button class="box bg-white" style="width: 100%; border: None" onclick="window.location.href='article_list?catalog=' + encodeURIComponent('急救常识')">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle mx-3  d-flex align-items-center justify-content-center pale-cyan">
+                            <img src="{% static 'images/column/catalog_icon/catalog_icon_4.png' %}" alt="">
+                        </div>
+                        <div class="d-flex flex-column">
+                            <b>急救常识</b>
+                            <a href="#">
+                                <p class="text-muted" style="text-align: left">{{class.1.1 }} 篇</p>
+                            </a>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div class="col-lg-4 col-md-6 my-lg-3 my-3">
+                <button class="box bg-white" style="width: 100%; border: None" onclick="window.location.href='article_list?catalog=' + encodeURIComponent('灾害急救')">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle mx-3  d-flex align-items-center justify-content-center pale-pink">
+                            <img src="{% static 'images/column/catalog_icon/catalog_icon_5.png' %}"
+                                alt="">
+                        </div>
+                        <div class="d-flex flex-column">
+                            <b>灾害急救</b>
+                            <a href="#">
+                                <p class="text-muted" style="text-align: left">{{class.2.1 }} 篇</p>
+                            </a>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div class="col-lg-4 col-md-6 my-lg-3 my-3">
+                <button class="box bg-white" style="width: 100%; border: None" onclick="window.location.href='article_list?catalog=' + encodeURIComponent('意外急救')">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle mx-3  d-flex align-items-center justify-content-center pale-orange">
+                            <img src="{% static 'images/column/catalog_icon/catalog_icon_6.png' %}"
+                                alt="">
+                        </div>
+                        <div class="d-flex flex-column">
+                            <b>意外急救</b>
+                            <a href="#">
+                                <p class="text-muted" style="text-align: left">{{class.3.1 }} 篇</p>
+                            </a>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div class="col-lg-4 col-md-6 my-lg-0 my-3">
+                <button class="box bg-white" style="width: 100%; border: None" onclick="window.location.href='article_list?catalog=' + encodeURIComponent('疾病急救')">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle mx-3  d-flex align-items-center justify-content-center pale-orange">
+                            <img src="{% static 'images/column/catalog_icon/catalog_icon_7.png' %}"
+                                alt="">
+                        </div>
+                        <div class="d-flex flex-column">
+                            <b>疾病急救</b>
+                            <a href="#">
+                                <p class="text-muted" style="text-align: left">{{class.4.1 }} 篇</p>
+                            </a>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div class="col-lg-4 col-md-6 my-lg-0 my-3">
+                <button class="box bg-white" style="width: 100%; border: None" onclick="window.location.href='article_list?catalog=' + encodeURIComponent('中毒急救')">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle mx-3  d-flex align-items-center justify-content-center pale-green">
+                            <img src="{% static 'images/column/catalog_icon/catalog_icon_8.png' %}" alt="">
+                        </div>
+                        <div class="d-flex flex-column">
+                            <b>中毒急救</b>
+                            <a href="#">
+                                <p class="text-muted" style="text-align: left">{{class.5.1 }} 篇</p>
+                            </a>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div class="col-lg-4 col-md-6 my-lg-0 my-3">
+<button class="box bg-white" style="width: 100%; border: None" onclick="window.location.href='article_list?catalog=' + encodeURIComponent('家庭急救')">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle mx-3  d-flex align-items-center justify-content-center pale-pista">
+                            <img src="{% static 'images/column/catalog_icon/catalog_icon_9.png' %}" alt="">
+                        </div>
+                        <div class="d-flex flex-column">
+                            <b>家庭急救</b>
+                            <a href="#">
+                                <p class="text-muted" style="text-align: left">{{class.6.1 }} 篇</p>
+                            </a>
+                        </div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

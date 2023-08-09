@@ -31,6 +31,7 @@ urlpatterns = [
     path("manager/", include('manager.urls')),
     path("statistic/", include('statistic.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('medical_info/', include('medical_info.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
