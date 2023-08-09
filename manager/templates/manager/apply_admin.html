@@ -34,7 +34,7 @@ h6{
 
     flex-direction: column;
     text-align: center;
-    background: green;
+    background: whitesmoke;
     width: 600px;
     height: 600px;
     border: 1px;
@@ -119,7 +119,7 @@ h6{
       <div class="modal-footer pt-4">
 
         <button type="button" class="btn btn-light mx-auto" style="width:45%" data-dismiss="modal">Cancel</button>
-        <button id="btnConfirm" type="button" class="btn btn-dark mx-auto" style="width:45%">确认申请</button>
+        <button id="btnConfirm" type="button" onclick="showSwal('success-message')" class="btn btn-dark mx-auto" style="width:45%">确认申请</button>
 
       </div>
     </div>
@@ -151,7 +151,7 @@ function btnApply_click() {
         var condition1 = msg.condition[0]
         var condition2 = msg.condition[1]
         var condition3 = msg.condition[2]
-        if(condition1!==true||condition2!==true||condition3!==true);
+        if(condition1!==true||condition2!==true||condition3!==true)
             $('#btnConfirm').prop('disabled', true)
         if(condition1) {
             var element = document.getElementById("condition1");
@@ -187,7 +187,7 @@ function btnConfirm_click(){
             csrfmiddlewaretoken:'{{ csrf_token }}'
     },
      success(msg) {
-       alert('申请成功')
+
      }
      })
         var button =document.getElementById("close")
@@ -201,6 +201,53 @@ function btnConfirm_click(){
 
 
     )}
+     (function($) {
+  showSwal = function(type) {
+
+     if (type === 'success-message') {
+         swalWithBootstrapButtons=Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-success',
+    cancelButton: 'btn btn-danger'
+  },
+  buttonsStyling: false
+})
+
+swalWithBootstrapButtons.fire({
+  title: 'Are you sure?',
+  text: "确定要成为管理员吗？",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonText: '是的!',
+  cancelButtonText: '我再考虑一下',
+  reverseButtons: true
+}).then((result) => {
+  if (result.value) {
+    swalWithBootstrapButtons.fire(
+      '申请成功!',
+      '恭喜你成为管理员',
+      'success'
+    ).then((result)=>{
+        window.location.href='/column/catalog';
+    })
+  } else if (
+    /* Read more about handling dismissals below */
+    result.dismiss === Swal.DismissReason.cancel
+  ) {
+    swalWithBootstrapButtons.fire(
+      '申请失败',
+      '没事！考虑好了可以再申请 :)',
+      'error'
+    )
+  }
+})
+         }
+    else{
+        swal("Error occured !");
+    }
+  }
+
+})(jQuery);
 
 
 
