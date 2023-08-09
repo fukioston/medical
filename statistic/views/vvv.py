@@ -68,7 +68,7 @@ def statistic(request):
 
     d = []
     t = []
-    data = pd.read_csv("D:\\PyCharm\\medical\\static\\csv\\rate.csv")
+    data = pd.read_csv('../../rate.csv')
     # date = data['date']
     times = data['times']
     # for i in range(1, 6):
@@ -79,7 +79,7 @@ def statistic(request):
 
 
 def p():
-    data = pd.read_csv("D:\\PyCharm\\medical\\static\\csv\\rate.csv")
+    data = pd.read_csv("../../rate.csv")
     t = time.strftime("%Y-%m-%d")
     date = data['date']
     l = len(date)
@@ -87,14 +87,14 @@ def p():
         l = l + 1
         af = {'date': [t], 'times': [0]}
         a = pd.DataFrame(af)
-        with open('D:\\PyCharm\\medical\\static\\csv\\rate.csv', mode='a', newline='') as file:
+        with open('../../rate.csv', mode='a', newline='') as file:
             a.to_csv(file, header=(not file.tell()), index=False)
 
-    with open('D:\\PyCharm\\medical\\static\\csv\\rate.csv', 'r') as csvfile:
+    with open('../../rate.csv', 'r') as csvfile:
         reader = csv.reader(csvfile)
         d = list(reader)
         d[l][1] = str(int(d[l][1]) + 1)
-    with open('D:\\PyCharm\\medical\\static\\csv\\rate.csv', mode='w', newline='') as file:
+    with open('../../rate.csv', mode='w', newline='') as file:
         writer = csv.writer(file)
         # 写入数据
         writer.writerows(d)
