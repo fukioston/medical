@@ -10,11 +10,21 @@ def symptom_info(request):
 def get_symptom_info(request):
     page = request.GET.get('page')
     page = int(page)
+    print(page)
+    query = (
+        "MATCH (n:Symptom)-[r:BELONGS_TO]->(p:Department) "  # 假设 n 和 p 之间有某种关系，修改为实际关系
+        "RETURN ID(n) AS id,n,  p.name AS department_name "  # 选择需要的属性
+    )
     answer = g.run(
-        "MATCH (n:Symptom) RETURN n").data()
+        query).data()
     json_data = []
     for record in answer:
-        json_data.append(record['n'])
+        data = {
+            'n': record['n'],
+            'id':record['id'],
+            'department_name': record['department_name']
+        }
+        json_data.append(data)
     # 返回JSON响应
     json_data = json_data[(page - 1) * 10:page * 10]
     return JsonResponse(json_data, safe=False)
@@ -26,11 +36,23 @@ def get_select_symptom(request):
     department = request.GET.get('department')
     print(department)
     answer = g.run(
-        "MATCH (n:Symptom)-[r:BELONGS_TO]->(p:Department{name:\"" + department + "\"}) RETURN n ").data()
+        "MATCH (n:Symptom)-[r:BELONGS_TO]->(p:Department{name:\"" + department + "\"}) RETURN ID(n) AS id,n ").data()
     json_data = []
     for record in answer:
-        json_data.append(record['n'])
+        data = {
+            'n': record['n'],
+            'id': record['id'],
+        }
+        json_data.append(data)
     json_data = json_data[(page - 1) * 10:page * 10]
+    # 返回JSON响应
+    return JsonResponse(json_data, safe=False)
+def get_department(request):
+    answer = g.run(
+        "MATCH (n:Symptom)-[r:BELONGS_TO]->(p:Department) RETURN distinct p ").data()
+    json_data = []
+    for record in answer:
+        json_data.append(record['p'])
     # 返回JSON响应
     return JsonResponse(json_data, safe=False)
 

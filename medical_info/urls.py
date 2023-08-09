@@ -21,9 +21,10 @@ from medical_info.views import home, info, search
 urlpatterns = [
     path('home', home.home),
     path('search', search.search),
-    path('symptom_info', info.symptom_info),
-    path('get_symptom_info', info.get_symptom_info),
-    path('get_select_symptom', info.get_select_symptom),
+    path('symptom_info',info.symptom_info),
+    path('get_symptom_info',info.get_symptom_info),
+    path('get_select_symptom',info.get_select_symptom),
+    path('get_department',info.get_department),
     path('disease_info', info.disease_info),
     path('get_disease_info', info.get_disease_info),
     path('get_select_disease', info.get_select_disease),
