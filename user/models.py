@@ -11,3 +11,6 @@ class UserInfo(models.Model):
     mobile_phone = models.CharField(verbose_name='手机号码', max_length=32)
     profile_img= models.CharField(verbose_name='头像', max_length=64, default='doge.jpg')
     identity=models.CharField(verbose_name='身份', max_length=64, default='user')
+class like(models.Model):
+    article_id = models.IntegerField(verbose_name='article_id')
+    user_id = models.IntegerField(verbose_name='user_id')

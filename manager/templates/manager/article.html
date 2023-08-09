@@ -215,21 +215,18 @@ $('document').ready(function(){
     });
     (function($) {
   showSwal = function(type) {
-    'use strict';
+
      if (type === 'success-message') {
-      swal({
-        title: '审核通过!',
-        type: 'success',
-        button: {
-          text: "Continue",
-          value: true,
-          visible: true,
-          className: "btn btn-primary ",
-
-        }
-      })
-
-    }else{
+         Swal.fire({
+  title: '成功!',
+  text: 'Do you want to continue',
+  icon: 'success',
+  confirmButtonText: 'ok'
+        }).then(function(isConfirm) {
+            window.location.href='/manager/manage';
+         })
+         }
+    else{
         swal("Error occured !");
     }
   }

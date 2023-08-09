@@ -1,8 +1,8 @@
 from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse, redirect
 
-from column.models import articles, like
-from user.models import UserInfo
+from column.models import articles
+from user.models import UserInfo, like
 
 
 def article(request):

@@ -10,6 +10,7 @@ def search(request):
 
 def search_tip(request):
     kw = request.POST.get('kw')
+    print(kw)
     article_objs = articles.objects.filter(article_name__contains=kw)
     article_name_list = [article_obj.article_name.strip().lower() for article_obj in article_objs]
     article_name_list = list(set(article_name_list))

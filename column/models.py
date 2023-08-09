@@ -29,8 +29,6 @@ class articles(models.Model):
     status = models.CharField(verbose_name='状态', default=0, max_length=32)
 
 
-class like(models.Model):
-    article_id = models.IntegerField(verbose_name='article_id')
-    user_id = models.IntegerField(verbose_name='user_id')
+
 
 
