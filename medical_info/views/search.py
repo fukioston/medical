@@ -11,5 +11,7 @@ def search(request):
     kw = request.GET.get('kw')  # 获取参数值
     # 用关键字搜索neo4j库
     print(kw)
-
-    return render(request, 'medical_info/search.html', {'user_info': query_set})
+    if query_set:
+        return render(request, 'medical_info/search.html', {'user_info': query_set})
+    else:
+        return render(request, 'medical_info/search.html')

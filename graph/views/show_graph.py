@@ -6,10 +6,18 @@ from django.shortcuts import render, HttpResponse, redirect
 import os
 
 from graph.views.neo4j_db import neo4jconn
+from user.models import UserInfo
 
 
 def show(request):
-    return render(request, 'graph/graph.html')
+    uinfo = request.session.get('info')
+    user_id = uinfo['id']
+    query_set = UserInfo.objects.filter(id=user_id).first()
+    if query_set:
+        return render(request, 'graph/graph.html',{'user_info':query_set})
+    else:
+        return render(request, 'graph/graph.html')
+
 
 
 def handle(request):

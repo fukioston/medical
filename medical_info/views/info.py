@@ -1,10 +1,17 @@
 from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse
 from medical.settings import g
+from user.models import UserInfo
 
 
 def symptom_info(request):
-    return render(request, 'medical_info/symptom_info.html')
+    info = request.session.get('info')
+    user_id = info['id']
+    query_set = UserInfo.objects.filter(id=user_id).first()
+    if query_set:
+        return render(request, 'medical_info/symptom_info.html', {'user_info': query_set})
+    else:
+        return render(request, 'medical_info/symptom_info.html', )
 
 
 def get_symptom_info(request):
@@ -58,7 +65,14 @@ def get_department(request):
 
 
 def disease_info(request):
-    return render(request, 'medical_info/disease_info.html')
+    info = request.session.get('info')
+    user_id = info['id']
+    query_set = UserInfo.objects.filter(id=user_id).first()
+    if query_set:
+        return render(request, 'medical_info/disease_info.html',{'user_info': query_set})
+    else:
+        return render(request, 'medical_info/disease_info.html')
+
 
 
 
@@ -112,7 +126,14 @@ def get_department2(request):
     return JsonResponse(json_data, safe=False)
 
 def diagnose_info(request):
-    return render(request, 'medical_info/diagnose_info.html')
+    info = request.session.get('info')
+    user_id = info['id']
+    query_set = UserInfo.objects.filter(id=user_id).first()
+    if query_set:
+        return render(request, 'medical_info/diagnose_info.html', {'user_info': query_set})
+    else:
+        return render(request, 'medical_info/diagnose_info.html')
+
 
 
 def get_diagnose_info(request):
@@ -165,7 +186,13 @@ def get_department3(request):
     return JsonResponse(json_data, safe=False)
 
 def drug_info(request):
-    return render(request, 'medical_info/drug_info.html')
+    info = request.session.get('info')
+    user_id = info['id']
+    query_set = UserInfo.objects.filter(id=user_id).first()
+    if query_set:
+        return render(request, 'medical_info/drug_info.html', {'user_info': query_set})
+    else:
+        return render(request, 'medical_info/drug_info.html')
 
 
 def get_drug_info(request):

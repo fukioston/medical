@@ -21,7 +21,10 @@ def article(request):
     info = request.session.get('info')
     user_id = info['id']
     query_set = UserInfo.objects.filter(id=user_id).first()
-    return render(request, 'manager/article.html', {'article_status':article_status,'article_id':article_id,'title': article_name, 'content': article_content, 'user_info': query_set})
+    if query_set:
+        return render(request, 'manager/article.html', {'article_status':article_status,'article_id':article_id,'title': article_name, 'content': article_content, 'user_info': query_set})
+    else:
+        return render(request, 'manager/article.html', {'article_status':article_status,'article_id':article_id,'title': article_name, 'content': article_content, })
 
 
 def agreed(request):
