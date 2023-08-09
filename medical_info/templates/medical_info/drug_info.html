@@ -191,9 +191,7 @@ $('#drug').append(`
         <td class="truncate">${data[i].disease_name}</td>
 <td class="truncate">${data[i].d.name}</td>
 <td class="truncate2">
-<a href="detail/${data[i].d.name}">
-<input   class="btn btn-primary" type="button"  value="查看详细信息" >
-</a>
+<input   class="btn btn-primary" type="button" onclick="window.location.href='/medical_info/drug_detail?item=${data[i].d.name}'" value="查看详细信息" >
 </td>
  </tr>
 `)

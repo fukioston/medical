@@ -23,13 +23,43 @@
         <div style="height: 60px">
             <p>详情</p>
         </div>
-        {% for k in list %}
+{% for record in data %}
             <div class="card">
                 <div class="card-body">
-                    {{ k }}
+                    {{ record.n.name }}
                 </div>
             </div>
+        <div class="card">
+                <div class="card-body">
+                   功能：{{ record.n.function }}
+                </div>
+            </div>
+    <div class="card">
+                <div class="card-body">
+                  {{ record.n.price }}
+                </div>
+            </div>
+    <div class="card">
+                <div class="card-body">
+                   副作用：{{ record.n.side_effect }}
+                </div>
+            </div>
+    <div class="card">
+                <div class="card-body">
+                  功能：{{ record.n.usage }}
+                </div>
+            </div>
+
+
+            </div>
         {% endfor %}
+
+{#    <div class="card">#}
+{#                <div class="card-body">#}
+{#                    {{ data.n.name  }}#}
+{#                </div>#}
+{#            </div>#}
+
     </div>
 {% endblock %}
 </body>
