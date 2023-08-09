@@ -16,10 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from medical_info.views import home, info, search
+from medical_info.views import home, info, search, detail_info
 
 urlpatterns = [
-    path('home', home.home),
+    path('home',home.home),
     path('search', search.search),
     path('symptom_info',info.symptom_info),
     path('get_symptom_info',info.get_symptom_info),
@@ -35,5 +35,7 @@ urlpatterns = [
     path('get_department3',info.get_department3),
     path('drug_info', info.drug_info),
     path('get_drug_info', info.get_drug_info),
+    path('detail/<item>', detail_info.drug_detail),
+
 
 ]

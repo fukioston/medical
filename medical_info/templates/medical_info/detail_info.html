@@ -1,0 +1,35 @@
+{% extends 'layout/basic.html' %}
+{% load static %}
+<link rel="stylesheet" href="../../../static/plugins/bootstrap-4.4.1-dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+{% block base %}
+    <title>Detail</title>
+{% endblock %}
+{% block css %}
+    <style>
+        .card {
+            margin-bottom: 5px;
+            width: 1000px;
+        }
+        .card-body {
+            margin: 10px 50px 10px 50px;
+        }
+    </style>
+{% endblock %}
+<body>
+{% block content %}
+    <div>
+        <div style="height: 60px">
+            <p>详情</p>
+        </div>
+        {% for k in list %}
+            <div class="card">
+                <div class="card-body">
+                    {{ k }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+</body>

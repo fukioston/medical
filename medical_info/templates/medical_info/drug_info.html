@@ -190,7 +190,11 @@ $('#drug').append(`
       <td class="truncate text-center">${data[i].id}</td>
         <td class="truncate">${data[i].disease_name}</td>
 <td class="truncate">${data[i].d.name}</td>
-<td class="truncate2"><input   class="btn btn-primary" type="button"  value="查看详细信息"></td>
+<td class="truncate2">
+<a href="detail/${data[i].d.name}">
+<input   class="btn btn-primary" type="button"  value="查看详细信息" >
+</a>
+</td>
  </tr>
 `)
      if(data.length<10)

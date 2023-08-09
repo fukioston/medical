@@ -6,6 +6,7 @@
 {% block base %}
     <title>Statistic</title>
     <script src={% static 'js/echarts.min.js' %}></script>
+    <script src="https://gallery.echartsjs.com/dep/echarts/map/js/china.js"></script>
 {% endblock %}
 
 <body>
@@ -22,6 +23,7 @@
 <script src="../../../static/plugins/bootstrap-4.4.1-dist/js/bootstrap.bundle.js"></script>
 {% block js %}
     <script type="text/javascript">
+
         window.onload = function () {
             echart01();
             echart02();
@@ -165,4 +167,5 @@
             }
         }
     </script>
+
 {% endblock %}
