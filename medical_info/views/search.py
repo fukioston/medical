@@ -1,4 +1,4 @@
 from django.shortcuts import render
 
-def home(request):
+def search(request):
     return render(request, 'medical_info/search.html')
