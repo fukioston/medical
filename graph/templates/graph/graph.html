@@ -144,7 +144,6 @@
 
                 var text = $(this).text();
                 $('#dropdownMenuButton').text(text);
-                // 根据关系类型显示不同的输入框
 
                 showInputFields(relation);
             });
@@ -181,6 +180,7 @@
                 inputContainer.append('<div id="entity1" class="form-group" style="padding: 2%"> <input type="text" id="entity1_text" name="entity1_text" class="form-control"placeholder="输入想查询的疾病" aria-describedby="basic-addon1"> </div>');
                 inputContainer.append('<div class="btn-group" style="padding: 2%"> <button type="button" id="btnSearch" class="btn btn-primary"onclick="handleSearchClick()">获取这个疾病的推荐治疗药物</button> </div>');
             } else if (relation === 'ALL') {
+                relationNameValue = '';
                 inputContainer.append('<div class="btn-group" style="padding: 2%"> <button type="button" id="btnSearch" class="btn btn-primary"onclick="handleSearchClick()">获取所有关系</button> </div>');
             }
 
@@ -194,11 +194,9 @@
             if (document.getElementById('entity1_text') !== null) {
                 entity1Value = document.getElementById('entity1_text').value;
             }
-
-            // 获取关系名称输入框的内容
-
-            // 获取实体2输入框的内容
-            {#entity2Value = document.getElementById('entity2_text').value;#}
+            else{
+                entity1Value = '';
+            }
 
             var searchResult;
             // 使用Ajax发送数据给后端
@@ -208,7 +206,7 @@
                 data: {
                     entity1: entity1Value,
                     relation: relationNameValue,
-                    entity2: entity2Value
+                    entity2: entity2Value,
                 },
                 success: function (response) {
                     // 这里是请求成功后的回调函数
@@ -264,7 +262,6 @@
                 }
 
                 // 处理边的数据
-                {#var relation = item.rel;#}
                 relation = item.relationshipName;
                 links.push({
                     source: node1.name, // 边的起始节点id

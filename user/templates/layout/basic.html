@@ -13,7 +13,7 @@
 <style>
     @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
-    .selected{
+    .selected {
         background-color: #318fb5;
     }
 
@@ -177,9 +177,6 @@
     }
 
 
-
-
-
 </style>
 {% block css %}
 
@@ -196,19 +193,20 @@
             <li>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">用户</a>
                 <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li><a href="/user/home/" class="link">用户中心</a></li>
-                    <li><a href="/user/edit_pwd/" class="link">修改密码</a></li>
-                    <li><a href="/user/edit_info/" class="link">修改个人信息</a></li>
-                    <li><a href="/user/my_article/" class="link">我的文章</a></li>
-                    <li><a class="hahaha link" href="/manager/manage">文章审核</a></li>
+                    <li><a href="/user/home/" class="link drop">用户中心</a></li>
+                    <li><a href="/user/edit_pwd/" class="link drop">修改密码</a></li>
+                    <li><a href="/user/edit_info/" class="link drop">修改个人信息</a></li>
+                    <li><a href="/user/my_article/" class="link drop">我的文章</a></li>
+                    <li><a class="hahaha link drop" href="/manager/manage">文章审核</a></li>
                 </ul>
             </li>
             <li>
                 <a href="#kepumenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">科普栏目</a>
                 <ul class="collapse list-unstyled" id="kepumenu">
-                    <li><a href="/column/search" class="link">科普栏目搜索</a></li>
-                    <li><a href="/column/catalog" class="link">科普栏目专题</a></li>
-                </ul></li>
+                    <li><a href="/column/search" class="link drop">科普栏目搜索</a></li>
+                    <li><a href="/column/catalog" class="link drop">科普栏目专题</a></li>
+                </ul>
+            </li>
             <li><a href="/robot/talk/" class="link">智能问答机器人</a></li>
             <li><a href="/graph/" class="link">医学知识图谱</a></li>
             <li><a href="/map/" class="link">医院地图支持</a></li>
@@ -288,8 +286,8 @@
                 link.classList.add('selected');
             }
         });
-    });
 
+    });
 
 
 </script>
