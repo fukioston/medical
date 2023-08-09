@@ -7,6 +7,14 @@
 body{
 background-color: #eee;
 }
+.cell-1 {
+  border-collapse: separate;
+  border-spacing: 0 4em;
+  background: #fff;
+  border-bottom: 5px solid transparent;
+  /*background-color: gold;*/
+  background-clip: padding-box;
+}
 .container{
 height: 100vh;
 }
@@ -57,7 +65,7 @@ thead {
   background: #dddcdc;
 }
 .rounded{
-    width:980px;
+    width:900px;
 }
 .truncate {
   white-space: nowrap; /* 不换行 */
@@ -116,8 +124,6 @@ thead {
                                     <th class="text-center">id</th>
                                     <th>症状名</th>
                                     <th>所属科室</th>
-
-                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody id="symptom" class="table-body">
@@ -158,10 +164,10 @@ thead {
  for (var i = 0; i < data.length; i++) {
 $('#symptom').append(`
 <tr class="cell-1">
-      <td class="text-center truncate">${data[i].name}</td>
+      <td class="text-center">${data[i].id}</td>
         <td class="truncate1">${data[i].name}</td>
-      <td class="truncate">${data[i].name}</td>
-                                </tr>
+      <td class="truncate1">${data[i].name}</td>
+ </tr>
 `)
             }
     }
@@ -179,8 +185,11 @@ $('#symptom').append(`
 
  for (var i = 0; i < data.length; i++) {
 $('#symptom').append(`
-                    <li class="border bg-white list-none rounded-sm px-3 py-3 cursor-pointer hover:text-white hover:bg-blue-600" style='border-bottom-width:0'>${data[i].name}</li>
-
+                   <tr class="cell-1">
+      <td class="text-center truncate">${data[i].id}</td>
+        <td class="truncate1">${data[i].name}</td>
+      <td class="truncate1">${data[i].name}</td>
+ </tr>
 `)
             }
     }
