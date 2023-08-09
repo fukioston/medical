@@ -193,8 +193,7 @@
             // 获取实体1输入框的内容
             if (document.getElementById('entity1_text') !== null) {
                 entity1Value = document.getElementById('entity1_text').value;
-            }
-            else{
+            } else {
                 entity1Value = '';
             }
 
@@ -362,7 +361,25 @@
 
                     categories: categories,
                 }],
-            };
+
+                graphic: [{
+                    type: 'text',     // 类型：文本
+                    left: 'center',
+                    top: 'middle',
+                    silent: true,     // 不响应事件
+                    invisible: nodes.length > 0,   // 有数据就隐藏
+                    style: {
+                        fill: '#9d9d9d',
+                        fontWeight: 'bold',
+                        text: '暂时查询不到数据，请输入正确的查询条件',
+                        fontFamily: 'Microsoft YaHei',
+                        fontSize: '25px'
+                    }
+
+
+                }],
+
+            }
             myChart.setOption(option);
         }
 
