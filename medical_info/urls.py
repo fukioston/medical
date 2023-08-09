@@ -27,6 +27,7 @@ urlpatterns = [
     path('get_department',info.get_department),
     path('disease_info', info.disease_info),
     path('get_disease_info', info.get_disease_info),
+    path('get_department2',info.get_department2),
     path('get_select_disease', info.get_select_disease),
     path('diagnose_info', info.diagnose_info),
     path('get_diagnose_info', info.get_diagnose_info),

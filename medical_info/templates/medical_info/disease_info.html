@@ -93,6 +93,8 @@ thead {
 {% endblock %}
 
 {% block content %}
+
+
 <div class="row">
         <div class="d-flex justify-content-center row">
             <div class="col-md-10">
@@ -105,9 +107,10 @@ thead {
                                     <th class="text-center">id</th>
                                     <th>疾病名</th>
                                     <th>所属科室</th>
+                                    <th></th>
                                 </tr>
                             </thead>
-                            <tbody id="symptom" class="table-body">
+                            <tbody id="disease" class="table-body">
                             </tbody>
                         </table>
                     </div>
@@ -128,13 +131,11 @@ thead {
     </div>
 <div class="dropdown">
     <button class="btn btn-outline-danger dropdown-toggle_inner" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-        <span>全部</span>
+        <span id="now_department">全部</span>
         <i class="fa fa-caret-down"></i>
     </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <li><a class="dropdown-item" href=" ">妇产科</a ></li>
-        <li><a class="dropdown-item" href="#">儿科</a></li>
-        <li><a class="dropdown-item" href="#">内科</a></li>
+    <ul id="department" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+<li><a class="dropdown-item" id="search_department" data-id="全部" href="#">全部</a ></li>
     </ul>
 </div>
 
@@ -144,14 +145,19 @@ thead {
 {% block js %}
 
     <script>
-     var page=1
+
+
     var last=0
-{##有点bug需要修复#}
+
     $('#next_page').click(function(){
             page+=1;
             if(last===1)
         {page-=1; alert('已经是最后一页') }
-        else get_all();
+        else {
+            const department_name=$('#now_department').text()
+if(department_name==="全部") get_all(page);
+else
+            get_select_all(department_name,page);}
 
 })
     $('#previous_page').click(function(){
@@ -159,48 +165,65 @@ thead {
             console.log(page)
             if(page<1)
         {page=1; alert('已经是第一页') }
-        else get_all();
+        else {
+               const department_name=$('#now_department').text()
+if(department_name==="全部") get_all(page);
+else get_select_all(department_name,page);
+            }
 
 })
 $('#page1').click(function(){
             page=1;
-            get_all();
+            const department_name=$('#now_department').text()
+    console.log(department_name)
+
+if(department_name==="全部") get_all(page);
+else get_select_all(department_name,page);
 })
     $('#page2').click(function(){
             page=2;
-            get_all();
+           const department_name=$('#now_department').text()
+if(department_name==="全部") get_all(page);
+else get_select_all(department_name,page);
 })
     $('#page3').click(function(){
             page=3;
-            get_all();
+            const department_name=$('#now_department').text()
+if(department_name==="全部") get_all(page);
+else get_select_all(department_name,page);
 })
     $('#page4').click(function(){
             page=4;
-            get_all();
+           const department_name=$('#now_department').text()
+if(department_name==="全部") get_all(page);
+else get_select_all(department_name,page);
 })
     $('#page5').click(function(){
             page=5;
-            get_all();
+            const department_name=$('#now_department').text()
+if(department_name==="全部") get_all(page);
+else get_select_all(department_name,page);
 })
 
-    get_select_all()
-    function get_all(){
+get_all(1)
+     get_department()
+    function get_all(page){
          $.ajax({
-    url:'/medical_info/get_diagnose_info',
+    url:'/medical_info/get_disease_info',
     type:'get',
              data:{
-        'page':page
+        'page':page,
              },
         success(data){
-var element = document.getElementById("symptom");
+var element = document.getElementById("disease");
                     element.innerHTML = "";
  for (var i = 0; i < data.length; i++) {
-$('#symptom').append(`
+$('#disease').append(`
 <tr class="cell-1">
-      <td class="truncate" class="text-center">${data[i].id}</td>
-        <td class="truncate">${data[i].name}</td>
-      <td class="truncate">${data[i].name}</td>
-<td class="truncate2"><input  class="btn btn-primary" type="button"  onclick="window.location.href='/manager/article?article_name=1'"  value="查看详细信息"></td>
+      <td class="truncate text-center">${data[i].id}</td>
+        <td class="truncate">${data[i].n.name}</td>
+      <td class="truncate">${data[i].department_name}</td>
+<td class="truncate2"><input   class="btn btn-primary" type="button"  value="查看详细信息"></td>
  </tr>
 `)
      if(data.length<10)
@@ -210,25 +233,62 @@ $('#symptom').append(`
     }
     })}
 
-   function get_select_all(){
+   function get_select_all(department,page){
         $.ajax({
     url:'/medical_info/get_select_disease',
     type:'get',
             data:{
         'page':page,
-        'department':'妇科',
+        'department':department,
             },
         success(data){
-        var element = document.getElementById("symptom");
+        var element = document.getElementById("disease");
                     element.innerHTML = "";
-        for (var i = 0; i < data.length; i++) {
-            $('#symptom').append(`
-                               <tr class="cell-1">
-                  <td class="text-center truncate">${data[i].id}</td>
-                    <td class="truncate">${data[i].name}</td>
-                  <td class="truncate">${data[i].name}</td>
-            <td class="truncate2"><input  class="btn btn-primary" type="button"  onclick="window.location.href='/manager/article?article_name=1'"  value="查看详细信息"></td>
-             </tr>
-        `)}}})}
+ for (var i = 0; i < data.length; i++) {
+$('#disease').append(`
+                   <tr class="cell-1">
+      <td class="text-center truncate">${data[i].id}</td>
+        <td class="truncate">${data[i].n.name}</td>
+      <td class="truncate">${$('#now_department').text()}</td>
+<td class="truncate2"><input  class="btn btn-primary" type="button"  onclick="window.location.href='/manager/article?article_name=1'"  value="查看详细信息"></td>
+ </tr>
+`)
+     if(data.length<10)
+             last=1
+         else last=0
+            }
+    }
+    })
+   }
+function get_department(){
+             $.ajax({
+    url:'/medical_info/get_department2',
+    type:'get',
+            data:{
+
+            },
+        success(data){
+ for (var i = 0; i < data.length; i++) {
+$('#department').append(`
+             <li><a class="dropdown-item" id="search_department" data-id="${data[i].name}" href="#">${data[i].name}</a ></li>
+`)
+            }
+    }
+    })
+}
+ $('#department').on('click', '#search_department', function() {
+            console.log('点击了按钮');
+            const department_name=$(this).data('id')
+                 $('#now_department').text(department_name);
+if(department_name==="全部") {console.log('??')
+    get_all(page);}
+else
+            get_select_all(department_name,page);
+
+
+            })
+
+
+
     </script>
 {% endblock %}
