@@ -110,6 +110,7 @@
         </div>
 
   </div>
+
 {% endblock %}
 
 {% block js %}
@@ -219,10 +220,9 @@ $('document').ready(function(){
      if (type === 'success-message') {
          Swal.fire({
   title: '成功!',
-  text: 'Do you want to continue',
   icon: 'success',
   confirmButtonText: 'ok'
-        }).then(function(isConfirm) {
+        }).then(function() {
             window.location.href='/manager/manage';
          })
          }
@@ -235,26 +235,15 @@ $('document').ready(function(){
     (function($) {
   showSwal2 = function(type) {
      if (type === 'fail-message') {
-      swal({
-        title: '审核不通过!',
-        type: 'error',
-        button: {
-          text: "Continue",
-          value: true,
-          visible: true,
-          className: "btn btn-primary ",
-
-        },
-      }).then(function(result){
-
-
-          // 用户点击了 "Continue" 按钮，执行您的关闭后操作
-          console.log("弹出框已关闭");
-          // 在这里可以执行您的逻辑
-      });
-
-    }
-     else{
+      Swal.fire({
+  title: '审核不通过!',
+  icon: 'error',
+  confirmButtonText: 'ok'
+        }).then(function() {
+            window.location.href='/manager/manage';
+         })
+         }
+    else{
         swal("Error occured !");
     }
   }
