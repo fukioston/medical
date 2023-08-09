@@ -161,10 +161,10 @@ height: 650px;
 
 		<div class="d-flex align-items-center">
 			<div class="text-left pr-1">
-                <img src="{% static 'images/panda.png' %}" width="30" class="img1" /></div>
+                <img src="{% static 'images/doctor.png' %}" width="30" class="img1" /></div>
 			<div class="pr-2 pl-1 ">
 				<span class="name">智能医生</span>
-				<p class="msg">你好，我是莫名其妙的医生。请问有什么能帮助你的呢？</p>
+				<p class="msg">你好，我是智能医生。请问有什么能帮助你的呢？</p>
 			</div>
 		</div>
 {#		<div class="text-center"><span class="between">Call started at 10:47am</span></div>#}
@@ -224,7 +224,7 @@ function btnSend_click() {
             var answer=msg.message
         $('#talk_div').append(`
         <div class="d-flex align-items-center">
-			<div class="text-left pr-1"><img src="{% static 'images/panda.png' %}" width="30" class="img1" /></div>
+			<div class="text-left pr-1"><img src="{% static 'images/doctor.png' %}" width="30" class="img1" /></div>
 			<div class="pr-2 pl-1">
 				<span class="name">智能医生</span>
 				<p class="msg">${answer}</p>
