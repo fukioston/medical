@@ -170,6 +170,7 @@
 
 {% block js %}
     <script type="text/javascript">
+            a()
         $(function(){
             $("#search_content_input").on('input',function (){
 
@@ -186,9 +187,12 @@
                         info=msg.info
                         for(var i=0;i<info.length;i++)
                         $('#show_ul').append(
-                            `<li class="show_li">${info[i]}</li>`
+                            `<li class="show_li"><a class="search_text" id="search_text"  data-id="${info[i]}" >${info[i]}<a></li>`
                         )
                         $("#show").show();
+
+
+
                     },
                     error: function (){
                         alert('failed!')
@@ -197,13 +201,17 @@
             })
         });
 
-        var input = document.getElementById('search_content_input');
+function a(){
+ $('#show_ul').on('click', '#search_text', function() {
+console.log('点击了按钮');
+const article_name=$(this).data('id')
+     $('#search_content_input').val(article_name);
 
-        var list = document.getElementsByClassName("show_li")
-        for(var i = 0; i < list.length; i++){
-            list[i].index = i
-            list[i].onclick = function(){
-                console.log(this.index)
-            }}
+
+
+})
+}
+
+
     </script>
 {% endblock %}
