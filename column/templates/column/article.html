@@ -183,13 +183,10 @@ function iscollect(){
                },
                type:'get',
                success(msg){
-                   console.log('cgn')
                    if(msg.status)//已经收藏
                    {
-                    btnFavorite.classList.toggle('active')
-                   btnFavorite.data('id', 1)
-
-
+                       btnFavorite.classList.toggle('active')
+                        $('#btnFavorite').data('id', 1)
 
                    }
 
@@ -202,7 +199,7 @@ function btnFavorite_click() {
         console.log('sss')
         if ($(this).data('id') === 0) {
 
-            $(this).data('id', 1)
+
             $.ajax({
                 url: '/column/click_favorite/',
                 data: {
@@ -213,12 +210,12 @@ function btnFavorite_click() {
                 type: 'post',
                 success(msg) {
                     btnFavorite.classList.toggle('active')
-                    $(this).data('id', 0)
+                    $(this).data('id', 1)
                 }
             })
             // button.classList.toggle('active');
         } else if ($(this).data('id') === 1) {
-            $(this).data('id', 0)
+
             $.ajax({
                 url: '/column/cancel_favorite/',
                 data: {
@@ -228,8 +225,8 @@ function btnFavorite_click() {
                 },
                 type: 'post',
                 success(msg) {
-                    btnFavorite.classList.toggle('active')
-                    $(this).data('id', 1)
+                    btnFavorite.classList.remove('active');
+                    $(this).data('id', 0)
 
                 }
             })
