@@ -38,5 +38,9 @@ def bmi(request):
     info = request.session.get('info')
     user_id = info['id']
     query_set = UserInfo.objects.filter(id=user_id).first()
+    if query_set:
+        return render(request, 'calculate/bmi.html', {'user_info': query_set, })
+    else:
+        return render(request, 'calculate/bmi.html',)
     # on_sales_num = Items.objects.filter(userid=user_id).count()
-    return render(request, 'calculate/bmi.html', {'user_info': query_set, })
+

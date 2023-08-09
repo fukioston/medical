@@ -14,7 +14,11 @@ def home(request):
     info = request.session.get('info')
     user_id = info['id']
     query_set = UserInfo.objects.filter(id=user_id).first()
-    return render(request, 'column/catalog.html', {'class': counts, 'user_info': query_set, })
+    if query_set:
+        return render(request, 'column/catalog.html', {'class': counts, 'user_info': query_set, })
+    else:
+        return render(request, 'column/catalog.html',{'class': counts,})
+
 
 
 def article_list(request):
@@ -46,4 +50,7 @@ def article_list(request):
     uinfo = request.session.get('info')
     user_id = uinfo['id']
     query_set = UserInfo.objects.filter(id=user_id).first()
-    return render(request, 'column/article_list.html', {'info_list': info, 'user_info': query_set})
+    if query_set:
+        return render(request, 'column/article_list.html', {'info_list': info, 'user_info': query_set})
+    else:
+        return render(request, 'column/article_list.html', {'info_list': info,})
