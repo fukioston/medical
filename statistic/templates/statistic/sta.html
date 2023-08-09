@@ -11,9 +11,9 @@
 <body>
 {% block content %}
     <div style="width: 350px;height:720px;background-color: #e0e0e0;position:relative;">
-        <div id="main" style="width: 300px;height:300px;margin: 20px 20px 10px 20px;"></div>
+        <div id="main" style="width: 300px;height:300px;margin: 20px 20px 10px 10px;position:absolute;left: 5px"></div>
         <div id="rate"
-             style="width: 300px;height:300px;margin: 10px 20px 10px 20px;top: 380px;position:absolute;"></div>
+             style="width: 300px;height:300px;margin: 10px 20px 10px 20px;top: 380px;position:absolute;left: 5px"></div>
     </div>
     <div id="sta1" style="width: 700px;height:700px;margin: 10px 20px 10px 20px;"></div>
 {% endblock %}
@@ -34,6 +34,9 @@
                         text: '节点统计',
                         left: 'center'
                     },
+                    grid: {
+                        left: '15%',
+                    },
                     xAxis: {
                         axisLabel: {
                             interval: 0,  //让所有标签全部显示
@@ -43,6 +46,10 @@
                         data: ['Disease', 'Department', 'Drug', 'Food', 'Symptom']
                     },
                     yAxis: {
+                        axisLabel: {
+                            interval: 0,  //让所有标签全部显示
+                            rotate: -45  //让标签旋转一定的角度
+                        },
                         type: 'value'
                     },
                     series: [
@@ -129,7 +136,7 @@
                     },
                     xAxis: {
                         type: 'category',
-                        data: ['-4day','-3day','-2day','-1day','today'],
+                        data: ['-4day', '-3day', '-2day', '-1day', 'today'],
                     },
                     yAxis: {
                         type: 'value',
