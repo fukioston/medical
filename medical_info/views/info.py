@@ -12,3 +12,15 @@ def get_symptom_info(request):
         json_data.append(record['n'])
     # 返回JSON响应
     return JsonResponse(json_data, safe=False)
+
+
+def get_select(request):
+    department=request.GET.get('department')
+    print(department)
+    answer = g.run(
+        "MATCH (n:Symptom)-[r:BELONGS_TO]->(p:Department{name:\"" + department + "\"}) RETURN n ").data()
+    json_data = []
+    for record in answer:
+        json_data.append(record['n'])
+    # 返回JSON响应
+    return JsonResponse(json_data, safe=False)

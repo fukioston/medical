@@ -3,83 +3,189 @@
 
 {% block css %}
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-        *{
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-        body{
 
-            background-color: #f8f8f8;
-        }
-        .container{
-            margin-top: 20px;
-            padding: 40px 20px;
-        }
-        .box{
-            padding: 40px 30px;
-            transition: all .4s ease-in-out;
-            cursor: pointer;
-        }
-        .box:hover{
-            box-shadow: 2px 2px 10px #a5a5a5;
-            transform: scale(1.03);
-        }
-        a:hover{
-            text-decoration: none;
-        }
-        img{
-            object-fit: contain;
-            width: 35px;
-            height: 35px;
-            /* padding: 20px; */
-        }
-        p.text-muted{
-            margin: 0;
-            font-size: 0.9rem;
-        }
-        b{
-            font-size: 1.12rem;
-        }
+body{
+background-color: #eee;
+}
+.container{
+height: 100vh;
+}
+.dropdown-toggle_inner{
+width: 200px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+height: 50px;
+border: 2px solid #dc3545;
+font-weight: 600;
+}
+.dropdown-toggle_inner:focus{
+
+box-shadow: none !important;
+
+}
+
+
+.dropdown-toggle_inner::after {
+
+display: none;
+
+}
+
+.dropdown-menu{
+
+width: 200px;
+border: 2px solid #F44336;
+padding: 0rem 0;
+transform: translate3d(0px, 50px, 0px) !important;
+
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+color: #ffffff;
+background-color: #dc3545;
+padding: 12px;
+}
+
+.dropdown-item {
+display: block;
+width: 100%;
+padding: 12px;
+
+}
+thead {
+  background: #dddcdc;
+}
+.rounded{
+    width:980px;
+}
+.truncate {
+  white-space: nowrap; /* 不换行 */
+  overflow: hidden; /* 隐藏溢出内容 */
+  text-overflow: ellipsis; /* 使用省略号表示溢出内容 */
+    min-width: 60px;
+  max-width: 60px; /* 设置最大宽度 */
+}
+.truncate1 {
+  white-space: nowrap; /* 不换行 */
+  overflow: hidden; /* 隐藏溢出内容 */
+  text-overflow: ellipsis; /* 使用省略号表示溢出内容 */
+    min-width: 150px;
+  max-width: 150px; /* 设置最大宽度 */
+}
+.truncate2 {
+  white-space: nowrap; /* 不换行 */
+  overflow: hidden; /* 隐藏溢出内容 */
+  text-overflow: ellipsis; /* 使用省略号表示溢出内容 */
+    min-width: 80px;
+  max-width: 80px; /* 设置最大宽度 */
+}
 
     </style>
 {% endblock %}
 
 {% block content %}
+    <div class="row">
+<div class="container">
 
-{#<div class="h-screen bg-blue-300 flex justify-center items-center">#}
-{#    <div class="container mx-auto">#}
-{#        <div class="max-w-sm mx-auto md:max-w-lg">#}
-{#            <div class="w-full">#}
-{#                <ul id="symptom" class="px-0">#}
-{#                </ul>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#</div>#}
+<div class="dropdown">
+<button class="btn btn-outline-danger dropdown-toggle_inner" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+<span>Countries</span>
+<i class="fa fa-caret-down"></i>
+</button>
+<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+<li><a class="dropdown-item" href=" ">Australia</a ></li>
+<li><a class="dropdown-item" href="#">India</a ></li>
+<li><a class="dropdown-item" href="#">United States</a ></li>
+</ul>
+</div>
+</div>
+
+
+</div>
+
+<div class="row">
+        <div class="d-flex justify-content-center row">
+            <div class="col-md-10">
+                <div class="rounded">
+                    <div class="table-responsive table-borderless">
+
+                        <table  class="table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">id</th>
+                                    <th>症状名</th>
+                                    <th>所属科室</th>
+
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="symptom" class="table-body">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a id="previous_page" class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a id="page1" class="page-link" href="#">1</a></li>
+    <li class="page-item"><a id="page2" class="page-link" href="#">2</a></li>
+    <li class="page-item"><a id="page3" class="page-link" href="#">3</a></li>
+      <li class="page-item"><a id="page4" class="page-link" href="#">4</a></li>
+      <li class="page-item"><a id="page5" class="page-link" href="#">5</a></li>
+    <li class="page-item"><a id="next_page" class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
+        </div>
+
+</div>
+    </div>
+
 
 
 {% endblock %}
 {% block js %}
 
     <script>
-{#    get_all()#}
-{#    function get_all(){#}
-{#         $.ajax({#}
-{#    url:'/medical_info/get_symptom_info',#}
-{#    type:'get',#}
-{#        success(data){#}
-{##}
-{# for (var i = 0; i < data.length; i++) {#}
-{#$('#symptom').append(`#}
-{#                    <li class="border bg-white list-none rounded-sm px-3 py-3 cursor-pointer hover:text-white hover:bg-blue-600" style='border-bottom-width:0'>${data[i].name}</li>#}
-{##}
-{#`)#}
-{#            }#}
-{#    }#}
-{#    })}#}
+    get_select_all()
+    function get_all(){
+         $.ajax({
+    url:'/medical_info/get_symptom_info',
+    type:'get',
+        success(data){
+
+ for (var i = 0; i < data.length; i++) {
+$('#symptom').append(`
+<tr class="cell-1">
+      <td class="text-center truncate">${data[i].name}</td>
+        <td class="truncate1">${data[i].name}</td>
+      <td class="truncate">${data[i].name}</td>
+                                </tr>
+`)
+            }
+    }
+    })}
+
+   function get_select_all(){
+        $.ajax({
+    url:'/medical_info/get_select',
+    type:'get',
+            data: {
+
+        'department':'妇科',
+            },
+        success(data){
+
+ for (var i = 0; i < data.length; i++) {
+$('#symptom').append(`
+                    <li class="border bg-white list-none rounded-sm px-3 py-3 cursor-pointer hover:text-white hover:bg-blue-600" style='border-bottom-width:0'>${data[i].name}</li>
+
+`)
+            }
+    }
+    })
+   }
 
 
 
