@@ -29,9 +29,8 @@ urlpatterns = [
     path('logout/', home.logout, name="logout"),
     path('edit_pwd/', home.edit_pwd, name='edit_pwd'),
     path('my_article/', home.my_article, name='my_article'),
-    path('get_myall',myarticle.get_myall),
-    path('get_myreview',myarticle.get_myreview),
-    path('my_review/', home.my_review,)
-
+    path('get_myall', myarticle.get_myall),
+    path('get_myreview', myarticle.get_myreview),
+    path('my_review/', home.my_review),
 
 ]
