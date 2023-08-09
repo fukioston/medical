@@ -6,7 +6,11 @@ from column.models import articles
 from user.models import UserInfo
 
 def search(request):
-    return render(request, 'column/search.html', )
+    uinfo = request.session.get('info')
+    user_id = uinfo['id']
+    query_set = UserInfo.objects.filter(id=user_id).first()
+    if query_set:
+        return render(request, 'column/search.html',{'user_info':query_set,} )
 
 
 def search_tip(request):
@@ -51,8 +55,10 @@ def search_result(request):
     info = list(
         zip(article_name_list, article_img_list, article_uploader, article_upload_time, article_likes, article_click,
             articles_id, article_uploader_img))
-
-    return render(request, 'column/article_list.html', {'info_list': info, 'user_info': query_set})
+    if query_set:
+        return render(request, 'column/article_list.html', {'info_list': info, 'user_info': query_set})
+    else:
+        return render(request, 'column/article_list.html', {'info_list': info,})
 
 
 
