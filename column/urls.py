@@ -30,5 +30,6 @@ urlpatterns = [
     path('cancel_favorite/', article_list.cancel_favorite),
     path('search_tip/', search.search_tip),
     path('edit_article', upload.edit_article),
-    path('show_collects', article_list.show_collects)
+    path('show_collects', article_list.show_collects),
+    path('search_result', search.search_result),
 ]

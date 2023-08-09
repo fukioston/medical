@@ -11,7 +11,6 @@
             font-family: 'Poppins', sans-serif;
         }
         body{
-
             background-color: #f8f8f8;
         }
         .container{
@@ -125,26 +124,32 @@
             border:none;
         }
 
-        #show {
-            width: 545px;
-            border: 1px solid #4e6ef2;
-            position: relative;
-            left: -55px;
-            text-align: left;
+        #show_ul {
+          list-style-type: none;
+          margin: 1px;
+          padding: 0;
         }
 
-        ul {
-            list-style-type: none;
+        #show_ul li {
+          margin-bottom: 8px;
+          padding-left: 20px;
+          position: relative;
         }
 
-        ul li::before {
-            content: "•";
-            margin-right: 8px;
+        #show_ul li:before {
+          position: absolute;
+          left: 0;
         }
 
         /* 添加鼠标指针样式，表示可点击 */
-        ul li {
+        ul#show_ul li {
             cursor: pointer;
+        }
+
+        #go:active{
+            display: none;
+            border: none;
+            background: white;
         }
 
     </style>
@@ -155,13 +160,11 @@
         <div class="row height d-flex justify-content-center align-items-center">
             <div class="col-lg-4 col-md-6 my-lg-0 my-3">
                 <div class="form">
-                    <button class="fa fa-search" style="border: none; background-color: #f8f8f8;"></button>
+                    <button id="go" class="fa fa-search" style="border: none; background-color: #f8f8f8;"></button>
                     <input id="search_content_input" type="text" class="form-control form-input" placeholder="请输入文章名">
                 </div>
                 <div id="show" style="display: none">
-                    <ul id="show_ul">
-
-                    </ul>
+                    <ul id="show_ul"></ul>
                 </div>
             </div>
         </div>
@@ -170,7 +173,7 @@
 
 {% block js %}
     <script type="text/javascript">
-            a()
+        a()
         $(function(){
             $("#search_content_input").on('input',function (){
 
@@ -190,9 +193,6 @@
                             `<li class="show_li"><a class="search_text" id="search_text"  data-id="${info[i]}" >${info[i]}<a></li>`
                         )
                         $("#show").show();
-
-
-
                     },
                     error: function (){
                         alert('failed!')
@@ -201,17 +201,19 @@
             })
         });
 
-function a(){
- $('#show_ul').on('click', '#search_text', function() {
-console.log('点击了按钮');
-const article_name=$(this).data('id')
-     $('#search_content_input').val(article_name);
+        function a(){
+         $('#show_ul').on('click', '#search_text', function() {
+            console.log('点击了按钮');
+            const article_name=$(this).data('id')
+                 $('#search_content_input').val(article_name);
+            })
+        }
 
-
-
-})
-}
-
-
+        $("#go").click(function (){
+            kw = $('#search_content_input').val()
+            if(kw) {
+                window.location.href = '/column/search_result?kw=' + kw;
+            }else{}
+        })
     </script>
 {% endblock %}
