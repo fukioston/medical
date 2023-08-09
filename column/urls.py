@@ -25,6 +25,9 @@ urlpatterns = [
     path('article', article_list.article),
     path('upload', upload.upload),
     path('search', search.search),
+    path('iscollect/', article_list.iscollect),
+path('click_favorite/', article_list.change_favorite),
+    path('cancel_favorite/', article_list.cancel_favorite),
     path('search_tip', search.search_tip),
     path('edit_article', upload.edit_article),
 ]

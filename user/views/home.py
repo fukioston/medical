@@ -110,3 +110,10 @@ def my_article(request):
                 articles_id, article_uploader_img))
         return render(request, 'user/my_article.html', {'info_list': info, 'user_info': query_set})
     return render(request, 'user/my_article.html', {'user_info': query_set})
+
+
+def my_review(request):
+    uinfo = request.session.get('info')
+    user_id = uinfo['id']
+    query_set = UserInfo.objects.filter(id=user_id).first()
+    return render(request, 'user/my_reviewing.html', {'user_info': query_set})

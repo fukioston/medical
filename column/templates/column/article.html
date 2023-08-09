@@ -56,25 +56,52 @@
           font-size: 2em;
             font-family: sans-serif;
         }
+        .favorite{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.Collect_Button{
+    border: none;
+    height: 60px;
+    width: 60px;
+    text-align: center;
+    font-size: 35px;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    color: rgba(46, 38, 52, 0.429);
+
+  }
+
+  .Collect_Button:hover {
+
+    color: rgb(24, 176, 218);
+  }
+
+  .Collect_Button:hover:after {
+    content: "收藏";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    color:black;
+    border-radius: 5px;
+    font-size: 15px;
+  }
+
+  .Collect_Button.active {
+    color: rgb(24, 176, 218);
+  }
+
     </style>
 {% endblock %}
 
 {% block content %}
-    <div class="progress-indicator">
-      <svg>
-        <g>
-          <circle cx="0" cy="0" r="20" stroke="black" class="animated-circle" transform="translate(50,50) rotate(-90)"></circle>
-        </g>
-        <g>
-          <circle cx="0" cy="0" r="38" transform="translate(50,50) rotate(-90)"></circle>
-        </g>
-      </svg>
-      <div class="progress-count"></div>
-    </div>
+
 
 
   <div class="container">
-    <h1>{{ title }}</h1>
+    <div class="favorite"><h1>{{ title }}</h1> <input  data-id="0"  id="btnFavorite" type="button" class="Collect_Button " value="★"></div>
     <div class="row" style="margin-top: 10px;">
         <div class="col-md-1"></div>
         <div class="col-md-10" style="text-align: center">
@@ -92,6 +119,8 @@
 {% block js %}
     <script>
 
+iscollect()
+btnFavorite_click()
 $('document').ready(function(){
 
 
@@ -142,5 +171,74 @@ $('document').ready(function(){
 
 
     });
+
+function iscollect(){
+
+    $.ajax({
+               url:'/column/iscollect/',
+
+               data:{
+                   'article_id':{{article_id}},
+                   'user_id': {{user_info.id}},
+               },
+               type:'get',
+               success(msg){
+                   console.log('cgn')
+                   if(msg.status)//已经收藏
+                   {
+                    btnFavorite.classList.toggle('active')
+                   btnFavorite.data('id', 1)
+
+
+
+                   }
+
+                }
+
+})
+}
+function btnFavorite_click() {
+    $('#btnFavorite').click(function () {
+        console.log('sss')
+        if ($(this).data('id') === 0) {
+
+            $(this).data('id', 1)
+            $.ajax({
+                url: '/column/click_favorite/',
+                data: {
+                    'article_id':{{article_id}},
+                   'user_id': {{user_info.id}},
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                type: 'post',
+                success(msg) {
+                    btnFavorite.classList.toggle('active')
+                    $(this).data('id', 0)
+                }
+            })
+            // button.classList.toggle('active');
+        } else if ($(this).data('id') === 1) {
+            $(this).data('id', 0)
+            $.ajax({
+                url: '/column/cancel_favorite/',
+                data: {
+                    'article_id':{{article_id}},
+                   'user_id': {{user_info.id}},
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                type: 'post',
+                success(msg) {
+                    btnFavorite.classList.toggle('active')
+                    $(this).data('id', 1)
+
+                }
+            })
+
+
+        }
+    })
+}
     </script>
+
+
 {% endblock %}

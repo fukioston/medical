@@ -29,4 +29,5 @@ urlpatterns = [
     path('article', article.article),
     path('agreed', article.agreed),
 path('notagreed', article.notagreed),
+
 ]

@@ -15,7 +15,7 @@ Including another URLconf
 """
 
 from django.urls import path
-from user.views import login, home, register
+from user.views import login, home, register, myarticle
 
 urlpatterns = [
     path('login/', login.login, name="login"),
@@ -29,6 +29,9 @@ urlpatterns = [
     path('logout/', home.logout, name="logout"),
     path('edit_pwd/', home.edit_pwd, name='edit_pwd'),
     path('my_article/', home.my_article, name='my_article'),
+    path('get_myall',myarticle.get_myall),
+    path('get_myreview',myarticle.get_myreview),
+    path('my_review/', home.my_review,)
 
 
 ]
