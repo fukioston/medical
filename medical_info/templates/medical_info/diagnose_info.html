@@ -103,9 +103,8 @@ thead {
                             <thead>
                                 <tr>
                                     <th class="text-center">id</th>
-                                    <th>症状名</th>
+                                    <th>检查项目</th>
                                     <th>所属科室</th>
-                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody id="symptom" class="table-body">
@@ -187,7 +186,7 @@ $('#page1').click(function(){
     get_select_all()
     function get_all(){
          $.ajax({
-    url:'/medical_info/get_symptom_info',
+    url:'/medical_info/get_diagnose_info',
     type:'get',
              data:{
         'page':page
@@ -213,7 +212,7 @@ $('#symptom').append(`
 
    function get_select_all(){
         $.ajax({
-    url:'/medical_info/get_select_symptom',
+    url:'/medical_info/get_select_diagnose',
     type:'get',
             data:{
         'page':page,

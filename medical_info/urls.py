@@ -19,11 +19,18 @@ from django.urls import path, include
 from medical_info.views import home, info, search
 
 urlpatterns = [
-    path('home',home.home),
+    path('home', home.home),
     path('search', search.search),
-    path('symptom_info',info.symptom_info),
-    path('get_symptom_info',info.get_symptom_info),
-    path('get_select',info.get_select),
-
+    path('symptom_info', info.symptom_info),
+    path('get_symptom_info', info.get_symptom_info),
+    path('get_select_symptom', info.get_select_symptom),
+    path('disease_info', info.disease_info),
+    path('get_disease_info', info.get_disease_info),
+    path('get_select_disease', info.get_select_disease),
+    path('diagnose_info', info.diagnose_info),
+    path('get_diagnose_info', info.get_diagnose_info),
+    path('get_select_diagnose', info.get_select_diagnose),
+    path('drug_info', info.drug_info),
+    path('get_drug_info', info.get_drug_info),
 
 ]

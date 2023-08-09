@@ -103,9 +103,8 @@ thead {
                             <thead>
                                 <tr>
                                     <th class="text-center">id</th>
-                                    <th>症状名</th>
-                                    <th>所属科室</th>
-                                    <th></th>
+                                    <th>疾病</th>
+                                    <th>对应药物</th>
                                 </tr>
                             </thead>
                             <tbody id="symptom" class="table-body">
@@ -127,19 +126,6 @@ thead {
             </nav>
         </div>
     </div>
-<div class="dropdown">
-    <button class="btn btn-outline-danger dropdown-toggle_inner" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-        <span>全部</span>
-        <i class="fa fa-caret-down"></i>
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <li><a class="dropdown-item" href=" ">妇产科</a ></li>
-        <li><a class="dropdown-item" href="#">儿科</a></li>
-        <li><a class="dropdown-item" href="#">内科</a></li>
-    </ul>
-</div>
-
-
 
 {% endblock %}
 {% block js %}
@@ -187,7 +173,7 @@ $('#page1').click(function(){
     get_select_all()
     function get_all(){
          $.ajax({
-    url:'/medical_info/get_symptom_info',
+    url:'/medical_info/get_drug_info',
     type:'get',
              data:{
         'page':page
@@ -211,25 +197,25 @@ $('#symptom').append(`
     }
     })}
 
-   function get_select_all(){
-        $.ajax({
-    url:'/medical_info/get_select_symptom',
-    type:'get',
-            data:{
-        'page':page,
-        'department':'妇科',
-            },
-        success(data){
-        var element = document.getElementById("symptom");
-                    element.innerHTML = "";
-        for (var i = 0; i < data.length; i++) {
-            $('#symptom').append(`
-                               <tr class="cell-1">
-                  <td class="text-center truncate">${data[i].id}</td>
-                    <td class="truncate">${data[i].name}</td>
-                  <td class="truncate">${data[i].name}</td>
-            <td class="truncate2"><input  class="btn btn-primary" type="button"  onclick="window.location.href='/manager/article?article_name=1'"  value="查看详细信息"></td>
-             </tr>
-        `)}}})}
+   {#function get_select_all(){#}
+   {#     $.ajax({#}
+   {# url:'/medical_info/get_select',#}
+   {# type:'get',#}
+   {#         data:{#}
+   {#     'page':page,#}
+   {#     'department':'妇科',#}
+   {#         },#}
+   {#     success(data){#}
+   {#     var element = document.getElementById("symptom");#}
+   {#                 element.innerHTML = "";#}
+   {#     for (var i = 0; i < data.length; i++) {#}
+   {#         $('#symptom').append(`#}
+   {#                            <tr class="cell-1">#}
+   {#               <td class="text-center truncate">${data[i].id}</td>#}
+   {#                 <td class="truncate">${data[i].name}</td>#}
+   {#               <td class="truncate">${data[i].name}</td>#}
+   {#         <td class="truncate2"><input  class="btn btn-primary" type="button"  onclick="window.location.href='/manager/article?article_name=1'"  value="查看详细信息"></td>#}
+   {#          </tr>#}
+   {#     `)}}})}#}
     </script>
 {% endblock %}
