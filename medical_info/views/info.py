@@ -1,7 +1,14 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 from medical.settings import g
 
 def symptom_info(request):
     return render(request, 'medical_info/symptom_info.html')
 def get_symptom_info(request):
-    return True
+    answer = g.run(
+        "MATCH (n:Symptom) RETURN n").data()
+    json_data = []
+    for record in answer:
+        json_data.append(record['n'])
+    # 返回JSON响应
+    return JsonResponse(json_data, safe=False)

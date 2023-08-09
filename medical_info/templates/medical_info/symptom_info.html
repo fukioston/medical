@@ -43,11 +43,46 @@
         b{
             font-size: 1.12rem;
         }
-     
+
     </style>
 {% endblock %}
 
 {% block content %}
 
+{#<div class="h-screen bg-blue-300 flex justify-center items-center">#}
+{#    <div class="container mx-auto">#}
+{#        <div class="max-w-sm mx-auto md:max-w-lg">#}
+{#            <div class="w-full">#}
+{#                <ul id="symptom" class="px-0">#}
+{#                </ul>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
 
+
+{% endblock %}
+{% block js %}
+
+    <script>
+{#    get_all()#}
+{#    function get_all(){#}
+{#         $.ajax({#}
+{#    url:'/medical_info/get_symptom_info',#}
+{#    type:'get',#}
+{#        success(data){#}
+{##}
+{# for (var i = 0; i < data.length; i++) {#}
+{#$('#symptom').append(`#}
+{#                    <li class="border bg-white list-none rounded-sm px-3 py-3 cursor-pointer hover:text-white hover:bg-blue-600" style='border-bottom-width:0'>${data[i].name}</li>#}
+{##}
+{#`)#}
+{#            }#}
+{#    }#}
+{#    })}#}
+
+
+
+
+    </script>
 {% endblock %}

@@ -21,6 +21,7 @@ from medical_info.views import home, info
 urlpatterns = [
     path('home',home.home),
     path('symptom_info',info.symptom_info),
+    path('get_symptom_info',info.get_symptom_info)
 
 
 ]
