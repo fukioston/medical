@@ -10,38 +10,152 @@
 
 <body>
 {% block content %}
-    <div id="main" style="width: 500px;height:500px;"></div>
-    <div id="sta1" style="width: 500px;height:500px;"></div>
+    <div style="width: 350px;height:720px;background-color: #e0e0e0;position:relative;">
+        <div id="main" style="width: 300px;height:300px;margin: 20px 20px 10px 20px;"></div>
+        <div id="rate"
+             style="width: 300px;height:300px;margin: 10px 20px 10px 20px;top: 380px;position:absolute;"></div>
+    </div>
+    <div id="sta1" style="width: 700px;height:700px;margin: 10px 20px 10px 20px;"></div>
 {% endblock %}
 
 <script src="../../../static/js/jquery-3.2.1.min.js"></script>
 <script src="../../../static/plugins/bootstrap-4.4.1-dist/js/bootstrap.bundle.js"></script>
 {% block js %}
     <script type="text/javascript">
-        myChart = echarts.init(document.getElementById('main'));
-        option = {
-            title: {
-                text: '节点统计',
-                left: 'center'
-            },
-            xAxis: {
-                type: 'category',
-                data: ['Disease', 'Department', 'Drug', 'Food', 'Symptom']
-            },
-            yAxis: {
-                type: 'value'
-            },
-            series: [
-                {
-                    label: {
-                        show: true,
-                        position: 'top'
+        window.onload = function () {
+            echart01();
+            echart02();
+            echart03();
+
+            function echart01() {
+                myChart = echarts.init(document.getElementById('main'));
+                option = {
+                    title: {
+                        text: '节点统计',
+                        left: 'center'
                     },
-                    data: {{ list }},
-                    type: 'bar'
-                }
-            ]
-        };
-        myChart.setOption(option);
+                    xAxis: {
+                        axisLabel: {
+                            interval: 0,  //让所有标签全部显示
+                            rotate: -30  //让标签旋转一定的角度
+                        },
+                        type: 'category',
+                        data: ['Disease', 'Department', 'Drug', 'Food', 'Symptom']
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [
+                        {
+                            label: {
+                                show: true,
+                                position: 'top'
+                            },
+                            data: {{ list }},
+                            type: 'bar'
+                        }
+                    ]
+                };
+                myChart.setOption(option);
+            }
+
+            function echart02() {
+                myChart = echarts.init(document.getElementById('sta1'));
+
+                option = {
+                    title: {
+                        text: '科室统计',
+                        left: 'center'
+                    },
+                    legend: {
+                        top: 'bottom'
+                    },
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            mark: {show: true},
+                            dataView: {show: true, readOnly: false},
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
+                    },
+                    series: [
+                        {
+                            name: 'Nightingale Chart',
+                            type: 'pie',
+                            radius: [50, 250],
+                            center: ['50%', '50%'],
+                            roseType: 'area',
+                            itemStyle: {
+                                borderRadius: 8
+                            },
+                            data: [
+                                {value: {{rate}}[0], name: '内科' + {{rate}}[0]},
+                                {value: {{rate}}[1], name: '外科' + {{rate}}[1]},
+                                {value: {{rate}}[2], name: '妇产科' + {{rate}}[2]},
+                                {value: {{rate}}[3], name: '传染科' + {{rate}}[3]},
+                                {value: {{rate}}[4], name: '生殖健康' + {{rate}}[4]},
+                                {value: {{rate}}[5], name: '男科' + {{rate}}[5]},
+                                {value: {{rate}}[6], name: '皮肤性病科' + {{rate}}[6]},
+                                {value: {{rate}}[7], name: '中西医' + {{rate}}[7]},
+                                {value: {{rate}}[8], name: '五官科' + {{rate}}[8]},
+                                {value: {{rate}}[9], name: '精神科' + {{rate}}[9]},
+                                {value: {{rate}}[10], name: '心理科' + {{rate}}[10]},
+                                {value: {{rate}}[11], name: '儿科' + {{rate}}[11]},
+                                {value: {{rate}}[12], name: '营养科' + {{rate}}[12]},
+                                {value: {{rate}}[13], name: '肿瘤科' + {{rate}}[13]},
+                                {value: {{rate}}[14], name: '其他科室' + {{rate}}[14]},
+                                {value: {{rate}}[15], name: '急诊科' + {{rate}}[15]},
+                                {value: {{rate}}[16], name: '体检科' + {{rate}}[16]},
+                            ]
+                        }
+                    ]
+                };
+                myChart.setOption(option);
+            }
+
+            function echart03() {
+                myChart = echarts.init(document.getElementById('rate'));
+                option = {
+                    title: {
+                        text: '近五日机器人访问',
+                        left: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        top: 'bottom'
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: ['-4day','-3day','-2day','-1day','today'],
+                    },
+                    yAxis: {
+                        type: 'value',
+                        axisLabel: {
+                            formatter: '{value}'
+                        }
+                    },
+                    series: [
+                        {
+                            name: 'Times',
+                            type: 'line',
+                            data: {{ times }},
+                            markPoint: {
+                                data: [
+                                    {type: 'max', name: 'Max'},
+                                    {type: 'min', name: 'Min'}
+                                ]
+                            },
+                            markLine: {
+                                data: [{type: 'average', name: 'Avg'}]
+                            }
+                        },
+                    ]
+                };
+                myChart.setOption(option);
+            }
+        }
     </script>
 {% endblock %}
