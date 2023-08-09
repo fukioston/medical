@@ -4,6 +4,7 @@ import csv
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from medical.local_settings import g
+from user.models import UserInfo
 
 
 def statistic(request):
@@ -75,7 +76,13 @@ def statistic(request):
     #     d.append(str(date[len(date) - (6 - i)]))
     for i in range(1, 6):
         t.append(times[len(times) - (6 - i)])
-    return render(request, 'statistic/sta.html', {'list': li, 'rate': ra, 'times': t, })
+    info = request.session.get('info')
+    user_id = info['id']
+    query_set = UserInfo.objects.filter(id=user_id).first()
+    if query_set:
+        return render(request, 'statistic/sta.html', {'list': li, 'rate': ra, 'times': t,'user_info': query_set,  })
+    else:
+        return render(request, 'statistic/sta.html', {'list': li, 'rate': ra, 'times': t, })
 
 
 def p():

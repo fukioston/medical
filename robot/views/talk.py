@@ -10,7 +10,11 @@ def talk(request):
     info = request.session.get('info')
     user_id = info['id']
     query_set = UserInfo.objects.filter(id=user_id).first()
-    return render(request, 'robot/talk.html', {'user_info': query_set, })
+    if query_set:
+        return render(request, 'robot/talk.html', {'user_info': query_set, })
+    else:
+        return render(request, 'robot/talk.html',)
+
 
 
 def answer(request):
