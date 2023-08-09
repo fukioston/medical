@@ -124,6 +124,29 @@
             box-shadow: none;
             border:none;
         }
+
+        #show {
+            width: 545px;
+            border: 1px solid #4e6ef2;
+            position: relative;
+            left: -55px;
+            text-align: left;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        ul li::before {
+            content: "•";
+            margin-right: 8px;
+        }
+
+        /* 添加鼠标指针样式，表示可点击 */
+        ul li {
+            cursor: pointer;
+        }
+
     </style>
 {% endblock %}
 
@@ -132,9 +155,13 @@
         <div class="row height d-flex justify-content-center align-items-center">
             <div class="col-lg-4 col-md-6 my-lg-0 my-3">
                 <div class="form">
-                    <i class="fa fa-search"></i>
-                    <input id="search_content" type="text" class="form-control form-input" placeholder="请输入文章名">
-                    <input type="submit" value="搜索">
+                    <button class="fa fa-search" style="border: none; background-color: #f8f8f8;"></button>
+                    <input id="search_content_input" type="text" class="form-control form-input" placeholder="请输入文章名">
+                </div>
+                <div id="show" style="display: none">
+                    <ul id="show_ul">
+
+                    </ul>
                 </div>
             </div>
         </div>
@@ -144,7 +171,7 @@
 {% block js %}
     <script type="text/javascript">
         $(function(){
-            $("#search_content").keyup(function (){
+            $("#search_content_input").on('input',function (){
 
                 $.ajax({
                     url: '/column/search_tip/',
@@ -153,7 +180,15 @@
                         csrfmiddlewaretoken:'{{ csrf_token }}'
                     },
                     success(msg){
-                        console.log(msg.status)
+                        var element = document.getElementById("show_ul");
+                        element.innerHTML = "";
+                        console.log(msg.info)
+                        info=msg.info
+                        for(var i=0;i<info.length;i++)
+                        $('#show_ul').append(
+                            `<li class="show_li">${info[i]}</li>`
+                        )
+                        $("#show").show();
                     },
                     error: function (){
                         alert('failed!')
@@ -161,5 +196,14 @@
                 })
             })
         });
+
+        var input = document.getElementById('search_content_input');
+
+        var list = document.getElementsByClassName("show_li")
+        for(var i = 0; i < list.length; i++){
+            list[i].index = i
+            list[i].onclick = function(){
+                console.log(this.index)
+            }}
     </script>
 {% endblock %}

@@ -2,7 +2,6 @@ from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse, redirect
 
 from column.models import articles
-from user.models import UserInfo
 
 
 def search(request):
@@ -10,5 +9,12 @@ def search(request):
 
 
 def search_tip(request):
-    info=2
-    return JsonResponse({'status':True, 'err': "无法回复",'info':info})
+    kw = request.POST.get('kw')
+    article_objs = articles.objects.filter(article_name__contains=kw)
+    article_name_list = [article_obj.article_name.strip().lower() for article_obj in article_objs]
+    article_name_list = list(set(article_name_list))
+    if len(article_name_list) > 5:
+        article_name_list = []
+    print(article_name_list)
+
+    return JsonResponse({'status': True, 'err': "无法回复", 'info': article_name_list})
