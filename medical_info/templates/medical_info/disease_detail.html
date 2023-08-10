@@ -22,50 +22,48 @@
     <div>
         <div style="height: 60px">
             <p>详情</p>
-        </div>
-{% for record in data %}
-            <div class="card">
-                <div class="card-body">
-                    {{ record.n.name }}
-                </div>
             </div>
-        <div class="card">
-                <div class="card-body">
-                   介绍：{{ record.n.introduction }}
-                </div>
-            </div>
-    <div class="card">
-                <div class="card-body">
-                 原因： {{ record.n.reason }}
-                </div>
-            </div>
-    <div class="card">
-                <div class="card-body">
-                 症状： {{ record.n.reason }}
-                </div>
-            </div>
-    <div class="card">
-                <div class="card-body">
-                   预防：{{ record.n.prevention }}
-                </div>
-            </div>
-    <div class="card">
-                <div class="card-body">
-                  检查：{{ record.n.examine }}
-                </div>
-            </div>
-<div class="card">
-                <div class="card-body">
-                  治疗：{{ record.n.treatment }}
-                </div>
-            </div>
-    <div class="card">
-                <div class="card-body">
-                  易感人群：{{ record.n.easy_person }}
-                </div>
-            </div>
-
-
+                {% for record in data %}
+                    <div class="card">
+                        <div class="card-body">
+                            {{ record.n.name }}
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                           介绍：{{ record.n.introduction }}
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                         原因： {{ record.n.reason }}
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                         症状： {{ record.n.reason }}
+                        </div>
+                    </div>
+                     <div class="card">
+                        <div class="card-body">
+                           预防：{{ record.n.prevention }}
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                          检查：{{ record.n.examine }}
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                          治疗：{{ record.n.treatment }}
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                          易感人群：{{ record.n.easy_person }}
+                        </div>
+                    </div>
             </div>
         {% endfor %}
 
@@ -75,6 +73,5 @@
 {#                </div>#}
 {#            </div>#}
 
-    </div>
 {% endblock %}
 </body>
