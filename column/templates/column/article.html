@@ -185,8 +185,7 @@ function iscollect(){
                url:'/column/iscollect/',
 
                data:{
-                   'article_id':{{article_id}},
-                   'user_id': {{ user_info.id }}
+                   'article_id':{{article_id}}
                },
                type:'get',
                success(msg){
@@ -211,7 +210,6 @@ function btnFavorite_click() {
                 url: '/column/click_favorite/',
                 data: {
                     'article_id':{{article_id}},
-                    'user_id': {{ user_info.id }},
 
                     csrfmiddlewaretoken: '{{ csrf_token }}'
                 },
@@ -228,7 +226,6 @@ function btnFavorite_click() {
                 url: '/column/cancel_favorite/',
                 data: {
                     'article_id':{{article_id}},
-                    'user_id': {{ user_info.id }},
 
                     csrfmiddlewaretoken: '{{ csrf_token }}'
                 },
