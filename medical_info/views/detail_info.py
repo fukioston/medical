@@ -19,4 +19,56 @@ def drug_detail(request):
             'n': record['n'],
         }
         json_data.append(data)
-    return render(request, 'medical_info/detail_info.html', {'data':json_data})
+    return render(request, 'medical_info/drug_detail_info.html', {'data':json_data})
+
+def symptom_detail(request):
+    item=request.GET.get('item')
+    print(item)
+    query = (
+        "MATCH (n:Symptom {name:\"" + item + "\"})  RETURN n"
+    )
+    answer = g.run(query).data()
+    json_data = []
+    print(answer)
+    for record in answer:
+        print(record)
+        data = {
+            'n': record['n'],
+        }
+        json_data.append(data)
+    return render(request, 'medical_info/symptom_detail.html', {'data':json_data})
+
+
+def disease_detail(request):
+    disease=request.GET.get('disease')
+    query = (
+            "MATCH (n:Disease {name:\"" + disease + "\"})  RETURN n"
+    )
+    answer = g.run(query).data()
+    json_data = []
+    print(answer)
+    for record in answer:
+        print(record)
+        data = {
+            'n': record['n'],
+        }
+        json_data.append(data)
+    return render(request, 'medical_info/disease_detail.html', {'data': json_data})
+
+
+
+def check_detail(request):
+    check = request.GET.get('check')
+    query = (
+            "MATCH (n:Check {name:\"" + check + "\"})  RETURN n"
+    )
+    answer = g.run(query).data()
+    json_data = []
+    print(answer)
+    for record in answer:
+        print(record)
+        data = {
+            'n': record['n'],
+        }
+        json_data.append(data)
+    return render(request, 'medical_info/check_detail.html', {'data': json_data})
