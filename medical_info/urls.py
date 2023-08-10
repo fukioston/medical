@@ -35,6 +35,6 @@ urlpatterns = [
     path('get_department3',info.get_department3),
     path('drug_info', info.drug_info),
     path('get_drug_info', info.get_drug_info),
-    path('drug_detail',detail_info.drug_detail),
+    path('drug_detail', detail_info.drug_detail),
 
 ]

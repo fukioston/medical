@@ -28,7 +28,7 @@ def get_symptom_info(request):
     for record in answer:
         data = {
             'n': record['n'],
-            'id':record['id'],
+            'id': record['id'],
             'department_name': record['department_name']
         }
         json_data.append(data)
@@ -54,6 +54,8 @@ def get_select_symptom(request):
     json_data = json_data[(page - 1) * 10:page * 10]
     # 返回JSON响应
     return JsonResponse(json_data, safe=False)
+
+
 def get_department(request):
     answer = g.run(
         "MATCH (n:Symptom)-[r:BELONGS_TO]->(p:Department) RETURN distinct p ").data()
@@ -69,11 +71,9 @@ def disease_info(request):
     user_id = info['id']
     query_set = UserInfo.objects.filter(id=user_id).first()
     if query_set:
-        return render(request, 'medical_info/disease_info.html',{'user_info': query_set})
+        return render(request, 'medical_info/disease_info.html', {'user_info': query_set})
     else:
         return render(request, 'medical_info/disease_info.html')
-
-
 
 
 def get_disease_info(request):
@@ -116,6 +116,8 @@ def get_select_disease(request):
     json_data = json_data[(page - 1) * 10:page * 10]
     # 返回JSON响应
     return JsonResponse(json_data, safe=False)
+
+
 def get_department2(request):
     answer = g.run(
         "MATCH (n:Disease)-[r:BELONGS_TO]->(p:Department) RETURN distinct p ").data()
@@ -125,6 +127,7 @@ def get_department2(request):
     # 返回JSON响应
     return JsonResponse(json_data, safe=False)
 
+
 def diagnose_info(request):
     info = request.session.get('info')
     user_id = info['id']
@@ -133,7 +136,6 @@ def diagnose_info(request):
         return render(request, 'medical_info/diagnose_info.html', {'user_info': query_set})
     else:
         return render(request, 'medical_info/diagnose_info.html')
-
 
 
 def get_diagnose_info(request):
@@ -176,6 +178,8 @@ def get_select_diagnose(request):
     json_data = json_data[(page - 1) * 10:page * 10]
     # 返回JSON响应
     return JsonResponse(json_data, safe=False)
+
+
 def get_department3(request):
     answer = g.run(
         "MATCH (n:Check)-[r:BELONGS_TO]->(p:Department) RETURN distinct p ").data()
@@ -184,6 +188,7 @@ def get_department3(request):
         json_data.append(record['p'])
     # 返回JSON响应
     return JsonResponse(json_data, safe=False)
+
 
 def drug_info(request):
     info = request.session.get('info')
@@ -216,4 +221,3 @@ def get_drug_info(request):
     # 返回JSON响应
     json_data = json_data[(page - 1) * 10:page * 10]
     return JsonResponse(json_data, safe=False)
-
