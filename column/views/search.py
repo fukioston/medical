@@ -19,7 +19,7 @@ def search_tip(request):
     kw = request.POST.get('kw')
     print(kw)
     article_objs = articles.objects.filter(article_name__contains=kw, status=1)
-    article_name_list = [article_obj.article_name.strip().lower() for article_obj in article_objs]
+    article_name_list = [article_obj.article_name.strip() for article_obj in article_objs]
     article_name_list = list(set(article_name_list))
     if len(article_name_list) > 5:
         article_name_list = []
