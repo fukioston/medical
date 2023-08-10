@@ -71,4 +71,4 @@ def check_detail(request):
             'n': record['n'],
         }
         json_data.append(data)
-    return render(request, 'medical_info/check_detail.html', {'data': json_data})
+    return render(request, 'medical_info/diagnose_detail.html', {'data': json_data})

@@ -31,50 +31,55 @@
             </div>
         <div class="card">
                 <div class="card-body">
-                   介绍：{{ record.n.introduction }}
+                   价格：{{ record.n.price }}
                 </div>
             </div>
     <div class="card">
                 <div class="card-body">
-                 原因： {{ record.n.reason }}
+                 过程： {{ record.n.procedure }}
                 </div>
             </div>
     <div class="card">
                 <div class="card-body">
-                 预防： {{ record.n.preventtion }}
+                 风险： {{ record.n.risk }}
                 </div>
             </div>
     <div class="card">
                 <div class="card-body">
-                 检查： {{ record.n.examine }}
+                 禁忌人群： {{ record.n.unsuitable }}
                 </div>
             </div>
     <div class="card">
                 <div class="card-body">
-                   辨认：{{ record.n.diagnose }}
+                   警告：{{ record.n.warning}}
                 </div>
             </div>
     <div class="card">
                 <div class="card-body">
-                  检查：{{ record.n.examine }}
+                注意事项：{{ record.n.tip }}
+                </div>
+            </div>
+    <div class="card">
+                <div class="card-body">
+                  正常结果：{{ record.n.normal_range }}
                 </div>
             </div>
 <div class="card">
                 <div class="card-body">
-                  治疗：{{ record.n.treatment }}
+                  异常结果：{{ record.n.clinical_value }}
                 </div>
             </div>
-    <div class="card">
-                <div class="card-body">
-                  易感人群：{{ record.n.easy_person }}
-                </div>
-            </div>
+
 
 
             </div>
         {% endfor %}
 
-
+{#    <div class="card">#}
+{#                <div class="card-body">#}
+{#                    {{ data.n.name  }}#}
+{#                </div>#}
+{#            </div>#}
 
     </div>
 {% endblock %}
