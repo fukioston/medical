@@ -251,7 +251,7 @@ $('#disease').append(`
       <td class="text-center truncate">${data[i].id}</td>
         <td class="truncate">${data[i].n.name}</td>
       <td class="truncate">${$('#now_department').text()}</td>
-<td class="truncate2"><input  class="btn btn-primary" type="button"  onclick="window.location.href='/manager/article?article_name=1'"  value="查看详细信息"></td>
+<td class="truncate2"><input  class="btn btn-primary" type="button"  onclick="window.location.href='/medical_info/disease_detail?item=${data[i].d.name}'"  value="查看详细信息"></td>
  </tr>
 `)
      if(data.length<10)
