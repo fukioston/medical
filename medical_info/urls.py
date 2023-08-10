@@ -16,28 +16,27 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from medical_info.views import home, info, search, detail_info
+from medical_info.views import home, info, detail_info
 
 urlpatterns = [
     path('home', home.home),
-    path('search', search.search),
-    path('symptom_info',info.symptom_info),
-    path('get_symptom_info',info.get_symptom_info),
-    path('get_select_symptom',info.get_select_symptom),
-    path('get_department',info.get_department),
+    path('symptom_info', info.symptom_info),
+    path('get_symptom_info', info.get_symptom_info),
+    path('get_select_symptom', info.get_select_symptom),
+    path('get_department', info.get_department),
     path('disease_info', info.disease_info),
     path('get_disease_info', info.get_disease_info),
-    path('get_department2',info.get_department2),
+    path('get_department2', info.get_department2),
     path('get_select_disease', info.get_select_disease),
     path('diagnose_info', info.diagnose_info),
     path('get_diagnose_info', info.get_diagnose_info),
     path('get_select_diagnose', info.get_select_diagnose),
-    path('get_department3',info.get_department3),
+    path('get_department3', info.get_department3),
     path('drug_info', info.drug_info),
     path('get_drug_info', info.get_drug_info),
-    path('drug_detail',detail_info.drug_detail),
-path('symptom_detail',detail_info.symptom_detail),
-path('disease_detail',detail_info.disease_detail),
-    path('check_detail',detail_info.check_detail),
+    path('drug_detail', detail_info.drug_detail),
+    path('symptom_detail', detail_info.symptom_detail),
+    path('disease_detail', detail_info.disease_detail),
+    path('check_detail', detail_info.check_detail),
 
 ]
