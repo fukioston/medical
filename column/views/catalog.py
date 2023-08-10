@@ -9,7 +9,7 @@ def home(request):
     counts = []
     catalog_list = articles.objects.values_list('catalog', flat=True).distinct()
     for catalog in catalog_list:
-        counts.append([catalog, articles.objects.filter(catalog=catalog).count()])
+        counts.append([catalog, articles.objects.filter(catalog=catalog, status=1).count()])
     print(counts)
     info = request.session.get('info')
     if info:
@@ -17,15 +17,14 @@ def home(request):
         query_set = UserInfo.objects.filter(id=user_id).first()
         return render(request, 'column/catalog.html', {'class': counts, 'user_info': query_set, })
     else:
-        return render(request, 'column/catalog.html',{'class': counts,})
-
+        return render(request, 'column/catalog.html', {'class': counts, })
 
 
 def article_list(request):
     catalog = request.GET.get('catalog')  # 获取参数值
     print(catalog)
     if catalog:
-        articles_obj = articles.objects.filter(catalog=catalog)
+        articles_obj = articles.objects.filter(catalog=catalog, status=1)
     else:
         articles_obj = None
     articles_id = [article_obj.id for article_obj in articles_obj]

@@ -18,7 +18,7 @@ def search(request):
 def search_tip(request):
     kw = request.POST.get('kw')
     print(kw)
-    article_objs = articles.objects.filter(article_name__contains=kw)
+    article_objs = articles.objects.filter(article_name__contains=kw, status=1)
     article_name_list = [article_obj.article_name.strip().lower() for article_obj in article_objs]
     article_name_list = list(set(article_name_list))
     if len(article_name_list) > 5:
@@ -29,11 +29,16 @@ def search_tip(request):
 
 
 def search_result(request):
+    uinfo = request.session.get('info')
     kw = request.GET.get('kw')  # 获取参数值
     print(kw)
-    article_objs = articles.objects.filter(article_name__contains=kw)
+    article_objs = articles.objects.filter(article_name__contains=kw, status=1)
     if not article_objs:
-        return render(request, 'column/404.html', {'user_info': query_set})
+        if uinfo:
+            user_id = uinfo['id']
+            query_set = UserInfo.objects.filter(id=user_id).first()
+            return render(request, 'column/404.html', {'user_info': query_set})
+        return render(request, 'column/404.html')
     articles_id = [article_obj.id for article_obj in article_objs]
     article_name_list = [article_obj.article_name for article_obj in article_objs]
     article_img_list = [article_obj.img_url for article_obj in article_objs]
@@ -53,7 +58,6 @@ def search_result(request):
     info = list(
         zip(article_name_list, article_img_list, article_uploader, article_upload_time, article_likes, article_click,
             articles_id, article_uploader_img))
-    uinfo = request.session.get('info')
     if uinfo:
         user_id = uinfo['id']
         query_set = UserInfo.objects.filter(id=user_id).first()

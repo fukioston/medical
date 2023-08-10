@@ -36,7 +36,7 @@ def show_collects(request):
     article_ids = like.objects.filter(user_id=user_id)
     article_objs = []
     for article_id in article_ids:
-        article_objs.append(articles.objects.filter(id=article_id.article_id).first())
+        article_objs.append(articles.objects.filter(id=article_id.article_id, status=1).first())
     articles_id = [article_obj.id for article_obj in article_objs]
     article_name_list = [article_obj.article_name for article_obj in article_objs]
     article_img_list = [article_obj.img_url for article_obj in article_objs]
@@ -74,7 +74,6 @@ def iscollect(request):
             return JsonResponse({'status': False})
     redirect('user/login')
 
-
 def change_favorite(request):
     uinfo = request.session.get('info')
     if uinfo:
@@ -88,7 +87,6 @@ def change_favorite(request):
             # 如果表中没有数据
             return JsonResponse({'status': True})
     redirect('user/login')
-
 
 def cancel_favorite(request):
     uinfo = request.session.get('info')
