@@ -36,28 +36,32 @@ def show_collects(request):
     article_ids = like.objects.filter(user_id=user_id)
     article_objs = []
     for article_id in article_ids:
-        article_objs.append(articles.objects.filter(id=article_id.article_id, status=1).first())
-    articles_id = [article_obj.id for article_obj in article_objs]
-    article_name_list = [article_obj.article_name for article_obj in article_objs]
-    article_img_list = [article_obj.img_url for article_obj in article_objs]
-    for i in range(len(article_img_list)):
-        s = str(article_img_list[i])
-        if s.__contains__('static'):
-            article_img_list[i] = '/' + s
-            print(article_img_list[i])
+        obj = articles.objects.filter(id=article_id.article_id, status=1).first()
+        if obj:
+            article_objs.append(obj)
+    if article_objs:
+        articles_id = [article_obj.id for article_obj in article_objs]
+        article_name_list = [article_obj.article_name for article_obj in article_objs]
+        article_img_list = [article_obj.img_url for article_obj in article_objs]
+        for i in range(len(article_img_list)):
+            s = str(article_img_list[i])
+            if s.__contains__('static'):
+                article_img_list[i] = '/' + s
+                print(article_img_list[i])
 
-    article_uploader_img = [UserInfo.objects.filter(id=article_obj.uploader_id).first().profile_img
+        article_uploader_img = [UserInfo.objects.filter(id=article_obj.uploader_id).first().profile_img
+                                for article_obj in article_objs]
+        article_uploader = [UserInfo.objects.filter(id=article_obj.uploader_id).first().username
                             for article_obj in article_objs]
-    article_uploader = [UserInfo.objects.filter(id=article_obj.uploader_id).first().username
-                        for article_obj in article_objs]
-    article_upload_time = [article_obj.upload_time for article_obj in article_objs]
-    article_likes = [article_obj.likes for article_obj in article_objs]
-    article_click = [article_obj.click for article_obj in article_objs]
-    info = list(
-        zip(article_name_list, article_img_list, article_uploader, article_upload_time, article_likes, article_click,
-            articles_id, article_uploader_img))
+        article_upload_time = [article_obj.upload_time for article_obj in article_objs]
+        article_likes = [article_obj.likes for article_obj in article_objs]
+        article_click = [article_obj.click for article_obj in article_objs]
+        info = list(
+            zip(article_name_list, article_img_list, article_uploader, article_upload_time, article_likes, article_click,
+                articles_id, article_uploader_img))
 
-    return render(request, 'column/collects.html', {'info_list': info, 'user_info': query_set})
+        return render(request, 'column/collects.html', {'info_list': info, 'user_info': query_set})
+    return render(request, 'column/collects.html', {'user_info': query_set})
 
 
 def iscollect(request):
