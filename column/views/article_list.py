@@ -60,38 +60,40 @@ def show_collects(request):
 
 
 def iscollect(request):
-    user_id = request.GET.get('user_id')
-    article_id = request.GET.get('article_id')
-    print(user_id + 'aaaa' + article_id)
-    try:
-        if like.objects.get(user_id=user_id, article_id=article_id):
-            print('sss')
-            return JsonResponse({'status': True, 'err': "已经收藏"})
-    except like.DoesNotExist:
-        # 如果表中没有数据
-        return JsonResponse({'status': False})
+    uinfo = request.session.get('info')
+    if uinfo:
+        user_id = uinfo['id']
+        article_id = request.GET.get('article_id')
+        try:
+            if like.objects.get(user_id=user_id, article_id=article_id):
+                print('sss')
+                return JsonResponse({'status': True, 'err': "已经收藏"})
+        except like.DoesNotExist:
+            # 如果表中没有数据
+            return JsonResponse({'status': False})
+    redirect('user/login')
 
 
 def change_favorite(request):
-    article_id = request.POST.get('article_id')
-    user_id = request.POST.get('user_id')
-    print(article_id)
-    print(user_id)
-    # 如果表中有了数据就报错
-    try:
-        if like.objects.get(user_id=user_id, article_id=article_id):
-            return JsonResponse({'status': False, 'err': "已经收藏"})
-    except like.DoesNotExist:
-        like.objects.create(user_id=user_id, article_id=article_id)
-        # 如果表中没有数据
-        return JsonResponse({'status': True})
-
+    uinfo = request.session.get('info')
+    if uinfo:
+        user_id = uinfo['id']
+        article_id = request.POST.get('article_id')
+        try:
+            if like.objects.get(user_id=user_id, article_id=article_id):
+                return JsonResponse({'status': False, 'err': "已经收藏"})
+        except like.DoesNotExist:
+            like.objects.create(user_id=user_id, article_id=article_id)
+            # 如果表中没有数据
+            return JsonResponse({'status': True})
+    redirect('user/login')
 
 def cancel_favorite(request):
-    article_id = request.POST.get('article_id')
-    user_id = request.POST.get('user_id')
-    print(article_id)
-    print(user_id)
-    if like.objects.get(user_id=user_id, article_id=article_id):
-        like.objects.filter(user_id=user_id, article_id=article_id).delete()
-        return JsonResponse({'status': True, 'err': "已经取消收藏"})
+    uinfo = request.session.get('info')
+    if uinfo:
+        user_id = uinfo['id']
+        article_id = request.POST.get('article_id')
+        if like.objects.get(user_id=user_id, article_id=article_id):
+            like.objects.filter(user_id=user_id, article_id=article_id).delete()
+            return JsonResponse({'status': True, 'err': "已经取消收藏"})
+    redirect('user/login')
