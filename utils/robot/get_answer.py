@@ -94,14 +94,14 @@ def classify(question,region_tree,wdtype_dict):
         question_type = 'disease_accompany'
         question_types.append(question_type)
 
-        # 症状能吃什么，不能吃什么
-        if check_keywords(food_qwds, question) and 'symptom' in types:
-            deny_status = check_keywords(deny_words, question)
-            if deny_status:
-                question_type = 'symptom_not_food'
-            else:
-                question_type = 'symptom_do_food'
-            question_types.append(question_type)
+    # 症状能吃什么，不能吃什么
+    if check_keywords(food_qwds, question) and 'symptom' in types:
+        deny_status = check_keywords(deny_words, question)
+        if deny_status:
+            question_type = 'symptom_not_food'
+        else:
+            question_type = 'symptom_do_food'
+        question_types.append(question_type)
 
     #疾病该吃什么药
     if check_keywords(drug_qwds, question) and ('disease' in types):
@@ -254,6 +254,9 @@ def cql_transfer(question_type, entities):#翻译成cypher语句
     # 症状能吃什么，不能吃什么
     elif question_type == 'symptom_not_food':
         cql = ["MATCH  (m:Symptom)- [r:AVOID_EAT]->(n:Food) where m.name = '{0}' RETURN m.name,n.name".format(i) for i in entities]
+
+    elif question_type == 'symptom_do_food':
+        cql = ["MATCH  (m:Symptom)- [r:GOOD_EAT]->(n:Food) where m.name = '{0}' RETURN m.name,n.name".format(i) for i in entities]
 
     # 症状属于哪个科室
     elif question_type == 'symptom_belong':
