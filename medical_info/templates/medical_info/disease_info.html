@@ -88,7 +88,12 @@ thead {
     min-width: 80px;
   max-width: 80px; /* 设置最大宽度 */
 }
-
+    .list-container {
+        max-height: 200px; /* 设置容器的最大高度 */
+        overflow: auto;    /* 添加滚动条，当内容超过容器高度时出现滚动条 */
+        border: 1px solid #ccc; /* 添加边框样式 */
+        padding: 10px; /* 添加内边距 */
+    }
     </style>
 {% endblock %}
 
@@ -134,7 +139,7 @@ thead {
         <span id="now_department">全部</span>
         <i class="fa fa-caret-down"></i>
     </button>
-    <ul id="department" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <ul id="department" class="dropdown-menu list-container" aria-labelledby="dropdownMenuButton">
 <li><a class="dropdown-item" id="search_department" data-id="全部" href="#">全部</a ></li>
     </ul>
 </div>
