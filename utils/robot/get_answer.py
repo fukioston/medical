@@ -215,7 +215,7 @@ def cql_transfer(question_type, entities):#翻译成cypher语句
 
     # 疾病并发症
     elif question_type == 'disease_accompany':
-        cql = ["MATCH  (m:Disease)- [r:ACCOMANY]->(n:Disease) where m.name = '{0}' RETURN m.name,n.name".format(i) for i in entities]
+        cql = ["MATCH  (m:Disease)- [r:ACCOMMANY]->(n:Disease) where m.name = '{0}' RETURN m.name,n.name".format(i) for i in entities]
 
     # 疾病该吃什么药
     elif question_type == 'disease_drug':

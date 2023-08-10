@@ -221,3 +221,86 @@ def get_drug_info(request):
     # 返回JSON响应
     json_data = json_data[(page - 1) * 10:page * 10]
     return JsonResponse(json_data, safe=False)
+
+
+def search_disease(request):
+    disease=request.GET.get('disease')
+    query = (
+        "MATCH (n:Disease{name:\"" + disease + "\"})-[r:BELONGS_TO]->(p:Department)"  
+        "RETURN n,ID(n) AS id,p.name As department, n.name AS disease_name "
+    )
+    answer = g.run(
+        query).data()
+    json_data = []
+    for record in answer:
+        data = {
+            'n':record['n'],
+            'id': record['id'],
+            'disease_name': record['disease_name'],
+            'department':record['department']
+        }
+        json_data.append(data)
+    # 返回JSON响应
+    return JsonResponse(json_data, safe=False)
+
+
+def search_symptom(request):
+    symptom = request.GET.get('symptom')
+    query = (
+            "MATCH (n:Symptom{name:\"" + symptom + "\"})-[r:BELONGS_TO]->(p:Department)"
+                                                   "RETURN n,ID(n) AS id,p.name As department, n.name AS symptom_name "
+    )
+    answer = g.run(
+        query).data()
+    json_data = []
+    for record in answer:
+        data = {
+            'n': record['n'],
+            'id': record['id'],
+            'symptom_name': record['symptom_name'],
+            'department': record['department']
+        }
+        json_data.append(data)
+    # 返回JSON响应
+    return JsonResponse(json_data, safe=False)
+
+def search_drug(request):
+    drug=request.GET.get('drug')
+    query = (
+        "MATCH (n:Disease)-[r:RECOMMAND_DRUG]->(d:Drug{name:\"" + drug + "\"}) "  # 假设 n 和 p 之间有某种关系，修改为实际关系
+        "RETURN ID(d) AS id, d,  n.name AS disease_name "  # 选择需要的属性
+    )
+    answer = g.run(
+        query).data()
+    json_data = []
+    for record in answer:
+        data = {
+            'd': record['d'],
+            'id': record['id'],
+            'disease_name': record['disease_name']
+        }
+        json_data.append(data)
+    # 返回JSON响应
+    return JsonResponse(json_data, safe=False)
+
+
+
+def search_diagnose(request):
+    diagnose = request.GET.get('diagnose')
+    query = (
+            "MATCH (n:Check{name:\"" + diagnose + "\"})-[r:BELONGS_TO]->(p:Department)"
+                                                   "RETURN n,ID(n) AS id,p.name As department, n.name AS diagnose_name "
+    )
+    answer = g.run(
+        query).data()
+    json_data = []
+    for record in answer:
+        data = {
+            'n': record['n'],
+            'id': record['id'],
+            'diagnose_name': record['diagnose_name'],
+            'department': record['department']
+        }
+        json_data.append(data)
+    # 返回JSON响应
+    return JsonResponse(json_data, safe=False)

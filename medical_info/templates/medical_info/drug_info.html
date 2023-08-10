@@ -88,6 +88,13 @@ thead {
     min-width: 80px;
   max-width: 80px; /* 设置最大宽度 */
 }
+.my_input{
+        width:830px;
+    }
+    .search_div{
+        display: flex;
+        flex-direction: row;
+    }
 
     </style>
 {% endblock %}
@@ -97,6 +104,11 @@ thead {
         <div class="d-flex justify-content-center row">
             <div class="col-md-10">
                 <div class="rounded">
+                    <div class="search_div">
+                    <input id="search_content_input" type="text" class="form-control form-input my_input" placeholder="请输入药物名">
+                        <input id="search_info" type="button" class="btn btn-primary" value="搜索">
+
+                        </div>
                     <div class="table-responsive table-borderless">
 
                         <table  class="table">
@@ -201,7 +213,40 @@ $('#drug').append(`
             }
     }
     })}
+search_info_click()
+function search_info_click() {
+    $('#search_info').click(function () {
 
+console.log('ss')
+            $.ajax({
+                url: '/medical_info/search_drug',
+                data: {
+                    'drug':$("#search_content_input").val(),
+                },
+                type: 'get',
+                success(data){
+        var element = document.getElementById("drug");
+                    element.innerHTML = "";
+ for (var i = 0; i < data.length; i++) {
+$('#drug').append(`
+  <tr class="cell-1">
+      <td class="truncate text-center">${data[i].id}</td>
+        <td class="truncate">${data[i].disease_name}</td>
+<td class="truncate">${data[i].d.name}</td>
+<td class="truncate2">
+<input   class="btn btn-primary" type="button" onclick="window.location.href='/medical_info/drug_detail?item=${data[i].d.name}'" value="查看详细信息" >
+</td>
+ </tr>
+`)
+     if(data.length<10)
+             last=1
+         else last=0
+            }}
+            })
+            // button.classList.toggle('active');
+
+    })
+}
 
     </script>
 {% endblock %}

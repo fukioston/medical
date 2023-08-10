@@ -38,5 +38,10 @@ urlpatterns = [
     path('symptom_detail', detail_info.symptom_detail),
     path('disease_detail', detail_info.disease_detail),
     path('check_detail', detail_info.check_detail),
+    path('search_disease', info.search_disease),
+    path('search_symptom', info.search_symptom),
+    path('search_drug', info.search_drug),
+    path('search_diagnose', info.search_diagnose),
+
 
 ]

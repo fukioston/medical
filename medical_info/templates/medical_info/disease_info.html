@@ -94,6 +94,13 @@ thead {
         border: 1px solid #ccc; /* 添加边框样式 */
         padding: 10px; /* 添加内边距 */
     }
+    .my_input{
+        width:830px;
+    }
+    .search_div{
+        display: flex;
+        flex-direction: row;
+    }
     </style>
 {% endblock %}
 
@@ -104,6 +111,11 @@ thead {
         <div class="d-flex justify-content-center row">
             <div class="col-md-10">
                 <div class="rounded">
+                    <div class="search_div">
+                    <input id="search_content_input" type="text" class="form-control form-input my_input" placeholder="请输入疾病名">
+                        <input id="search_info" type="button" class="btn btn-primary" value="搜索">
+
+                        </div>
                     <div class="table-responsive table-borderless">
 
                         <table  class="table">
@@ -293,6 +305,39 @@ else
 
 
             })
+search_info_click()
+function search_info_click() {
+    $('#search_info').click(function () {
+
+console.log('ss')
+            $.ajax({
+                url: '/medical_info/search_disease',
+                data: {
+                    'disease':$("#search_content_input").val(),
+                },
+                type: 'get',
+                success(data){
+        var element = document.getElementById("disease");
+                    element.innerHTML = "";
+ for (var i = 0; i < data.length; i++) {
+$('#disease').append(`
+                   <tr class="cell-1">
+      <td class="text-center truncate">${data[i].id}</td>
+        <td class="truncate">${data[i].n.name}</td>
+      <td class="truncate">${data[i].department}</td>
+<td class="truncate2"><input  class="btn btn-primary" type="button"  onclick="window.location.href='/medical_info/disease_detail?disease=${data[i].n.name}'"  value="查看详细信息"></td>
+ </tr>
+`)
+     if(data.length<10)
+             last=1
+         else last=0
+            }}
+            })
+            // button.classList.toggle('active');
+
+    })
+}
+
 
 
 
