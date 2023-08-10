@@ -17,22 +17,26 @@ def article(request):
 
     article_content = articles_obj.content
     article_id = articles_obj.id
-    article_status=articles_obj.status
+    article_status = articles_obj.status
     info = request.session.get('info')
-    user_id = info['id']
-    query_set = UserInfo.objects.filter(id=user_id).first()
-    if query_set:
-        return render(request, 'manager/article.html', {'article_status':article_status,'article_id':article_id,'title': article_name, 'content': article_content, 'user_info': query_set})
+    if info:
+        user_id = info['id']
+        query_set = UserInfo.objects.filter(id=user_id).first()
+        return render(request, 'manager/article.html',
+                      {'article_status': article_status, 'article_id': article_id, 'title': article_name,
+                       'content': article_content, 'user_info': query_set})
     else:
-        return render(request, 'manager/article.html', {'article_status':article_status,'article_id':article_id,'title': article_name, 'content': article_content, })
+        return render(request, 'manager/article.html',
+                      {'article_status': article_status, 'article_id': article_id, 'title': article_name,
+                       'content': article_content, })
 
 
 def agreed(request):
-    id=request.POST.get('id')
+    id = request.POST.get('id')
     article_obj = articles.objects.filter(id=id).first()
-    article_obj.status="1"
+    article_obj.status = "1"
     article_obj.save()
-    return JsonResponse({'status': True,  })
+    return JsonResponse({'status': True})
 
 
 def notagreed(request):
@@ -40,4 +44,4 @@ def notagreed(request):
     article_obj = articles.objects.filter(id=id).first()
     article_obj.status = "2"
     article_obj.save()
-    return JsonResponse({'status': True,  })
+    return JsonResponse({'status': True, })

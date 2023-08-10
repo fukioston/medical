@@ -19,10 +19,13 @@ def article(request):
     article_content = articles_obj.content
     article_id = articles_obj.id
     info = request.session.get('info')
-    user_id = info['id']
-    query_set = UserInfo.objects.filter(id=user_id).first()
+    if info:
+        user_id = info['id']
+        query_set = UserInfo.objects.filter(id=user_id).first()
+        return render(request, 'column/article.html',
+                      {'article_id': article_id, 'title': article_name, 'content': article_content, 'user_info': query_set})
     return render(request, 'column/article.html',
-                  {'article_id': article_id, 'title': article_name, 'content': article_content, 'user_info': query_set})
+                  {'article_id': article_id, 'title': article_name, 'content': article_content})
 
 
 def show_collects(request):

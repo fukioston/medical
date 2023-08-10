@@ -6,9 +6,9 @@ from user.models import UserInfo
 
 def symptom_info(request):
     info = request.session.get('info')
-    user_id = info['id']
-    query_set = UserInfo.objects.filter(id=user_id).first()
-    if query_set:
+    if info:
+        user_id = info['id']
+        query_set = UserInfo.objects.filter(id=user_id).first()
         return render(request, 'medical_info/symptom_info.html', {'user_info': query_set})
     else:
         return render(request, 'medical_info/symptom_info.html', )
@@ -68,9 +68,9 @@ def get_department(request):
 
 def disease_info(request):
     info = request.session.get('info')
-    user_id = info['id']
-    query_set = UserInfo.objects.filter(id=user_id).first()
-    if query_set:
+    if info:
+        user_id = info['id']
+        query_set = UserInfo.objects.filter(id=user_id).first()
         return render(request, 'medical_info/disease_info.html', {'user_info': query_set})
     else:
         return render(request, 'medical_info/disease_info.html')
@@ -130,9 +130,9 @@ def get_department2(request):
 
 def diagnose_info(request):
     info = request.session.get('info')
-    user_id = info['id']
-    query_set = UserInfo.objects.filter(id=user_id).first()
-    if query_set:
+    if info:
+        user_id = info['id']
+        query_set = UserInfo.objects.filter(id=user_id).first()
         return render(request, 'medical_info/diagnose_info.html', {'user_info': query_set})
     else:
         return render(request, 'medical_info/diagnose_info.html')
@@ -192,9 +192,9 @@ def get_department3(request):
 
 def drug_info(request):
     info = request.session.get('info')
-    user_id = info['id']
-    query_set = UserInfo.objects.filter(id=user_id).first()
-    if query_set:
+    if info:
+        user_id = info['id']
+        query_set = UserInfo.objects.filter(id=user_id).first()
         return render(request, 'medical_info/drug_info.html', {'user_info': query_set})
     else:
         return render(request, 'medical_info/drug_info.html')

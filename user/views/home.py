@@ -21,7 +21,7 @@ def home(request):
 
 def logout(request):
     request.session.flush()
-    return redirect('/item/')
+    return redirect('/column/catalog')
 
 
 def edit_info(request):

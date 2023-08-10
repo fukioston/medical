@@ -12,9 +12,9 @@ def home(request):
         counts.append([catalog, articles.objects.filter(catalog=catalog).count()])
     print(counts)
     info = request.session.get('info')
-    user_id = info['id']
-    query_set = UserInfo.objects.filter(id=user_id).first()
-    if query_set:
+    if info:
+        user_id = info['id']
+        query_set = UserInfo.objects.filter(id=user_id).first()
         return render(request, 'column/catalog.html', {'class': counts, 'user_info': query_set, })
     else:
         return render(request, 'column/catalog.html',{'class': counts,})
@@ -48,9 +48,9 @@ def article_list(request):
         zip(article_name_list, article_img_list, article_uploader, article_upload_time, article_likes, article_click,
             articles_id, article_uploader_img))
     uinfo = request.session.get('info')
-    user_id = uinfo['id']
-    query_set = UserInfo.objects.filter(id=user_id).first()
-    if query_set:
+    if uinfo:
+        user_id = uinfo['id']
+        query_set = UserInfo.objects.filter(id=user_id).first()
         return render(request, 'column/article_list.html', {'info_list': info, 'user_info': query_set})
     else:
-        return render(request, 'column/article_list.html', {'info_list': info,})
+        return render(request, 'column/article_list.html', {'info_list': info})

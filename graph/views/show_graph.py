@@ -11,13 +11,12 @@ from user.models import UserInfo
 
 def show(request):
     uinfo = request.session.get('info')
-    user_id = uinfo['id']
-    query_set = UserInfo.objects.filter(id=user_id).first()
-    if query_set:
-        return render(request, 'graph/graph.html',{'user_info':query_set})
+    if uinfo:
+        user_id = uinfo['id']
+        query_set = UserInfo.objects.filter(id=user_id).first()
+        return render(request, 'graph/graph.html', {'user_info': query_set})
     else:
         return render(request, 'graph/graph.html')
-
 
 
 def handle(request):
@@ -53,4 +52,4 @@ def handle(request):
         if len(entity1) != 0 and len(relation) != 0 and len(entity2) != 0:
             searchResult = db.findEntities1AndEntities2(entity1, entity2, relation)
 
-        return JsonResponse(json.dumps(searchResult), json_dumps_params={'ensure_ascii': False},safe=False)
+        return JsonResponse(json.dumps(searchResult), json_dumps_params={'ensure_ascii': False}, safe=False)
