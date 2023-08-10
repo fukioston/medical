@@ -26,6 +26,7 @@ def login(request):
                 # 登录成功，将用户标识存储在session中
                 request.session["info"] = {'id': user.id, 'name': user.username}
                 request.session.set_expiry(60 * 60 * 24 * 14)
+                print('sss')
                 return redirect('/column/catalog')  # 重定向到登录成功后的页面
             else:
                 form.add_error('password', '密码错误!')
@@ -50,11 +51,11 @@ def login_sms(request):
     form = LoginSmsForm(request, data=request.POST)
     try:
         if form.is_valid():
+
             mobile_phone = form.cleaned_data['mobile_phone']
             user_object = models.UserInfo.objects.filter(mobile_phone=mobile_phone).first()
             if user_object:
-                request.session['id'] = user_object.id
-                request.session['username'] = user_object.username
+                request.session["info"] = {'id': user_object.id, 'name': user_object.username}
                 request.session.set_expiry(60 * 60 * 24 * 14)
                 return redirect('/column/catalog')
             form.add_error('mobile_phone', '手机号或验证码错误')
