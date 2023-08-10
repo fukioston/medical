@@ -106,16 +106,18 @@
 
 
   <div class="container">
-    <div class="favorite"><h1>{{ title }}</h1> <input  data-id="0"  id="btnFavorite" type="button" class="Collect_Button " value="★"></div>
-    <div class="row" style="margin-top: 10px;">
+      <div class="favorite"><h1>{{ title }}</h1>
+        {% if user_info.id %}
+            <input  data-id="0"  id="btnFavorite" type="button" class="Collect_Button " value="★">
+        {% endif %}
+      </div>
+      <div class="row" style="margin-top: 10px;">
         <div class="col-md-1"></div>
         <div class="col-md-10" style="text-align: center">
             {{ content | safe}}
         </div>
         <div class="col-md-1"></div>
     </div>
-
-
   </div>
 
 
@@ -183,7 +185,8 @@ function iscollect(){
                url:'/column/iscollect/',
 
                data:{
-                   'article_id':{{article_id}}
+                   'article_id':{{article_id}},
+                   'user_id': {{ user_info.id }}
                },
                type:'get',
                success(msg){
@@ -208,6 +211,7 @@ function btnFavorite_click() {
                 url: '/column/click_favorite/',
                 data: {
                     'article_id':{{article_id}},
+                    'user_id': {{ user_info.id }},
 
                     csrfmiddlewaretoken: '{{ csrf_token }}'
                 },
@@ -224,6 +228,7 @@ function btnFavorite_click() {
                 url: '/column/cancel_favorite/',
                 data: {
                     'article_id':{{article_id}},
+                    'user_id': {{ user_info.id }},
 
                     csrfmiddlewaretoken: '{{ csrf_token }}'
                 },
