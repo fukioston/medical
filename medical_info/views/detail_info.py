@@ -26,16 +26,16 @@ def drug_detail(request):
     if info:
         user_id = info['id']
         query_set = UserInfo.objects.filter(id=user_id).first()
-        return render(request, 'medical_info/home.html', {'user_info': query_set, 'data': json_data})
+        return render(request, 'medical_info/drug_detail_info.html', {'user_info': query_set, 'data': json_data})
     else:
         return render(request, 'medical_info/drug_detail_info.html', {'data': json_data})
 
 
 def symptom_detail(request):
-    item = request.GET.get('item')
-    print(item)
+    symptom = request.GET.get('symptom')
+    # print(item)
     query = (
-            "MATCH (n:Symptom {name:\"" + item + "\"})  RETURN n"
+            "MATCH (n:Symptom {name:\"" + symptom + "\"})  RETURN n"
     )
     answer = g.run(query).data()
     json_data = []

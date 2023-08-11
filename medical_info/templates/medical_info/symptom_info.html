@@ -242,7 +242,7 @@ $('#symptom').append(`
         <td class="truncate">${data[i].n.name}</td>
       <td class="truncate">${data[i].department_name}</td>
 <td class="truncate2">
-<a><input   class="btn btn-primary" type="button"  value="查看详细信息" onclick="window.location.href='medical_info/symptom_detail?symptom=${data[i].n.name}'"></a></td>
+<a><input   class="btn btn-primary" type="button"  value="查看详细信息" onclick="window.location.href='/medical_info/symptom_detail?symptom=${data[i].n.name}'"></a></td>
  </tr>
 `)
      if(data.length<10)
@@ -269,7 +269,7 @@ $('#symptom').append(`
       <td class="text-center truncate">${data[i].id}</td>
         <td class="truncate">${data[i].n.name}</td>
       <td class="truncate">${$('#now_department').text()}</td>
-<td class="truncate2"><input  class="btn btn-primary" type="button"  onclick="window.location.href='medical_info/symptom_detail?symptom=${data[i].n.name}'"  value="查看详细信息"></td>
+<td class="truncate2"><input  class="btn btn-primary" type="button"  onclick="window.location.href='/medical_info/symptom_detail?symptom=${data[i].n.name}'"  value="查看详细信息"></td>
  </tr>
 `)
      if(data.length<10)
@@ -326,7 +326,7 @@ $('#symptom').append(`
       <td class="text-center truncate">${data[i].id}</td>
         <td class="truncate">${data[i].n.name}</td>
       <td class="truncate">${data[i].department}</td>
-<td class="truncate2"><input  class="btn btn-primary" type="button"  onclick="window.location.href='/medical_info/symptom_detail?disease=${data[i].n.name}'"  value="查看详细信息"></td>
+<td class="truncate2"><input  class="btn btn-primary" type="button"  onclick="window.location.href='/medical_info/symptom_detail?symptom=${data[i].n.name}'"  value="查看详细信息"></td>
  </tr>
 `)
      if(data.length<10)
