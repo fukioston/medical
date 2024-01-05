@@ -19,3 +19,4 @@ python manage.py migrate
 10、浏览你的网站吧
 #### 使用效果
 https://www.bilibili.com/video/BV12F411m7eA/?spm_id_from=333.999.0.0
+注：爬虫数据太大了，等我上传一个百度网盘链接。
