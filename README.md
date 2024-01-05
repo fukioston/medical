@@ -1,37 +1,20 @@
 # 中软实训结课项目
 
 #### 介绍
-中软实训最后的项目
-
-#### 软件架构
-软件架构说明
-
-
-#### 安装教程
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
+本项目是智慧医疗信息网站。 医疗网站为人们提供了方便快捷的途径，可以获取关于健康、疾病、医疗诊疗、药物信息等方面的知识。人们可以随时随地在网站上寻找健康相关信息，帮助他们更好地了解自己的健康状况和选项。医疗网站可以提供丰富的健康教育资源，向公众传递正确的医疗知识和预防方法，有助于减少疾病的发生和传播，提高人们的健康意识。 医疗网站可以为用户提供在线咨询和问诊服务，使患者能够远程与医生交流，获取初步诊断和建议，从而减少就医的时间和成本。医疗网站可以整合医疗资源，包括医院、诊所、药店等信息，帮助患者更好地选择和定位合适的医疗机构和服务。
+本项目面向社会群众，为社会群众提供众多医疗方面的相关帮助。
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1、首先克隆库：git clone https://gitee.com/cgnnnn/medical.git
+2、根据requirement.txt导入依赖库
+3、在MySQL中创建schema，假设其名字为medical，字符集设为utf-8
+4、在local_settings.py内更改MySQL信息和neo4j信息。
+5、运行neo4j_data中的neo4j文件完成neo4j数据导入
+6、在终端执行如下代码完成model迁移
+python manage.py makemigrations
+python manage.py migrate
+7、执行utils/data_importer下的insert_data.py（把conn内的数据库信息改成自己的）使数据导入MySQL数据库,完成数据初始化
+8、文件在终端输入：python manage.py createsuperuser 以创建django超级管理员
+9、运行django项目，访问127.0.0.1:8000/ckeditor/upload/，登录管理员（CKEditor上传图片到Django服务器后台需要管理员权限）
+10、浏览你的网站吧
 
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
-
-
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
