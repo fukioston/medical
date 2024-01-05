@@ -17,4 +17,5 @@ python manage.py migrate
 8、文件在终端输入：python manage.py createsuperuser 以创建django超级管理员
 9、运行django项目，访问127.0.0.1:8000/ckeditor/upload/，登录管理员（CKEditor上传图片到Django服务器后台需要管理员权限）
 10、浏览你的网站吧
-
+#### 使用效果
+https://www.bilibili.com/video/BV12F411m7eA/?spm_id_from=333.999.0.0
