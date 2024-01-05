@@ -23,6 +23,7 @@ python manage.py migrate
 
 7、执行utils/data_importer下的insert_data.py（把conn内的数据库信息改成自己的）使数据导入MySQL数据库,完成数据初始化
 （爬虫数据太大了，等我上传一个百度网盘链接。）
+
 8、文件在终端输入：python manage.py createsuperuser 以创建django超级管理员
 
 9、运行django项目，访问127.0.0.1:8000/ckeditor/upload/，登录管理员（CKEditor上传图片到Django服务器后台需要管理员权限）
