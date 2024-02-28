@@ -14,6 +14,13 @@
 4、在local_settings.py内更改MySQL信息和neo4j信息。
 
 5、运行neo4j_data中的neo4j文件完成neo4j数据导入
+neo4j_data百度网盘链接：
+
+链接：https://pan.baidu.com/s/1czk-d4CU2n-gCmGcbQa9UQ?pwd=70q4 
+
+提取码：70q4 
+
+--来自百度网盘超级会员V6的分享
 
 6、在终端执行如下代码完成model迁移
 
@@ -22,7 +29,6 @@ python manage.py makemigrations
 python manage.py migrate
 
 7、执行utils/data_importer下的insert_data.py（把conn内的数据库信息改成自己的）使数据导入MySQL数据库,完成数据初始化
-（爬虫数据太大了，等我上传一个百度网盘链接。）
 
 8、文件在终端输入：python manage.py createsuperuser 以创建django超级管理员
 
